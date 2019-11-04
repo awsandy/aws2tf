@@ -1,0 +1,5 @@
+aws.tf
+aws.tf.sav
+.terraform
+terraform.tfstate*
+*.txt
