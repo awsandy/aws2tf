@@ -33,7 +33,7 @@ c2=1
 if [ "$count" -gt "0" ]; then
     count=`expr $count - 1`
     #loop through query id's
-    for i in `seq 0 $count`; do
+    for i in `seq 0 6`; do
         qid=`echo $awsout | jq ".${pref[(${c})]}[(${i})]" | tr -d '"'`
         #echo "quid=$qid"
         cm="${cmd[$c2]} $qid"
@@ -53,7 +53,8 @@ if [ "$count" -gt "0" ]; then
         terraform state show $ttft.$cname > t2.txt
         rm $cname.tf
 
-        cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
+        cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t0.txt
+        cat t0.txt | sed 's/\\n/ /g' > t1.txt
         
         file="t1.txt"
         while IFS= read line

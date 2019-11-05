@@ -13,15 +13,15 @@ for c in `seq 0 1`; do
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
-        for i in `seq 0 0`; do
+        for i in `seq 0 $count`; do
             echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Name" | tr -d '"'`
             echo $cname
-            printf "resource \"%s\" \"%s\" {" $ttft $cname > $cname.tf
-            printf "}" $cname >> $cname.tf
+            printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
+            printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
             terraform state show $ttft.$cname > t2.txt
-            rm $cname.tf
+            rm $ttft.$cname.tf
             cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
             #	for k in `cat t1.txt`; do
             #		echo $k
@@ -34,7 +34,7 @@ for c in `seq 0 1`; do
                 t1=`echo "$line"`
                 
                 if [[ ${t1} == *"arn"*"="* ]];then
-				    echo "in arn"
+				    #echo "in arn"
 					skip=1
 				fi
 				
@@ -47,7 +47,7 @@ for c in `seq 0 1`; do
 
 				if [ "$skip" == "0" ]; then
 					#echo $skip $t1
-					echo $t1 >> $cname.tf
+					echo $t1 >> $ttft.$cname.tf
 				fi
             done <"$file"
             
