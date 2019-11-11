@@ -8,13 +8,14 @@ tft[0]="aws_s3_bucket"
 for c in `seq 0 0`; do
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
-	echo $cm
+	#echo $cm
     eval $cm > tmp.txt
-    cat tmp.txt
     count=`cat tmp.txt | wc -l | awk '{print $1}'`
     echo $count
-ttft=tft[0]
+ttft=${tft[0]}
 done
+echo $ttft
+
 if [ "$count" -gt "0" ]; then
     count=`expr $count - 1`
     for cname in `cat tmp.txt`; do
@@ -57,20 +58,6 @@ if [ "$count" -gt "0" ]; then
     done
 fi
 
-
-
-
-
-
-
-    done
-fi
-
-exit
-            echo $i
-            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Name" | tr -d '"'`
-            
-    fi
-done
 rm t*.txt
+exit
 
