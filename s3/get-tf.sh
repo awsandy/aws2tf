@@ -15,6 +15,8 @@ for c in `seq 0 0`; do
 ttft=${tft[0]}
 done
 echo $ttft
+cat tmp.txt
+
 
 if [ "$count" -gt "0" ]; then
     count=`expr $count - 1`
@@ -54,12 +56,19 @@ if [ "$count" -gt "0" ]; then
 
 			if [ "$skip" == "0" ]; then
 				#echo $skip $t1
-				echo $t1 >> $ttft-$cname.tf
+				echo $t1 >> $ttft__$cname.tf
 			fi
-        done <"$file"         
+        done <"$file"  
+    done
+fi
 
-# bucket policies:
 
+
+echo "****** bucket policies ******* "
+
+
+if [ "$count" -gt "0" ]; then
+    for cname in `cat tmp.txt`; do
         cm=${cmd[1]}
 	    ttft=${tft[1]}
         cm=`echo $cm $cname "| jq ."`
@@ -98,7 +107,7 @@ if [ "$count" -gt "0" ]; then
 
                 if [ "$skip" == "0" ]; then
                     #echo $skip $t1
-                    echo $t1 >> $ttft-$cname.tf
+                    echo $t1 >> $ttft--$cname.tf
                 fi
             done <"$file"         
 
