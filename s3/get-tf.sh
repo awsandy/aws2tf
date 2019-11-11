@@ -75,7 +75,7 @@ if [ "$count" -gt "0" ]; then
             terraform state show $ttft.$cname > t2.txt
             rm $cname.tf
             cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
-            more t1.txt
+            cat t1.txt
             file="t1.txt"
             while IFS= read line
             do
