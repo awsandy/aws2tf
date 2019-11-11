@@ -35,7 +35,7 @@ if [ "$count" -gt "0" ]; then
         do
 			skip=0
             # display $line or do something with $line
-            t1=`echo "$line"`
+            t1=`echo "$line"` 
                 
             if [[ ${t1} == *"arn"*"="* ]];then
 				echo "in arn"
@@ -47,6 +47,8 @@ if [ "$count" -gt "0" ]; then
             fi
 				
             if [[ ${t1} == *"role_arn"*"="* ]];then skip=0;fi
+            if [[ ${t1} == *"bucket_domain_name"*"="* ]];then skip=0;fi
+            if [[ ${t1} == *"bucket_regional_domain_name"*"="* ]];then skip=0;fi
 			if [[ ${t1} == *"allocated_capacity"*"="* ]];then skip=1;fi
 
 			if [ "$skip" == "0" ]; then
