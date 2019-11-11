@@ -51,8 +51,6 @@ for c in `seq 0 1`; do
 				fi
             done <"$file"
             
-            
-            
         done
     fi
 done

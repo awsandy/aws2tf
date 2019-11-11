@@ -1,9 +1,9 @@
 cmd[0]="aws s3 ls | awk '{print \$3'}"
 pref[0]="Crawlers"
 tft[0]="aws_s3_bucket"
-#cmd[1]="aws glue get-jobs"
-#pref[1]="Jobs"
-#tft[1]="aws_glue_job"
+cmd[1]="aws s3 get-bucket-policy --bucket "
+pref[1]="Jobs"
+tft[1]="aws_s3_bucket_policy"
 
 for c in `seq 0 0`; do
     cm=${cmd[$c]}
@@ -20,6 +20,8 @@ if [ "$count" -gt "0" ]; then
     count=`expr $count - 1`
     for cname in `cat tmp.txt`; do
         echo $cname
+        cm=${cmd[0]}
+	    ttft=${tft[0]}
 
         printf "resource \"%s\" \"%s\" {" $ttft $cname > $cname.tf
         printf "}" $cname >> $cname.tf
@@ -37,8 +39,7 @@ if [ "$count" -gt "0" ]; then
             # display $line or do something with $line
             t1=`echo "$line"` 
                 
-            if [[ ${t1} == *"arn"*"="* ]];then
-				echo "in arn"
+            if [[ ${t1} == *"arn"*"="* ]];then			
 				skip=1
 			fi
 				
@@ -47,19 +48,26 @@ if [ "$count" -gt "0" ]; then
             fi
 				
             if [[ ${t1} == *"role_arn"*"="* ]];then skip=0;fi
-            if [[ ${t1} == *"bucket_domain_name"*"="* ]];then skip=0;fi
-            if [[ ${t1} == *"bucket_regional_domain_name"*"="* ]];then skip=0;fi
+            if [[ ${t1} == *"bucket_domain_name"*"="* ]];then skip=1;fi
+            if [[ ${t1} == *"bucket_regional_domain_name"*"="* ]];then skip=1;fi
 			if [[ ${t1} == *"allocated_capacity"*"="* ]];then skip=1;fi
 
 			if [ "$skip" == "0" ]; then
 				#echo $skip $t1
 				echo $t1 >> $cname.tf
 			fi
-        done <"$file"           
-            
+        done <"$file"         
+
+# bucket policies:
+
+        cm=${cmd[1]}
+	    ttft=${tft[1]}
+        cm=`echo $cm $cname`
+        echo $cm
+        echo $ttft
+    
     done
 fi
-
 rm t*.txt
 exit
 
