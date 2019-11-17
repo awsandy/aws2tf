@@ -18,18 +18,6 @@ done
 
 
 c2=1
-#if [ "$count" -gt "0" ]; then
-#    count=`expr $count - 1`
-#    #loop through query id's
-#    for i in `seq 0 $count`; do
-#        qid=`echo $awsout | jq ".${pref[(${c})]}[(${i})]" | tr -d '"'`
-#        echo $qid
-#    done
-#fi
-
-#exit
-
-c2=1
 if [ "$count" -gt "0" ]; then
     count=`expr $count - 1`
     #loop through query id's
@@ -37,7 +25,7 @@ if [ "$count" -gt "0" ]; then
         qid=`echo $awsout | jq ".${pref[(${c})]}[(${i})]" | tr -d '"'`
         #echo "quid=$qid"
         cm="${cmd[$c2]} $qid"
-        
+        myuuid=`date +%s`
         #cm=`printf "%s %s" "$cm" "$quid"`
         
         ttft=${tft[(${c2})]}
@@ -45,6 +33,7 @@ if [ "$count" -gt "0" ]; then
         awsout2=`eval $cm`
         #echo $awsout
         cname=`echo $awsout2 | jq ".${pref[(${c2})]}" | jq .Name | tr -d '"'`
+        cname=`printf "%s__%s" $cname $myuuid`
         echo "name=$cname"
         ttft=${tft[(${c2})]}
         printf "resource \"%s\" \"%s\" {" $ttft $cname > $cname.tf
@@ -55,29 +44,44 @@ if [ "$count" -gt "0" ]; then
 
         cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t0.txt
         cat t0.txt | sed 's/\\n/ /g' > t1.txt
-        
+        echo "T1"
+        cat t1.txt
         file="t1.txt"
+        fn=`printf "%s__%s.tf" $ttft $cname`
         while IFS= read line
         do
-            skip=0
+			skip=0
             # display $line or do something with $line
-            t1=`echo "$line"`
-            
-            if [[ ${t1} == *"arn"*"="* ]];then
-                echo "in arn"
-                #skip=1
+            t1=`echo "$line"` 
+            if [[ ${t1} == *"="* ]];then
+                tt1=`echo "$line" | cut -f1 -d'=' | tr -d ' '` 
+                    
+                if [[ ${tt1} == "arn" ]];then	
+                	#printf "acl = \"private\" \n" >> $fn
+                    #printf "force_destroy = false \n" >> $fn
+
+                    skip=1
+                fi
+                    
+                if [[ ${tt1} == "id" ]];then
+                    #printf "acl = \"private\"\n" >> $fn
+                    #printf "force_destroy = false \n" >> $fn
+
+                    skip=1
+                fi
+                    
+                if [[ ${tt1} == "role_arn" ]];then skip=0;fi
+                if [[ ${tt1} == "force_destroy" ]];then skip=1;fi
+                if [[ ${tt1} == "bucket_domain_name" ]];then skip=1;fi
+                if [[ ${tt1} == "bucket_regional_domain_name" ]];then skip=1;fi
+                if [[ ${tt1} == "allocated_capacity" ]];then skip=1;fi
             fi
-            
-            var=`echo ${t1} | cut -d'=' -f1`
-            if [[ ${var} == *"id"* ]];then skip=1; fi
-            
-            if [[ ${t1} == *"role_arn"*"="* ]];then skip=0;fi
-            #if [[ ${t1} == *"allocated_capacity"*"="* ]];then skip=1;fi
-            
-            if [ "$skip" == "0" ]; then
-                #echo $skip $t1
-                echo $t1 >> $cname.tf
-            fi
+			if [ "$skip" == "0" ]; then
+
+				#echo $skip $t1 $ttft
+
+				echo $t1 >> $fn
+			fi
         done <"$file"      
         
     done
