@@ -21,7 +21,7 @@ c2=1
 if [ "$count" -gt "0" ]; then
     count=`expr $count - 1`
     #loop through query id's
-    for i in `seq 0 6`; do
+    for i in `seq 6 6`; do
         qid=`echo $awsout | jq ".${pref[(${c})]}[(${i})]" | tr -d '"'`
         #echo "quid=$qid"
         cm="${cmd[$c2]} $qid"
@@ -44,6 +44,7 @@ if [ "$count" -gt "0" ]; then
 
         cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t0.txt
         cat t0.txt | sed 's/\\n/ /g' > t1.txt
+        #cp t0.txt t1.txt
         echo "T1"
         cat t1.txt
         file="t1.txt"
