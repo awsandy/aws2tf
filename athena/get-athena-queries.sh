@@ -21,7 +21,7 @@ c2=1
 if [ "$count" -gt "0" ]; then
     count=`expr $count - 1`
     #loop through query id's
-    for i in `seq 6 6`; do
+    for i in `seq 0 20`; do
         qid=`echo $awsout | jq ".${pref[(${c})]}[(${i})]" | tr -d '"'`
         #echo "quid=$qid"
         cm="${cmd[$c2]} $qid"
@@ -44,7 +44,6 @@ if [ "$count" -gt "0" ]; then
 
         cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t0.txt
         cat t0.txt | sed 's/\\n/ /g' > t1.txt
-        #cp t0.txt t1.txt
         echo "T1"
         cat t1.txt
         file="t1.txt"
@@ -56,13 +55,23 @@ if [ "$count" -gt "0" ]; then
             t1=`echo "$line"` 
             if [[ ${t1} == *"="* ]];then
                 tt1=`echo "$line" | cut -f1 -d'=' | tr -d ' '` 
-                    
+                tt2=`echo "$line" | cut -f2- -d'=' | tr -d ' '`  
                 if [[ ${tt1} == "arn" ]];then	
                 	#printf "acl = \"private\" \n" >> $fn
                     #printf "force_destroy = false \n" >> $fn
 
                     skip=1
                 fi
+                if [[ ${tt1} == "query" ]];then
+                    echo "tt2="
+                    echo $tt2
+                    tt3=`echo $tt2 | sed 's/"/\\"/g'`
+                  
+                    echo $tt3
+                    
+                fi
+
+
                     
                 if [[ ${tt1} == "id" ]];then
                     #printf "acl = \"private\"\n" >> $fn
