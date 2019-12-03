@@ -1,7 +1,7 @@
 #1/bin/bash
-cmd[0]="aws ec2 describe-vpc-peering-connections"
-pref[0]="VpcPeeringConnections"
-tft[0]="aws_vpc_peering_connection"
+cmd[0]="aws iam list-instance-profiles"
+pref[0]="InstanceProfiles"
+tft[0]="aws_iam_instance_profile"
 rm -f ${tft[0]}_*.tf
 
 for c in `seq 0 0`; do
@@ -15,7 +15,7 @@ for c in `seq 0 0`; do
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
             echo $i
-            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].VpcPeeringConnectionId" | tr -d '"'`
+            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].InstanceProfileName" | tr -d '"'`
             echo $cname
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
@@ -30,7 +30,8 @@ for c in `seq 0 0`; do
             fn=`printf "%s__%s.tf" $ttft $cname`
             while IFS= read line
             do
-				skip=0
+                skip=0
+
                 # display $line or do something with $line
                 t1=`echo "$line"` 
                 if [[ ${t1} == *"="* ]];then
@@ -40,20 +41,25 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "id" ]];then skip=1; fi          
                     if [[ ${tt1} == "role_arn" ]];then skip=1;fi
                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
-                    if [[ ${tt1} == "association_id" ]];then skip=1;fi
+                    if [[ ${tt1} == "create_date" ]];then skip=1;fi
                     #if [[ ${tt1} == "public_dns" ]];then skip=1;fi
                     #if [[ ${tt1} == "private_dns" ]];then skip=1;fi
                     #if [[ ${tt1} == "public_ip" ]];then skip=1;fi
-                    if [[ ${tt1} == "private_ip" ]];then skip=1;fi
-                    if [[ ${tt1} == "accept_status" ]];then skip=1;fi
-                    #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
+                    #if [[ ${tt1} == "private_ip" ]];then skip=1;fi
+                    if [[ ${tt1} == "unique_id" ]];then skip=1;fi
+                    if [[ ${tt1} == "roles" ]];then 
+                        read line
+                        read line
+                        skip=1;
+                    fi
                     #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi
                 fi
                 if [ "$skip" == "0" ]; then
                     #echo $skip $t1
-                    echo $t1 >> $fn
+                    echo $t1 >> $fn 
                 fi
+                
                 
             done <"$file"
             
