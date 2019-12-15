@@ -6,13 +6,13 @@ cmd[1]="aws ec2 describe-client-vpn-target-networks --client-vpn-endpoint-id "
 pref[1]="ClientVpnTargetNetworks"
 tft[1]="aws_ec2_client_vpn_network_association"
 
-rm ${tft[0]}*.tf
+rm -f ${tft[0]}*.tf
 
 for c in `seq 0 0`; do
     rm -f ${tft[0]}*.tf
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
-	echo $cm
+	#echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
     if [ "$count" -gt "0" ]; then

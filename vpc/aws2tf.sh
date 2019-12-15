@@ -90,6 +90,9 @@ rm -rf .terraform
 if [ "$f" = "no" ]; then
     rm -f import.log resources*.txt
     rm -f processed.txt
+    rm -f *.tf
+    rm -f terraform.*
+    rm -rf .terraform
 else
     sort -u processed.txt > pt.txt
     cp pt.txt processed.txt
@@ -190,7 +193,7 @@ for com in `ls ../../scripts/*-get-*.sh | cut -d'/' -f4 | sort -g`; do
             if [ $? -eq 0 ]; then
                 echo "skipping $docomm"
             else
-                eval $docom 2>&1 | tee -a import.log
+                eval $docomm 2>&1 | tee -a import.log
             fi
         fi
 
@@ -199,7 +202,7 @@ for com in `ls ../../scripts/*-get-*.sh | cut -d'/' -f4 | sort -g`; do
             echo "Error in log file exiting ...."
             exit
         else
-        echo "$docom" >> processed.txt
+        echo "$docomm" >> processed.txt
         fi
     
     rm -f terraform*.backup
@@ -217,11 +220,12 @@ date
 echo "---------------------------------------------------------------------------"
 echo "az2tf output files are in generated/tf.$mysub"
 echo "---------------------------------------------------------------------------"
-exit
+
 echo "Terraform fmt ..."
 terraform fmt
 echo "Terraform validate ..."
 terraform validate .
+
 if [ "$v" = "yes" ]; then
     exit
 fi

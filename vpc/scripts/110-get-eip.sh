@@ -2,19 +2,19 @@
 cmd[0]="aws ec2 describe-addresses"
 pref[0]="Addresses"
 tft[0]="aws_eip"
-rm ${tft[0]}_*.tf
+rm -f ${tft[0]}_*.tf
 
 for c in `seq 0 0`; do
     rm -f ${tft[0]}*.tf
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
-	echo $cm
+	#echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
-            echo $i
+            #echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].AllocationId" | tr -d '"'`
             echo $cname
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
