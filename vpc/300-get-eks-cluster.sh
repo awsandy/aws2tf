@@ -32,6 +32,10 @@ if [ "$kcount" -gt "0" ]; then
                     printf "name=\"%s\"\n" $ocname >> data-$ttft.$cname.tf
                     printf "}\n" >> data-$ttft.$cname.tf
 
+                    printf "output \"%s_%s_endpoint\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.endpoint\n" $cname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf   
+
 
                     printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
                     printf "}" >> $ttft.$cname.tf
@@ -113,5 +117,8 @@ echo "fmt"
 terraform fmt
 echo "validate"
 terraform validate
+terraform refresh
+
+
 rm -f t*.txt
 
