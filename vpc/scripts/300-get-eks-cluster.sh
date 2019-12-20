@@ -1,18 +1,18 @@
-#1/bin/bash
+#!/bin/bash
+pref[0]="cluster"
+tft[0]="aws_eks_cluster"
+rm -f ${tft[0]}_*.tf
+
 kcount=`aws eks list-clusters | jq ".clusters | length"`
 if [ "$kcount" -gt "0" ]; then
     kcount=`expr $kcount - 1`
     for k in `seq 0 $kcount`; do
         cln=`aws eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`
-        echo cluster name $cln
-        
+        echo cluster name $cln        
         cmd[0]=`echo "aws eks describe-cluster --name $cln"`      
-        pref[0]="cluster"
-        tft[0]="aws_eks_cluster"
-        rm -f ${tft[0]}_*.tf
-        
+              
         for c in `seq 0 0`; do
-            rm -f ${tft[0]}*.tf
+            
             cm=${cmd[$c]}
             ttft=${tft[(${c})]}
             echo $cm
@@ -22,7 +22,7 @@ if [ "$kcount" -gt "0" ]; then
             if [ "$count" -gt "0" ]; then
                 count=`expr $count - 1`
                 for i in `seq 0 $count`; do
-                    echo $i
+                    #echo $i
                     cname=`echo $awsout | jq ".${pref[(${c})]}.name" | tr -d '"'`
                     ocname=`echo $cname`
                     cname=${cname//./_}
@@ -36,10 +36,21 @@ if [ "$kcount" -gt "0" ]; then
                     printf "\t value = data.aws_eks_cluster.%s.endpoint\n" $cname >> data-$ttft.$cname.tf
                     printf "}\n" >> data-$ttft.$cname.tf   
 
-                    printf "output \"%s_%s_vpc_id\" {\n" $ttft $cname >> data-$ttft.$cname.tf
-                    printf "\t value = data.aws_eks_cluster.%s.vpc_config.vpc_id\n" $cname >> data-$ttft.$cname.tf
+                    printf "output \"%s_%s_cluster_security_group_id\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.vpc_config.0.cluster_security_group_id\n" $cname >> data-$ttft.$cname.tf
                     printf "}\n" >> data-$ttft.$cname.tf
 
+                    printf "output \"%s_%s_security_group_ids\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.vpc_config.0.security_group_ids\n" $cname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
+
+                    printf "output \"%s_%s_subnet_ids\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.vpc_config.0.subnet_ids\n" $cname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
+
+                    printf "output \"%s_%s_vpc_id\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.vpc_config.0.vpc_id\n" $cname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
 
                     printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
                     printf "}" >> $ttft.$cname.tf
@@ -109,20 +120,31 @@ if [ "$kcount" -gt "0" ]; then
                     
                 done # done for i
             fi
+        done 
+        # address supporting eks cluster resources
+        echo "fmt"
+        terraform fmt
+        echo "validate"
+        terraform validate
+        terraform refresh > /dev/null
+        echo "finish refresh"
+        rm -f t*.txt
+        tcmd=`terraform output aws_eks_cluster_${cln}_vpc_id`
+        scmd=`terraform output aws_eks_cluster_${cln}_subnet_ids | tr -d '[|]|,|"'`
+        #echo "tcmd= $tcmd"
+        #echo "scmd= $scmd"
+        ../../scripts/100-get-vpc.sh $tcmd
+        for s1 in `echo $scmd` ; do
+            #echo $s1
+            ../../scripts/105-get-subnet.sh $s1
         done
-
         
-    done
+    done  # k  
 fi
 
 
 
-echo "fmt"
-terraform fmt
-echo "validate"
-terraform validate
-terraform refresh
 
 
-rm -f t*.txt
+
 

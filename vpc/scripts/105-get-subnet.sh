@@ -1,14 +1,17 @@
 #1/bin/bash
-cmd[0]="aws ec2 describe-subnets"
+if [ $1 != "" ]; then
+    cmd[0]="aws ec2 describe-subnets --subnet-ids $1"
+else
+    cmd[0]="aws ec2 describe-subnets"
+fi
+
 pref[0]="Subnets"
 tft[0]="aws_subnet"
-cmd[1]="aws glue get-jobs"
-pref[1]="Jobs"
-tft[1]="aws_glue_job"
-rm -f ${tft[0]}.tf
+
+#rm -f ${tft[0]}.tf
 
 for c in `seq 0 0`; do
-    rm -f ${tft[0]}*.tf
+    
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
 	#echo $cm

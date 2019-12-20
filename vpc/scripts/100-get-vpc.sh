@@ -6,9 +6,8 @@ else
 fi
 pref[0]="Vpcs"
 tft[0]="aws_vpc"
-cmd[1]="aws glue get-jobs"
-pref[1]="Jobs"
-tft[1]="aws_glue_job"
+echo ${cmd[0]}
+
 
 for c in `seq 0 0`; do
     cm=${cmd[$c]}
@@ -68,3 +67,4 @@ terraform fmt
 terraform validate
 rm t*.txt
 
+#

@@ -102,10 +102,10 @@ fi
 #fi
 echo " "
 echo "Account ID = ${s}"
-echo "Azure Resource Group Filter = ${g}"
+echo "AWS Resource Group Filter = ${g}"
 echo "Terraform Resource Type Filter = ${r}"
-echo "Get Subscription Policies & RBAC = ${p}"
-echo "Extract Key Vault Secrets to .tf files (insecure) = ${x}"
+echo "Get Account Policies & Roles = ${p}"
+echo "Extract KMS Secrets to .tf files (insecure) = ${x}"
 echo "Fast Forward = ${f}"
 echo " "
 
