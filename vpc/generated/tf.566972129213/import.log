@@ -597,7 +597,7 @@ Import successful!
 The resources that were imported are shown above. These resources are now in
 your Terraform state and will henceforth be managed by Terraform.
 [0m
-../../scripts/055-get-iam-policies.sh: line 75: cho: command not found
+fmt
 aws_iam_policy__arn_aws_iam__566972129213_policy_AWSCloudTrailAccessPolicy.tf
 aws_iam_policy__arn_aws_iam__566972129213_policy_AwsSecurityNacundaAuditPolicy.tf
 aws_iam_policy__arn_aws_iam__566972129213_policy_AzureAD_SSOUserRole_Policy.tf
@@ -900,18 +900,15 @@ aws_eip__eipalloc-0407ffac966c7739e.tf
 aws_eip__eipalloc-0ccb1e2720d9165df.tf
 [32m[1mSuccess![0m The configuration is valid.
 [0m
-rm: illegal option -- a
-usage: rm [-f | -i] [-dPRrvW] file ...
-       unlink file
 sg-039c3a0c49aa16cf1
 [0m[1maws_security_group.sg-039c3a0c49aa16cf1: Importing from ID "sg-039c3a0c49aa16cf1"...[0m
 [0m[1m[32maws_security_group.sg-039c3a0c49aa16cf1: Import prepared![0m
 [0m[32m  Prepared aws_security_group for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
+[0m[1maws_security_group_rule.sg-039c3a0c49aa16cf1: Refreshing state... [id=sgrule-1693782263][0m
 [0m[1maws_security_group_rule.sg-039c3a0c49aa16cf1-1: Refreshing state... [id=sgrule-4163617391][0m
 [0m[1maws_security_group.sg-039c3a0c49aa16cf1: Refreshing state... [id=sg-039c3a0c49aa16cf1][0m
-[0m[1maws_security_group_rule.sg-039c3a0c49aa16cf1: Refreshing state... [id=sgrule-1693782263][0m
 [0m[32m
 Import successful!
 
@@ -923,8 +920,8 @@ sg-046a506e3c71b5759
 [0m[1m[32maws_security_group.sg-046a506e3c71b5759: Import prepared![0m
 [0m[32m  Prepared aws_security_group for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
-[0m[1maws_security_group.sg-046a506e3c71b5759: Refreshing state... [id=sg-046a506e3c71b5759][0m
 [0m[1maws_security_group_rule.sg-046a506e3c71b5759: Refreshing state... [id=sgrule-3741256632][0m
+[0m[1maws_security_group.sg-046a506e3c71b5759: Refreshing state... [id=sg-046a506e3c71b5759][0m
 [0m[32m
 Import successful!
 
@@ -938,10 +935,10 @@ sg-04a42b2b1de775e99
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
-[0m[1maws_security_group.sg-04a42b2b1de775e99: Refreshing state... [id=sg-04a42b2b1de775e99][0m
-[0m[1maws_security_group_rule.sg-04a42b2b1de775e99-2: Refreshing state... [id=sgrule-1261870120][0m
-[0m[1maws_security_group_rule.sg-04a42b2b1de775e99-1: Refreshing state... [id=sgrule-520132178][0m
 [0m[1maws_security_group_rule.sg-04a42b2b1de775e99: Refreshing state... [id=sgrule-4181114147][0m
+[0m[1maws_security_group_rule.sg-04a42b2b1de775e99-2: Refreshing state... [id=sgrule-1261870120][0m
+[0m[1maws_security_group.sg-04a42b2b1de775e99: Refreshing state... [id=sg-04a42b2b1de775e99][0m
+[0m[1maws_security_group_rule.sg-04a42b2b1de775e99-1: Refreshing state... [id=sgrule-520132178][0m
 [0m[32m
 Import successful!
 
@@ -958,13 +955,13 @@ sg-0510f118422521f54
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
+[0m[1maws_security_group_rule.sg-0510f118422521f54-4: Refreshing state... [id=sgrule-1795107793][0m
 [0m[1maws_security_group_rule.sg-0510f118422521f54-5: Refreshing state... [id=sgrule-1638753341][0m
-[0m[1maws_security_group_rule.sg-0510f118422521f54-2: Refreshing state... [id=sgrule-826415360][0m
 [0m[1maws_security_group_rule.sg-0510f118422521f54-1: Refreshing state... [id=sgrule-3073976960][0m
 [0m[1maws_security_group.sg-0510f118422521f54: Refreshing state... [id=sg-0510f118422521f54][0m
-[0m[1maws_security_group_rule.sg-0510f118422521f54-4: Refreshing state... [id=sgrule-1795107793][0m
 [0m[1maws_security_group_rule.sg-0510f118422521f54-3: Refreshing state... [id=sgrule-3428756303][0m
 [0m[1maws_security_group_rule.sg-0510f118422521f54: Refreshing state... [id=sgrule-3103418519][0m
+[0m[1maws_security_group_rule.sg-0510f118422521f54-2: Refreshing state... [id=sgrule-826415360][0m
 [0m[32m
 Import successful!
 
@@ -979,9 +976,9 @@ sg-0a4d92f142e2a944e
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[1maws_security_group.sg-0a4d92f142e2a944e: Refreshing state... [id=sg-0a4d92f142e2a944e][0m
-[0m[1maws_security_group_rule.sg-0a4d92f142e2a944e-2: Refreshing state... [id=sgrule-2238351724][0m
-[0m[1maws_security_group_rule.sg-0a4d92f142e2a944e-1: Refreshing state... [id=sgrule-792843501][0m
-[0m[1maws_security_group_rule.sg-0a4d92f142e2a944e: Refreshing state... [id=sgrule-2615956241][0m
+[0m[1maws_security_group_rule.sg-0a4d92f142e2a944e-2: Refreshing state... [id=sgrule-792843501][0m
+[0m[1maws_security_group_rule.sg-0a4d92f142e2a944e-1: Refreshing state... [id=sgrule-2615956241][0m
+[0m[1maws_security_group_rule.sg-0a4d92f142e2a944e: Refreshing state... [id=sgrule-2238351724][0m
 [0m[32m
 Import successful!
 
@@ -997,12 +994,12 @@ sg-0a67d4d889051720b
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
-[0m[1maws_security_group_rule.sg-0a67d4d889051720b-3: Refreshing state... [id=sgrule-1620328719][0m
-[0m[1maws_security_group_rule.sg-0a67d4d889051720b: Refreshing state... [id=sgrule-1655437613][0m
-[0m[1maws_security_group_rule.sg-0a67d4d889051720b-2: Refreshing state... [id=sgrule-341012581][0m
-[0m[1maws_security_group_rule.sg-0a67d4d889051720b-1: Refreshing state... [id=sgrule-2143924763][0m
 [0m[1maws_security_group.sg-0a67d4d889051720b: Refreshing state... [id=sg-0a67d4d889051720b][0m
+[0m[1maws_security_group_rule.sg-0a67d4d889051720b-3: Refreshing state... [id=sgrule-1620328719][0m
+[0m[1maws_security_group_rule.sg-0a67d4d889051720b-1: Refreshing state... [id=sgrule-2143924763][0m
+[0m[1maws_security_group_rule.sg-0a67d4d889051720b-2: Refreshing state... [id=sgrule-341012581][0m
 [0m[1maws_security_group_rule.sg-0a67d4d889051720b-4: Refreshing state... [id=sgrule-3299443767][0m
+[0m[1maws_security_group_rule.sg-0a67d4d889051720b: Refreshing state... [id=sgrule-1655437613][0m
 [0m[32m
 Import successful!
 
@@ -1033,27 +1030,27 @@ sg-0aa2cd28fed522988
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-12: Refreshing state... [id=sgrule-1757463145][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-16: Refreshing state... [id=sgrule-3946120309][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-3: Refreshing state... [id=sgrule-4294689135][0m
 [0m[1maws_security_group_rule.sg-0aa2cd28fed522988-8: Refreshing state... [id=sgrule-688049472][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-9: Refreshing state... [id=sgrule-2810069659][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-13: Refreshing state... [id=sgrule-1347904631][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988: Refreshing state... [id=sgrule-1473064920][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-1: Refreshing state... [id=sgrule-1534239723][0m
-[0m[1maws_security_group.sg-0aa2cd28fed522988: Refreshing state... [id=sg-0aa2cd28fed522988][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-7: Refreshing state... [id=sgrule-412913816][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-10: Refreshing state... [id=sgrule-2880662531][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-5: Refreshing state... [id=sgrule-2516248301][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-11: Refreshing state... [id=sgrule-3548366288][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-18: Refreshing state... [id=sgrule-827179000][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-19: Refreshing state... [id=sgrule-520513626][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-14: Refreshing state... [id=sgrule-358508340][0m
 [0m[1maws_security_group_rule.sg-0aa2cd28fed522988-15: Refreshing state... [id=sgrule-578755365][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-4: Refreshing state... [id=sgrule-2757442948][0m
-[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-2: Refreshing state... [id=sgrule-2167677943][0m
 [0m[1maws_security_group_rule.sg-0aa2cd28fed522988-17: Refreshing state... [id=sgrule-370090225][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-3: Refreshing state... [id=sgrule-4294689135][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-18: Refreshing state... [id=sgrule-827179000][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-10: Refreshing state... [id=sgrule-2880662531][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-16: Refreshing state... [id=sgrule-3946120309][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-1: Refreshing state... [id=sgrule-1534239723][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-19: Refreshing state... [id=sgrule-520513626][0m
 [0m[1maws_security_group_rule.sg-0aa2cd28fed522988-6: Refreshing state... [id=sgrule-3667189532][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-9: Refreshing state... [id=sgrule-2810069659][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-11: Refreshing state... [id=sgrule-3548366288][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-13: Refreshing state... [id=sgrule-1347904631][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-14: Refreshing state... [id=sgrule-358508340][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-5: Refreshing state... [id=sgrule-2516248301][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-12: Refreshing state... [id=sgrule-1757463145][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-2: Refreshing state... [id=sgrule-2167677943][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988: Refreshing state... [id=sgrule-1473064920][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-7: Refreshing state... [id=sgrule-412913816][0m
+[0m[1maws_security_group_rule.sg-0aa2cd28fed522988-4: Refreshing state... [id=sgrule-2757442948][0m
+[0m[1maws_security_group.sg-0aa2cd28fed522988: Refreshing state... [id=sg-0aa2cd28fed522988][0m
 [0m[32m
 Import successful!
 
@@ -1067,10 +1064,10 @@ sg-0b555c632c5ef5aea
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
-[0m[1maws_security_group_rule.sg-0b555c632c5ef5aea-2: Refreshing state... [id=sgrule-930918936][0m
-[0m[1maws_security_group.sg-0b555c632c5ef5aea: Refreshing state... [id=sg-0b555c632c5ef5aea][0m
 [0m[1maws_security_group_rule.sg-0b555c632c5ef5aea: Refreshing state... [id=sgrule-1213891205][0m
+[0m[1maws_security_group.sg-0b555c632c5ef5aea: Refreshing state... [id=sg-0b555c632c5ef5aea][0m
 [0m[1maws_security_group_rule.sg-0b555c632c5ef5aea-1: Refreshing state... [id=sgrule-4244047225][0m
+[0m[1maws_security_group_rule.sg-0b555c632c5ef5aea-2: Refreshing state... [id=sgrule-930918936][0m
 [0m[32m
 Import successful!
 
@@ -1089,14 +1086,14 @@ sg-0b70930caea1aac99
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
+[0m[1maws_security_group_rule.sg-0b70930caea1aac99-2: Refreshing state... [id=sgrule-2601031547][0m
 [0m[1maws_security_group_rule.sg-0b70930caea1aac99-1: Refreshing state... [id=sgrule-3236065942][0m
-[0m[1maws_security_group_rule.sg-0b70930caea1aac99: Refreshing state... [id=sgrule-3567307328][0m
+[0m[1maws_security_group_rule.sg-0b70930caea1aac99-6: Refreshing state... [id=sgrule-3690624004][0m
+[0m[1maws_security_group_rule.sg-0b70930caea1aac99-7: Refreshing state... [id=sgrule-1160893209][0m
 [0m[1maws_security_group_rule.sg-0b70930caea1aac99-4: Refreshing state... [id=sgrule-3077314237][0m
 [0m[1maws_security_group.sg-0b70930caea1aac99: Refreshing state... [id=sg-0b70930caea1aac99][0m
-[0m[1maws_security_group_rule.sg-0b70930caea1aac99-6: Refreshing state... [id=sgrule-3690624004][0m
-[0m[1maws_security_group_rule.sg-0b70930caea1aac99-2: Refreshing state... [id=sgrule-2601031547][0m
-[0m[1maws_security_group_rule.sg-0b70930caea1aac99-7: Refreshing state... [id=sgrule-1160893209][0m
 [0m[1maws_security_group_rule.sg-0b70930caea1aac99-5: Refreshing state... [id=sgrule-1337075304][0m
+[0m[1maws_security_group_rule.sg-0b70930caea1aac99: Refreshing state... [id=sgrule-3567307328][0m
 [0m[1maws_security_group_rule.sg-0b70930caea1aac99-3: Refreshing state... [id=sgrule-1574259589][0m
 [0m[32m
 Import successful!
@@ -1112,9 +1109,9 @@ sg-0c8444a8f846d6c50
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[1maws_security_group_rule.sg-0c8444a8f846d6c50-1: Refreshing state... [id=sgrule-406240567][0m
-[0m[1maws_security_group_rule.sg-0c8444a8f846d6c50: Refreshing state... [id=sgrule-3052928691][0m
-[0m[1maws_security_group_rule.sg-0c8444a8f846d6c50-2: Refreshing state... [id=sgrule-1281388537][0m
 [0m[1maws_security_group.sg-0c8444a8f846d6c50: Refreshing state... [id=sg-0c8444a8f846d6c50][0m
+[0m[1maws_security_group_rule.sg-0c8444a8f846d6c50-2: Refreshing state... [id=sgrule-1281388537][0m
+[0m[1maws_security_group_rule.sg-0c8444a8f846d6c50: Refreshing state... [id=sgrule-3052928691][0m
 [0m[32m
 Import successful!
 
@@ -1127,16 +1124,127 @@ sg-307a915e
 [0m[32m  Prepared aws_security_group for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
+[0m[1maws_security_group_rule.sg-307a915e: Refreshing state... [id=sgrule-472212499][0m
 [0m[1maws_security_group_rule.sg-307a915e-1: Refreshing state... [id=sgrule-985785478][0m
 [0m[1maws_security_group.sg-307a915e: Refreshing state... [id=sg-307a915e][0m
-[0m[1maws_security_group_rule.sg-307a915e: Refreshing state... [id=sgrule-472212499][0m
 [0m[32m
 Import successful!
 
 The resources that were imported are shown above. These resources are now in
 your Terraform state and will henceforth be managed by Terraform.
 [0m
-../../scripts/115-get-security_group.sh: line 64: p_rule: command not found
+Removed aws_security_group_rule.sg-039c3a0c49aa16cf1
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-039c3a0c49aa16cf1-1
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-046a506e3c71b5759
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-04a42b2b1de775e99
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-04a42b2b1de775e99-1
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-04a42b2b1de775e99-2
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0510f118422521f54
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0510f118422521f54-1
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0510f118422521f54-2
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0510f118422521f54-3
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0510f118422521f54-4
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0510f118422521f54-5
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0a4d92f142e2a944e
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0a4d92f142e2a944e-1
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0a4d92f142e2a944e-2
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0a67d4d889051720b
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0a67d4d889051720b-1
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0a67d4d889051720b-2
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0a67d4d889051720b-3
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0a67d4d889051720b-4
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-1
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-10
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-11
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-12
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-13
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-14
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-15
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-16
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-17
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-18
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-19
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-2
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-3
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-4
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-5
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-6
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-7
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-8
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0aa2cd28fed522988-9
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0b555c632c5ef5aea
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0b555c632c5ef5aea-1
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0b555c632c5ef5aea-2
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0b70930caea1aac99
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0b70930caea1aac99-1
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0b70930caea1aac99-2
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0b70930caea1aac99-3
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0b70930caea1aac99-4
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0b70930caea1aac99-5
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0b70930caea1aac99-6
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0b70930caea1aac99-7
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0c8444a8f846d6c50
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0c8444a8f846d6c50-1
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-0c8444a8f846d6c50-2
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-307a915e
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-307a915e-1
+Successfully removed 1 resource instance(s).
 aws_security_group__sg-039c3a0c49aa16cf1.tf
 aws_security_group__sg-046a506e3c71b5759.tf
 aws_security_group__sg-04a42b2b1de775e99.tf
@@ -1367,3 +1475,704 @@ aws_vpc_peering_connection__pcx-06301e0ad19f54d1f.tf
 [32m[1mSuccess![0m The configuration is valid.
 [0m
 cgw-07b91c9b2fe594b2e
+[0m[1maws_customer_gateway.cgw-07b91c9b2fe594b2e: Importing from ID "cgw-07b91c9b2fe594b2e"...[0m
+[0m[1m[32maws_customer_gateway.cgw-07b91c9b2fe594b2e: Import prepared![0m
+[0m[32m  Prepared aws_customer_gateway for import[0m
+[0m[1maws_customer_gateway.cgw-07b91c9b2fe594b2e: Refreshing state... [id=cgw-07b91c9b2fe594b2e][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_customer_gateway__cgw-07b91c9b2fe594b2e.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+cvpn-endpoint-0ced50490144eb216
+[0m[1maws_ec2_client_vpn_endpoint.cvpn-endpoint-0ced50490144eb216: Importing from ID "cvpn-endpoint-0ced50490144eb216"...[0m
+[0m[1m[32maws_ec2_client_vpn_endpoint.cvpn-endpoint-0ced50490144eb216: Import prepared![0m
+[0m[32m  Prepared aws_ec2_client_vpn_endpoint for import[0m
+[0m[1maws_ec2_client_vpn_endpoint.cvpn-endpoint-0ced50490144eb216: Refreshing state... [id=cvpn-endpoint-0ced50490144eb216][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+inner 2
+aws ec2 describe-client-vpn-endpoints[1]
+command2 = aws ec2 describe-client-vpn-target-networks --client-vpn-endpoint-id cvpn-endpoint-0ced50490144eb216
+{
+  "ClientVpnTargetNetworks": [
+    {
+      "ClientVpnEndpointId": "cvpn-endpoint-0ced50490144eb216",
+      "Status": {
+        "Code": "associated"
+      },
+      "VpcId": "vpc-0d18b88f8596b92c3",
+      "AssociationId": "cvpn-assoc-0fa5edc46b7b62e1f",
+      "SecurityGroups": [
+        "sg-0c8444a8f846d6c50"
+      ],
+      "TargetNetworkId": "subnet-0ec3f52feec87b364"
+    }
+  ]
+}
+cvpn-assoc-0fa5edc46b7b62e1f
+client_vpn_endpoint_id = "aws_ec2_client_vpn_network_association__.tf.new" 
+aws_ec2_client_vpn_endpoint__cvpn-endpoint-0ced50490144eb216.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+vpn-0ada80f0666402f29
+[0m[1maws_vpn_connection.vpn-0ada80f0666402f29: Importing from ID "vpn-0ada80f0666402f29"...[0m
+[0m[1m[32maws_vpn_connection.vpn-0ada80f0666402f29: Import prepared![0m
+[0m[32m  Prepared aws_vpn_connection for import[0m
+[0m[1maws_vpn_connection.vpn-0ada80f0666402f29: Refreshing state... [id=vpn-0ada80f0666402f29][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_vpn_connection__vpn-0ada80f0666402f29.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+EC2DomainJoin
+[0m[1maws_iam_instance_profile.EC2DomainJoin: Importing from ID "EC2DomainJoin"...[0m
+[0m[1m[32maws_iam_instance_profile.EC2DomainJoin: Import prepared![0m
+[0m[32m  Prepared aws_iam_instance_profile for import[0m
+[0m[1maws_iam_instance_profile.EC2DomainJoin: Refreshing state... [id=EC2DomainJoin][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+eks-9eb791b6-3765-794f-9f14-45e96ef7116d
+[0m[1maws_iam_instance_profile.eks-9eb791b6-3765-794f-9f14-45e96ef7116d: Importing from ID "eks-9eb791b6-3765-794f-9f14-45e96ef7116d"...[0m
+[0m[1m[32maws_iam_instance_profile.eks-9eb791b6-3765-794f-9f14-45e96ef7116d: Import prepared![0m
+[0m[32m  Prepared aws_iam_instance_profile for import[0m
+[0m[1maws_iam_instance_profile.eks-9eb791b6-3765-794f-9f14-45e96ef7116d: Refreshing state... [id=eks-9eb791b6-3765-794f-9f14-45e96ef7116d][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+terrafrom_ec2_profile
+[0m[1maws_iam_instance_profile.terrafrom_ec2_profile: Importing from ID "terrafrom_ec2_profile"...[0m
+[0m[1m[32maws_iam_instance_profile.terrafrom_ec2_profile: Import prepared![0m
+[0m[32m  Prepared aws_iam_instance_profile for import[0m
+[0m[1maws_iam_instance_profile.terrafrom_ec2_profile: Refreshing state... [id=terrafrom_ec2_profile][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_iam_instance_profile__EC2DomainJoin.tf
+aws_iam_instance_profile__eks-9eb791b6-3765-794f-9f14-45e96ef7116d.tf
+aws_iam_instance_profile__terrafrom_ec2_profile.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+../../scripts/250-get-instances.sh: line 14: [: 1
+1
+1
+1
+1: integer expression expected
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+rm: t*.txt: No such file or directory
+cluster name ateks1
+aws eks describe-cluster --name ateks1
+cname = ateks1
+[0m[1maws_eks_cluster.ateks1: Importing from ID "ateks1"...[0m
+[0m[1m[32maws_eks_cluster.ateks1: Import prepared![0m
+[0m[32m  Prepared aws_eks_cluster for import[0m
+[0m[1maws_eks_cluster.ateks1: Refreshing state... [id=ateks1][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+
+fmt
+aws_eks_cluster__ateks1.tf
+data-aws_eks_cluster.ateks1.tf
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+finish refresh
+aws ec2 describe-vpcs --vpc-ids vpc-05431771f5ae36fac
+vpc-05431771f5ae36fac
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_vpc" configuration[0m
+
+[0m  on aws_vpc__vpc-05431771f5ae36fac.tf line 2:
+   2: [4mresource "aws_vpc" "vpc-05431771f5ae36fac"[0m {
+[0m
+A aws_vpc resource named "vpc-05431771f5ae36fac" was already declared at
+aws_vpc.vpc-05431771f5ae36fac.tf:1,1-43. Resource names must be unique per
+type in each module.
+[0m[0m
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_vpc" configuration[0m
+
+[0m  on aws_vpc__vpc-05431771f5ae36fac.tf line 2:
+   2: [4mresource "aws_vpc" "vpc-05431771f5ae36fac"[0m {
+[0m
+A aws_vpc resource named "vpc-05431771f5ae36fac" was already declared at
+aws_vpc.vpc-05431771f5ae36fac.tf:1,1-43. Resource names must be unique per
+type in each module.
+[0m[0m
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-02436ed03a9494b2f
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-02436ed03a9494b2f.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-02436ed03a9494b2f"[0m {
+[0m
+A aws_subnet resource named "subnet-02436ed03a9494b2f" was already declared at
+aws_subnet.subnet-02436ed03a9494b2f.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-02436ed03a9494b2f.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-02436ed03a9494b2f"[0m {
+[0m
+A aws_subnet resource named "subnet-02436ed03a9494b2f" was already declared at
+aws_subnet.subnet-02436ed03a9494b2f.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-02bcc3928997fb832
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-02bcc3928997fb832.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-02bcc3928997fb832"[0m {
+[0m
+A aws_subnet resource named "subnet-02bcc3928997fb832" was already declared at
+aws_subnet.subnet-02bcc3928997fb832.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-02bcc3928997fb832.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-02bcc3928997fb832"[0m {
+[0m
+A aws_subnet resource named "subnet-02bcc3928997fb832" was already declared at
+aws_subnet.subnet-02bcc3928997fb832.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-0ab09e3f936e9cc42
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-0ab09e3f936e9cc42.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-0ab09e3f936e9cc42"[0m {
+[0m
+A aws_subnet resource named "subnet-0ab09e3f936e9cc42" was already declared at
+aws_subnet.subnet-0ab09e3f936e9cc42.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-0ab09e3f936e9cc42.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-0ab09e3f936e9cc42"[0m {
+[0m
+A aws_subnet resource named "subnet-0ab09e3f936e9cc42" was already declared at
+aws_subnet.subnet-0ab09e3f936e9cc42.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-0f133f360c948ffcc
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-0f133f360c948ffcc.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-0f133f360c948ffcc"[0m {
+[0m
+A aws_subnet resource named "subnet-0f133f360c948ffcc" was already declared at
+aws_subnet.subnet-0f133f360c948ffcc.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-0f133f360c948ffcc.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-0f133f360c948ffcc"[0m {
+[0m
+A aws_subnet resource named "subnet-0f133f360c948ffcc" was already declared at
+aws_subnet.subnet-0f133f360c948ffcc.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-0fe2cc01a3714aa11
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-0fe2cc01a3714aa11.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-0fe2cc01a3714aa11"[0m {
+[0m
+A aws_subnet resource named "subnet-0fe2cc01a3714aa11" was already declared at
+aws_subnet.subnet-0fe2cc01a3714aa11.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-0fe2cc01a3714aa11.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-0fe2cc01a3714aa11"[0m {
+[0m
+A aws_subnet resource named "subnet-0fe2cc01a3714aa11" was already declared at
+aws_subnet.subnet-0fe2cc01a3714aa11.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-0fe339f2876cc1b94
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-0fe339f2876cc1b94.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-0fe339f2876cc1b94"[0m {
+[0m
+A aws_subnet resource named "subnet-0fe339f2876cc1b94" was already declared at
+aws_subnet.subnet-0fe339f2876cc1b94.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[31m
+[1m[31mError: [0m[0m[1mDuplicate resource "aws_subnet" configuration[0m
+
+[0m  on aws_subnet__subnet-0fe339f2876cc1b94.tf line 2:
+   2: [4mresource "aws_subnet" "subnet-0fe339f2876cc1b94"[0m {
+[0m
+A aws_subnet resource named "subnet-0fe339f2876cc1b94" was already declared at
+aws_subnet.subnet-0fe339f2876cc1b94.tf:1,1-49. Resource names must be unique
+per type in each module.
+[0m[0m
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+kcount=0
+***k=0
+cluster name ateks1
+jcount=1
+***** node gorup = ng-dbda4942
+inner command=aws eks describe-nodegroup --cluster-name ateks1 --nodegroup-name ng-dbda4942
+awsout
+0
+cname = ateks1_ng-dbda4942
+pre-import
+total 1472
+-rwxr-xr-x@ 1 awsandy  ANT\Domain Users     339 20 Dec 16:07 aws.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     215 20 Dec 16:13 aws_customer_gateway__cgw-07b91c9b2fe594b2e.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     536 20 Dec 16:08 aws_directory_service_directory__d-9c67238930.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     716 20 Dec 16:13 aws_ec2_client_vpn_endpoint__cvpn-endpoint-0ced50490144eb216.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     125 20 Dec 16:13 aws_ec2_client_vpn_network_association__.tf.new
+-rw-r--r--  1 awsandy  ANT\Domain Users     461 20 Dec 16:13 aws_ec2_transit_gateway__tgw-012e7d0a668d199ea.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     217 20 Dec 16:13 aws_ec2_transit_gateway_route_table__tgw-rtb-01a2da5b6635f4242.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     605 20 Dec 16:13 aws_ec2_transit_gateway_vpc_attachment__tgw-attach-07fc66880e7bf11a3.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     332 20 Dec 16:10 aws_eip__eipalloc-016c9005a2f305d4c.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     236 20 Dec 16:10 aws_eip__eipalloc-0407ffac966c7739e.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     236 20 Dec 16:10 aws_eip__eipalloc-0ccb1e2720d9165df.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     716 20 Dec 16:14 aws_eks_cluster__ateks1.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users      53 20 Dec 16:14 aws_eks_node_group.ateks1_ng-dbda4942.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     161 20 Dec 16:14 aws_iam_instance_profile__EC2DomainJoin.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     293 20 Dec 16:14 aws_iam_instance_profile__eks-9eb791b6-3765-794f-9f14-45e96ef7116d.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     189 20 Dec 16:14 aws_iam_instance_profile__terrafrom_ec2_profile.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     904 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_AWSCloudTrailAccessPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    1553 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_AwsSecurityNacundaAuditPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     454 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_AzureAD_SSOUserRole_Policy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    1202 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_ConfigAccessPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     906 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_quicksight-embed1.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     897 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSLambdaBasicExecutionRole-c333a457-28fe-47ca-ae28-230b3bd5f7c3.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     572 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightIAMPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     580 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightRDSPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     608 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightRedshiftPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    1496 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightS3Policy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     719 20 Dec 16:07 aws_iam_role__AWSServiceRoleForAmazonEKSNodegroup.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     719 20 Dec 16:07 aws_iam_role__AWSServiceRoleForAmazonGuardDuty.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     674 20 Dec 16:07 aws_iam_role__AWSServiceRoleForAmazonSSM.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     737 20 Dec 16:07 aws_iam_role__AWSServiceRoleForAutoScaling.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     657 20 Dec 16:07 aws_iam_role__AWSServiceRoleForClientVPN.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     579 20 Dec 16:07 aws_iam_role__AWSServiceRoleForConfig.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     643 20 Dec 16:07 aws_iam_role__AWSServiceRoleForEC2Spot.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     674 20 Dec 16:07 aws_iam_role__AWSServiceRoleForEC2SpotFleet.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    1052 20 Dec 16:07 aws_iam_role__AWSServiceRoleForIsengardControllerRoleInternal.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     649 20 Dec 16:07 aws_iam_role__AWSServiceRoleForRDS.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     700 20 Dec 16:07 aws_iam_role__AWSServiceRoleForSupport.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     779 20 Dec 16:07 aws_iam_role__AWSServiceRoleForTrustedAdvisor.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     628 20 Dec 16:07 aws_iam_role__AWSServiceRoleForVPCTransitGateway.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     708 20 Dec 16:07 aws_iam_role__Admin-andyt_work.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     688 20 Dec 16:07 aws_iam_role__AwsSecurityAudit.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     716 20 Dec 16:07 aws_iam_role__AwsSecurityNacundaAudit.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     594 20 Dec 16:07 aws_iam_role__EC2DomainJoin.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     670 20 Dec 16:07 aws_iam_role__FullAdmin.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     688 20 Dec 16:07 aws_iam_role__GatedGardenAudit.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     720 20 Dec 16:07 aws_iam_role__GatedGardenInternalAudit.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     748 20 Dec 16:07 aws_iam_role__IsengardAuditorRole-DO-NOT-DELETE.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     712 20 Dec 16:07 aws_iam_role__IsengardCloudTrailRole.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     696 20 Dec 16:07 aws_iam_role__IsengardConfigRole.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     720 20 Dec 16:07 aws_iam_role__IsengardRole-DO-NOT-DELETE.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     716 20 Dec 16:07 aws_iam_role__ReadOnly-andyt_work.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     667 20 Dec 16:07 aws_iam_role__ReadOnly.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     587 20 Dec 16:07 aws_iam_role__aws-ec2-spot-fleet-tagging-role.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     579 20 Dec 16:07 aws_iam_role__aws-quicksight-service-role-v0.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     563 20 Dec 16:07 aws_iam_role__dialycleanup-role-bv6r9pdi.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     830 20 Dec 16:07 aws_iam_role__eksctl-ateks1-cluster-FargatePodExecutionRole-X3ZJ45V68J4D.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     794 20 Dec 16:07 aws_iam_role__eksctl-ateks1-cluster-ServiceRole-DMARU9L49VXX.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     897 20 Dec 16:07 aws_iam_role__eksctl-ateks1-nodegroup-ng-dbda49-NodeInstanceRole-1G65LK0UHK9Q4.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     534 20 Dec 16:07 aws_iam_role__flowlogsRole.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     596 20 Dec 16:07 aws_iam_role__nhsbsa-glue-role.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     629 20 Dec 16:07 aws_iam_role__qslambda-ApiGatewayCloudWatchLogsRole-1MSZTVUYHC52S.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     595 20 Dec 16:07 aws_iam_role__qslambda-LambdaExecutionRole-L9GEC8B4BOR5.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     556 20 Dec 16:07 aws_iam_role__rds-monitoring-role.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     520 20 Dec 16:07 aws_iam_role__terraform_for_ec2.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     542 20 Dec 16:07 aws_iam_role__workspaces_DefaultRole.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     370 20 Dec 16:09 aws_internet_gateway__igw-0418397cdfa3e5b05.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     155 20 Dec 16:09 aws_internet_gateway__igw-082b7aaa6d6c243fc.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     128 20 Dec 16:09 aws_internet_gateway__igw-7f362a16.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     209 20 Dec 16:12 aws_nat_gateway__nat-075a0e1958884b647.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     412 20 Dec 16:12 aws_nat_gateway__nat-0b1f28f00bde47199.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     209 20 Dec 16:12 aws_nat_gateway__nat-0c951fe1748b14ea1.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    1353 20 Dec 16:12 aws_route_table__rtb-02055fcf137b43efb.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     786 20 Dec 16:12 aws_route_table__rtb-03275d53f5c7b9659.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     786 20 Dec 16:12 aws_route_table__rtb-03e91eb0eb660e934.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     786 20 Dec 16:12 aws_route_table__rtb-050b743ce69b3955b.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     213 20 Dec 16:12 aws_route_table__rtb-052c9afa41f934515.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     213 20 Dec 16:12 aws_route_table__rtb-0690e0cd3a8e08bdb.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     975 20 Dec 16:12 aws_route_table__rtb-07628e6b0055dd992.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     777 20 Dec 16:12 aws_route_table__rtb-0833f61541511953c.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    1351 20 Dec 16:12 aws_route_table__rtb-0949c5903722ad341.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     525 20 Dec 16:12 aws_route_table__rtb-61e4c209.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     823 20 Dec 16:11 aws_security_group__sg-039c3a0c49aa16cf1.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     867 20 Dec 16:11 aws_security_group__sg-046a506e3c71b5759.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     853 20 Dec 16:11 aws_security_group__sg-04a42b2b1de775e99.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    1495 20 Dec 16:11 aws_security_group__sg-0510f118422521f54.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    1547 20 Dec 16:11 aws_security_group__sg-0a4d92f142e2a944e.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    1233 20 Dec 16:11 aws_security_group__sg-0a67d4d889051720b.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    5886 20 Dec 16:11 aws_security_group__sg-0aa2cd28fed522988.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    1420 20 Dec 16:11 aws_security_group__sg-0b555c632c5ef5aea.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users    1559 20 Dec 16:11 aws_security_group__sg-0b70930caea1aac99.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     853 20 Dec 16:11 aws_security_group__sg-0c8444a8f846d6c50.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     796 20 Dec 16:11 aws_security_group__sg-307a915e.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     631 20 Dec 16:10 aws_subnet__subnet-02436ed03a9494b2f.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     631 20 Dec 16:10 aws_subnet__subnet-02bcc3928997fb832.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     318 20 Dec 16:10 aws_subnet__subnet-03ed208e3161f9ec9.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     321 20 Dec 16:10 aws_subnet__subnet-08a73bc6c48ac8e79.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     632 20 Dec 16:10 aws_subnet__subnet-0ab09e3f936e9cc42.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     319 20 Dec 16:10 aws_subnet__subnet-0da8454f43ede219d.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     321 20 Dec 16:10 aws_subnet__subnet-0ec3f52feec87b364.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     633 20 Dec 16:10 aws_subnet__subnet-0f133f360c948ffcc.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     633 20 Dec 16:10 aws_subnet__subnet-0fe2cc01a3714aa11.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     630 20 Dec 16:10 aws_subnet__subnet-0fe339f2876cc1b94.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     315 20 Dec 16:10 aws_subnet__subnet-34c57e4e.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     314 20 Dec 16:10 aws_subnet__subnet-4367182a.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     315 20 Dec 16:10 aws_subnet__subnet-f835fbb4.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     586 20 Dec 16:08 aws_vpc__vpc-05431771f5ae36fac.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     344 20 Dec 16:08 aws_vpc__vpc-0d18b88f8596b92c3.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     329 20 Dec 16:08 aws_vpc__vpc-db7c09b3.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     621 20 Dec 16:13 aws_vpc_peering_connection__pcx-06301e0ad19f54d1f.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     298 20 Dec 16:13 aws_vpn_connection__vpn-0ada80f0666402f29.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users     620 20 Dec 16:14 data-aws_eks_cluster.ateks1.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   88214 20 Dec 16:14 import.log
+-rw-r--r--@ 1 awsandy  ANT\Domain Users     744 20 Dec 16:14 processed.txt
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  154371 20 Dec 16:14 terraform.tfstate
+Importing .....
+[0m[1maws_eks_node_group.ateks1_ng-dbda4942: Importing from ID "ateks1:ng-dbda4942"...[0m
+[0m[1m[32maws_eks_node_group.ateks1_ng-dbda4942: Import prepared![0m
+[0m[32m  Prepared aws_eks_node_group for import[0m
+[0m[1maws_eks_node_group.ateks1_ng-dbda4942: Refreshing state... [id=ateks1:ng-dbda4942][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+-rwxr-xr-x@ 1 awsandy  ANT\Domain Users   339 20 Dec 16:07 aws.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   215 20 Dec 16:13 aws_customer_gateway__cgw-07b91c9b2fe594b2e.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   536 20 Dec 16:08 aws_directory_service_directory__d-9c67238930.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   716 20 Dec 16:13 aws_ec2_client_vpn_endpoint__cvpn-endpoint-0ced50490144eb216.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   461 20 Dec 16:13 aws_ec2_transit_gateway__tgw-012e7d0a668d199ea.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   217 20 Dec 16:13 aws_ec2_transit_gateway_route_table__tgw-rtb-01a2da5b6635f4242.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   605 20 Dec 16:13 aws_ec2_transit_gateway_vpc_attachment__tgw-attach-07fc66880e7bf11a3.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   332 20 Dec 16:10 aws_eip__eipalloc-016c9005a2f305d4c.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   236 20 Dec 16:10 aws_eip__eipalloc-0407ffac966c7739e.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   236 20 Dec 16:10 aws_eip__eipalloc-0ccb1e2720d9165df.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   716 20 Dec 16:14 aws_eks_cluster__ateks1.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users    53 20 Dec 16:14 aws_eks_node_group.ateks1_ng-dbda4942.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   161 20 Dec 16:14 aws_iam_instance_profile__EC2DomainJoin.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   293 20 Dec 16:14 aws_iam_instance_profile__eks-9eb791b6-3765-794f-9f14-45e96ef7116d.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   189 20 Dec 16:14 aws_iam_instance_profile__terrafrom_ec2_profile.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   904 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_AWSCloudTrailAccessPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  1553 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_AwsSecurityNacundaAuditPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   454 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_AzureAD_SSOUserRole_Policy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  1202 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_ConfigAccessPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   906 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_quicksight-embed1.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   897 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSLambdaBasicExecutionRole-c333a457-28fe-47ca-ae28-230b3bd5f7c3.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   572 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightIAMPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   580 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightRDSPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   608 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightRedshiftPolicy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  1496 20 Dec 16:08 aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightS3Policy.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   719 20 Dec 16:07 aws_iam_role__AWSServiceRoleForAmazonEKSNodegroup.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   719 20 Dec 16:07 aws_iam_role__AWSServiceRoleForAmazonGuardDuty.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   674 20 Dec 16:07 aws_iam_role__AWSServiceRoleForAmazonSSM.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   737 20 Dec 16:07 aws_iam_role__AWSServiceRoleForAutoScaling.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   657 20 Dec 16:07 aws_iam_role__AWSServiceRoleForClientVPN.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   579 20 Dec 16:07 aws_iam_role__AWSServiceRoleForConfig.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   643 20 Dec 16:07 aws_iam_role__AWSServiceRoleForEC2Spot.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   674 20 Dec 16:07 aws_iam_role__AWSServiceRoleForEC2SpotFleet.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  1052 20 Dec 16:07 aws_iam_role__AWSServiceRoleForIsengardControllerRoleInternal.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   649 20 Dec 16:07 aws_iam_role__AWSServiceRoleForRDS.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   700 20 Dec 16:07 aws_iam_role__AWSServiceRoleForSupport.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   779 20 Dec 16:07 aws_iam_role__AWSServiceRoleForTrustedAdvisor.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   628 20 Dec 16:07 aws_iam_role__AWSServiceRoleForVPCTransitGateway.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   708 20 Dec 16:07 aws_iam_role__Admin-andyt_work.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   688 20 Dec 16:07 aws_iam_role__AwsSecurityAudit.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   716 20 Dec 16:07 aws_iam_role__AwsSecurityNacundaAudit.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   594 20 Dec 16:07 aws_iam_role__EC2DomainJoin.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   670 20 Dec 16:07 aws_iam_role__FullAdmin.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   688 20 Dec 16:07 aws_iam_role__GatedGardenAudit.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   720 20 Dec 16:07 aws_iam_role__GatedGardenInternalAudit.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   748 20 Dec 16:07 aws_iam_role__IsengardAuditorRole-DO-NOT-DELETE.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   712 20 Dec 16:07 aws_iam_role__IsengardCloudTrailRole.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   696 20 Dec 16:07 aws_iam_role__IsengardConfigRole.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   720 20 Dec 16:07 aws_iam_role__IsengardRole-DO-NOT-DELETE.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   716 20 Dec 16:07 aws_iam_role__ReadOnly-andyt_work.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   667 20 Dec 16:07 aws_iam_role__ReadOnly.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   587 20 Dec 16:07 aws_iam_role__aws-ec2-spot-fleet-tagging-role.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   579 20 Dec 16:07 aws_iam_role__aws-quicksight-service-role-v0.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   563 20 Dec 16:07 aws_iam_role__dialycleanup-role-bv6r9pdi.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   830 20 Dec 16:07 aws_iam_role__eksctl-ateks1-cluster-FargatePodExecutionRole-X3ZJ45V68J4D.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   794 20 Dec 16:07 aws_iam_role__eksctl-ateks1-cluster-ServiceRole-DMARU9L49VXX.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   897 20 Dec 16:07 aws_iam_role__eksctl-ateks1-nodegroup-ng-dbda49-NodeInstanceRole-1G65LK0UHK9Q4.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   534 20 Dec 16:07 aws_iam_role__flowlogsRole.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   596 20 Dec 16:07 aws_iam_role__nhsbsa-glue-role.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   629 20 Dec 16:07 aws_iam_role__qslambda-ApiGatewayCloudWatchLogsRole-1MSZTVUYHC52S.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   595 20 Dec 16:07 aws_iam_role__qslambda-LambdaExecutionRole-L9GEC8B4BOR5.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   556 20 Dec 16:07 aws_iam_role__rds-monitoring-role.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   520 20 Dec 16:07 aws_iam_role__terraform_for_ec2.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   542 20 Dec 16:07 aws_iam_role__workspaces_DefaultRole.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   370 20 Dec 16:09 aws_internet_gateway__igw-0418397cdfa3e5b05.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   155 20 Dec 16:09 aws_internet_gateway__igw-082b7aaa6d6c243fc.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   128 20 Dec 16:09 aws_internet_gateway__igw-7f362a16.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   209 20 Dec 16:12 aws_nat_gateway__nat-075a0e1958884b647.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   412 20 Dec 16:12 aws_nat_gateway__nat-0b1f28f00bde47199.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   209 20 Dec 16:12 aws_nat_gateway__nat-0c951fe1748b14ea1.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  1353 20 Dec 16:12 aws_route_table__rtb-02055fcf137b43efb.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   786 20 Dec 16:12 aws_route_table__rtb-03275d53f5c7b9659.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   786 20 Dec 16:12 aws_route_table__rtb-03e91eb0eb660e934.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   786 20 Dec 16:12 aws_route_table__rtb-050b743ce69b3955b.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   213 20 Dec 16:12 aws_route_table__rtb-052c9afa41f934515.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   213 20 Dec 16:12 aws_route_table__rtb-0690e0cd3a8e08bdb.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   975 20 Dec 16:12 aws_route_table__rtb-07628e6b0055dd992.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   777 20 Dec 16:12 aws_route_table__rtb-0833f61541511953c.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  1351 20 Dec 16:12 aws_route_table__rtb-0949c5903722ad341.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   525 20 Dec 16:12 aws_route_table__rtb-61e4c209.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   823 20 Dec 16:11 aws_security_group__sg-039c3a0c49aa16cf1.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   867 20 Dec 16:11 aws_security_group__sg-046a506e3c71b5759.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   853 20 Dec 16:11 aws_security_group__sg-04a42b2b1de775e99.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  1495 20 Dec 16:11 aws_security_group__sg-0510f118422521f54.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  1547 20 Dec 16:11 aws_security_group__sg-0a4d92f142e2a944e.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  1233 20 Dec 16:11 aws_security_group__sg-0a67d4d889051720b.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  5886 20 Dec 16:11 aws_security_group__sg-0aa2cd28fed522988.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  1420 20 Dec 16:11 aws_security_group__sg-0b555c632c5ef5aea.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users  1559 20 Dec 16:11 aws_security_group__sg-0b70930caea1aac99.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   853 20 Dec 16:11 aws_security_group__sg-0c8444a8f846d6c50.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   796 20 Dec 16:11 aws_security_group__sg-307a915e.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   631 20 Dec 16:10 aws_subnet__subnet-02436ed03a9494b2f.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   631 20 Dec 16:10 aws_subnet__subnet-02bcc3928997fb832.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   318 20 Dec 16:10 aws_subnet__subnet-03ed208e3161f9ec9.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   321 20 Dec 16:10 aws_subnet__subnet-08a73bc6c48ac8e79.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   632 20 Dec 16:10 aws_subnet__subnet-0ab09e3f936e9cc42.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   319 20 Dec 16:10 aws_subnet__subnet-0da8454f43ede219d.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   321 20 Dec 16:10 aws_subnet__subnet-0ec3f52feec87b364.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   633 20 Dec 16:10 aws_subnet__subnet-0f133f360c948ffcc.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   633 20 Dec 16:10 aws_subnet__subnet-0fe2cc01a3714aa11.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   630 20 Dec 16:10 aws_subnet__subnet-0fe339f2876cc1b94.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   315 20 Dec 16:10 aws_subnet__subnet-34c57e4e.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   314 20 Dec 16:10 aws_subnet__subnet-4367182a.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   315 20 Dec 16:10 aws_subnet__subnet-f835fbb4.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   586 20 Dec 16:08 aws_vpc__vpc-05431771f5ae36fac.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   344 20 Dec 16:08 aws_vpc__vpc-0d18b88f8596b92c3.tf
+-rw-r--r--@ 1 awsandy  ANT\Domain Users   329 20 Dec 16:08 aws_vpc__vpc-db7c09b3.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   621 20 Dec 16:13 aws_vpc_peering_connection__pcx-06301e0ad19f54d1f.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   298 20 Dec 16:13 aws_vpn_connection__vpn-0ada80f0666402f29.tf
+-rw-r--r--  1 awsandy  ANT\Domain Users   620 20 Dec 16:14 data-aws_eks_cluster.ateks1.tf
+aws.tf
+aws_customer_gateway__cgw-07b91c9b2fe594b2e.tf
+aws_directory_service_directory__d-9c67238930.tf
+aws_ec2_client_vpn_endpoint__cvpn-endpoint-0ced50490144eb216.tf
+aws_ec2_transit_gateway__tgw-012e7d0a668d199ea.tf
+aws_ec2_transit_gateway_route_table__tgw-rtb-01a2da5b6635f4242.tf
+aws_ec2_transit_gateway_vpc_attachment__tgw-attach-07fc66880e7bf11a3.tf
+aws_eip__eipalloc-016c9005a2f305d4c.tf
+aws_eip__eipalloc-0407ffac966c7739e.tf
+aws_eip__eipalloc-0ccb1e2720d9165df.tf
+aws_eks_cluster__ateks1.tf
+aws_iam_instance_profile__EC2DomainJoin.tf
+aws_iam_instance_profile__eks-9eb791b6-3765-794f-9f14-45e96ef7116d.tf
+aws_iam_instance_profile__terrafrom_ec2_profile.tf
+aws_iam_policy__arn_aws_iam__566972129213_policy_AWSCloudTrailAccessPolicy.tf
+aws_iam_policy__arn_aws_iam__566972129213_policy_AwsSecurityNacundaAuditPolicy.tf
+aws_iam_policy__arn_aws_iam__566972129213_policy_AzureAD_SSOUserRole_Policy.tf
+aws_iam_policy__arn_aws_iam__566972129213_policy_ConfigAccessPolicy.tf
+aws_iam_policy__arn_aws_iam__566972129213_policy_quicksight-embed1.tf
+aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSLambdaBasicExecutionRole-c333a457-28fe-47ca-ae28-230b3bd5f7c3.tf
+aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightIAMPolicy.tf
+aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightRDSPolicy.tf
+aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightRedshiftPolicy.tf
+aws_iam_policy__arn_aws_iam__566972129213_policy_service-role_AWSQuickSightS3Policy.tf
+aws_iam_role__AWSServiceRoleForAmazonEKSNodegroup.tf
+aws_iam_role__AWSServiceRoleForAmazonGuardDuty.tf
+aws_iam_role__AWSServiceRoleForAmazonSSM.tf
+aws_iam_role__AWSServiceRoleForAutoScaling.tf
+aws_iam_role__AWSServiceRoleForClientVPN.tf
+aws_iam_role__AWSServiceRoleForConfig.tf
+aws_iam_role__AWSServiceRoleForEC2Spot.tf
+aws_iam_role__AWSServiceRoleForEC2SpotFleet.tf
+aws_iam_role__AWSServiceRoleForIsengardControllerRoleInternal.tf
+aws_iam_role__AWSServiceRoleForRDS.tf
+aws_iam_role__AWSServiceRoleForSupport.tf
+aws_iam_role__AWSServiceRoleForTrustedAdvisor.tf
+aws_iam_role__AWSServiceRoleForVPCTransitGateway.tf
+aws_iam_role__Admin-andyt_work.tf
+aws_iam_role__AwsSecurityAudit.tf
+aws_iam_role__AwsSecurityNacundaAudit.tf
+aws_iam_role__EC2DomainJoin.tf
+aws_iam_role__FullAdmin.tf
+aws_iam_role__GatedGardenAudit.tf
+aws_iam_role__GatedGardenInternalAudit.tf
+aws_iam_role__IsengardAuditorRole-DO-NOT-DELETE.tf
+aws_iam_role__IsengardCloudTrailRole.tf
+aws_iam_role__IsengardConfigRole.tf
+aws_iam_role__IsengardRole-DO-NOT-DELETE.tf
+aws_iam_role__ReadOnly-andyt_work.tf
+aws_iam_role__ReadOnly.tf
+aws_iam_role__aws-ec2-spot-fleet-tagging-role.tf
+aws_iam_role__aws-quicksight-service-role-v0.tf
+aws_iam_role__dialycleanup-role-bv6r9pdi.tf
+aws_iam_role__eksctl-ateks1-cluster-FargatePodExecutionRole-X3ZJ45V68J4D.tf
+aws_iam_role__eksctl-ateks1-cluster-ServiceRole-DMARU9L49VXX.tf
+aws_iam_role__eksctl-ateks1-nodegroup-ng-dbda49-NodeInstanceRole-1G65LK0UHK9Q4.tf
+aws_iam_role__flowlogsRole.tf
+aws_iam_role__nhsbsa-glue-role.tf
+aws_iam_role__qslambda-ApiGatewayCloudWatchLogsRole-1MSZTVUYHC52S.tf
+aws_iam_role__qslambda-LambdaExecutionRole-L9GEC8B4BOR5.tf
+aws_iam_role__rds-monitoring-role.tf
+aws_iam_role__terraform_for_ec2.tf
+aws_iam_role__workspaces_DefaultRole.tf
+aws_internet_gateway__igw-0418397cdfa3e5b05.tf
+aws_internet_gateway__igw-082b7aaa6d6c243fc.tf
+aws_internet_gateway__igw-7f362a16.tf
+aws_nat_gateway__nat-075a0e1958884b647.tf
+aws_nat_gateway__nat-0b1f28f00bde47199.tf
+aws_nat_gateway__nat-0c951fe1748b14ea1.tf
+aws_route_table__rtb-02055fcf137b43efb.tf
+aws_route_table__rtb-03275d53f5c7b9659.tf
+aws_route_table__rtb-03e91eb0eb660e934.tf
+aws_route_table__rtb-050b743ce69b3955b.tf
+aws_route_table__rtb-052c9afa41f934515.tf
+aws_route_table__rtb-0690e0cd3a8e08bdb.tf
+aws_route_table__rtb-07628e6b0055dd992.tf
+aws_route_table__rtb-0833f61541511953c.tf
+aws_route_table__rtb-0949c5903722ad341.tf
+aws_route_table__rtb-61e4c209.tf
+aws_security_group__sg-039c3a0c49aa16cf1.tf
+aws_security_group__sg-046a506e3c71b5759.tf
+aws_security_group__sg-04a42b2b1de775e99.tf
+aws_security_group__sg-0510f118422521f54.tf
+aws_security_group__sg-0a4d92f142e2a944e.tf
+aws_security_group__sg-0a67d4d889051720b.tf
+aws_security_group__sg-0aa2cd28fed522988.tf
+aws_security_group__sg-0b555c632c5ef5aea.tf
+aws_security_group__sg-0b70930caea1aac99.tf
+aws_security_group__sg-0c8444a8f846d6c50.tf
+aws_security_group__sg-307a915e.tf
+aws_subnet__subnet-02436ed03a9494b2f.tf
+aws_subnet__subnet-02bcc3928997fb832.tf
+aws_subnet__subnet-03ed208e3161f9ec9.tf
+aws_subnet__subnet-08a73bc6c48ac8e79.tf
+aws_subnet__subnet-0ab09e3f936e9cc42.tf
+aws_subnet__subnet-0da8454f43ede219d.tf
+aws_subnet__subnet-0ec3f52feec87b364.tf
+aws_subnet__subnet-0f133f360c948ffcc.tf
+aws_subnet__subnet-0fe2cc01a3714aa11.tf
+aws_subnet__subnet-0fe339f2876cc1b94.tf
+aws_subnet__subnet-34c57e4e.tf
+aws_subnet__subnet-4367182a.tf
+aws_subnet__subnet-f835fbb4.tf
+aws_vpc__vpc-05431771f5ae36fac.tf
+aws_vpc__vpc-0d18b88f8596b92c3.tf
+aws_vpc__vpc-db7c09b3.tf
+aws_vpc_peering_connection__pcx-06301e0ad19f54d1f.tf
+aws_vpn_connection__vpn-0ada80f0666402f29.tf
+data-aws_eks_cluster.ateks1.tf
+fmt
+aws_eks_node_group__ateks1_ng-dbda4942.tf
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+database-1
+[0m[1maws_db_instance.database-1: Importing from ID "database-1"...[0m
+[0m[1m[32maws_db_instance.database-1: Import prepared![0m
+[0m[32m  Prepared aws_db_instance for import[0m
+[0m[1maws_db_instance.database-1: Refreshing state... [id=database-1][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+nhsjdb
+[0m[1maws_db_instance.nhsjdb: Importing from ID "nhsjdb"...[0m
+[0m[1m[32maws_db_instance.nhsjdb: Import prepared![0m
+[0m[32m  Prepared aws_db_instance for import[0m
+[0m[1maws_db_instance.nhsjdb: Refreshing state... [id=nhsjdb][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+ohsdb
+[0m[1maws_db_instance.ohsdb: Importing from ID "ohsdb"...[0m
+[0m[1m[32maws_db_instance.ohsdb: Import prepared![0m
+[0m[32m  Prepared aws_db_instance for import[0m
+[0m[1maws_db_instance.ohsdb: Refreshing state... [id=ohsdb][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+prcdb
+[0m[1maws_db_instance.prcdb: Importing from ID "prcdb"...[0m
+[0m[1m[32maws_db_instance.prcdb: Import prepared![0m
+[0m[32m  Prepared aws_db_instance for import[0m
+[0m[1maws_db_instance.prcdb: Refreshing state... [id=prcdb][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_db_instance__database-1.tf
+aws_db_instance__nhsjdb.tf
+aws_db_instance__ohsdb.tf
+aws_db_instance__prcdb.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m

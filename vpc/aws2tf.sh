@@ -196,14 +196,25 @@ for com in `ls ../../scripts/*-get-*.sh | cut -d'/' -f4 | sort -g`; do
                 eval $docomm 2>&1 | tee -a import.log
             fi
         fi
-
         lc=`expr $lc + 1`
-        if grep Error: import.log; then
-            echo "Error in log file exiting ...."
-            exit
-        else
+
+        file="import.log"
+        while IFS= read -r line
+        do
+            if [[ "${line}" == *"Error"* ]];then
+          
+                if [[ "${line}" == *"Duplicate"* ]];then
+                    echo "Ignoring $line"
+                else
+                    echo "Found Error: $line exiting"
+                    exit
+                fi
+            fi
+
+        done <"$file"
+
         echo "$docomm" >> processed.txt
-        fi
+        
     
     rm -f terraform*.backup
 done
