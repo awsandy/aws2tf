@@ -1,11 +1,11 @@
-#1/bin/bash
+#!/bin/bash
 cmd[0]="aws ec2 describe-addresses"
 pref[0]="Addresses"
 tft[0]="aws_eip"
-rm -f ${tft[0]}_*.tf
+
 
 for c in `seq 0 0`; do
-    rm -f ${tft[0]}*.tf
+    
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
 	#echo $cm

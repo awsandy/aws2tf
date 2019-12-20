@@ -1,11 +1,10 @@
-#1/bin/bash
+#!/bin/bash
 cmd[0]="aws iam list-roles"
 pref[0]="Roles"
 tft[0]="aws_iam_role"
-rm -f ${tft[0]}_*.tf
 
 for c in `seq 0 0`; do
-    rm -f ${tft[0]}*.tf
+    
     cm=${cmd[$c]}
     ttft=${tft[(${c})]}
     #echo $cm

@@ -1,7 +1,7 @@
 #!/bin/bash
 pref[0]="cluster"
 tft[0]="aws_eks_cluster"
-rm -f ${tft[0]}_*.tf
+
 
 kcount=`aws eks list-clusters | jq ".clusters | length"`
 if [ "$kcount" -gt "0" ]; then

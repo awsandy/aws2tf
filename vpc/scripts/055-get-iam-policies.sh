@@ -1,15 +1,12 @@
-#1/bin/bash
-# aws iam list-policies --scope Local
-# get arns
-
+#!/bin/bash
 
 cmd[0]="aws iam list-policies --scope Local"
 pref[0]="Policies"
 tft[0]="aws_iam_policy"
-rm -f ${tft[0]}_*.tf
+
 
 for c in `seq 0 0`; do
-    rm -f ${tft[0]}*.tf
+ 
     cm=${cmd[$c]}
     ttft=${tft[(${c})]}
     #echo $cm

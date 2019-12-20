@@ -2,10 +2,9 @@
 cmd[0]="aws ec2 describe-vpc-peering-connections"
 pref[0]="VpcPeeringConnections"
 tft[0]="aws_vpc_peering_connection"
-rm -f ${tft[0]}_*.tf
 
 for c in `seq 0 0`; do
-    rm -f ${tft[0]}*.tf
+   
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
 	#echo $cm

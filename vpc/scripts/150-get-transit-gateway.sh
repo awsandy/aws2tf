@@ -2,13 +2,9 @@
 cmd[0]="aws ec2 describe-transit-gateways"
 pref[0]="TransitGateways"
 tft[0]="aws_ec2_transit_gateway"
-cmd[1]="aws glue get-jobs"
-pref[1]="Jobs"
-tft[1]="aws_glue_job"
-rm -f ${tft[0]}.tf
 
 for c in `seq 0 0`; do
-    rm -f ${tft[0]}*.tf
+    
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
 	#echo $cm

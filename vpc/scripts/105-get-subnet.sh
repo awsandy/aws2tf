@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 if [ $1 != "" ]; then
     cmd[0]="aws ec2 describe-subnets --subnet-ids $1"
 else

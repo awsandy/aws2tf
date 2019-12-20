@@ -2,10 +2,10 @@
 cmd[0]="aws ec2 describe-internet-gateways"
 pref[0]="InternetGateways"
 tft[0]="aws_internet_gateway"
-rm -f ${tft[0]}_*.tf
+
 
 for c in `seq 0 0`; do
-    rm -f ${tft[0]}*.tf
+
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
 	#echo $cm

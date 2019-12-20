@@ -3,10 +3,9 @@ cmd[0]="aws ec2 describe-transit-gateway-route-tables"
 pref[0]="TransitGatewayRouteTables"
 tft[0]="aws_ec2_transit_gateway_route_table"
 
-rm -f ${tft[0]}.tf
 
 for c in `seq 0 0`; do
-    rm -f ${tft[0]}*.tf
+   
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
 	#echo $cm

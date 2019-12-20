@@ -1,12 +1,10 @@
-#1/bin/bash
+#!/bin/bash
 cmd[0]="aws ds describe-directories"
 pref[0]="DirectoryDescriptions"
 tft[0]="aws_directory_service_directory"
 
-rm -f ${tft[0]}.tf
-
 for c in `seq 0 0`; do
-    rm -f ${tft[0]}*.tf
+    
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
 	#echo $cm
