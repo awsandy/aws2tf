@@ -1,6 +1,9 @@
-cmd[0]="aws s3 ls | grep 'ht-' | awk '{print \$3'}"
+cmd[0]="aws s3 ls  | awk '{print \$3'}"
 pref[0]="Crawlers"
 tft[0]="aws_s3_bucket"
+#
+# policies
+#
 cmd[1]="aws s3api get-bucket-policy --bucket "
 pref[1]="Jobs"
 tft[1]="aws_s3_bucket_policy"
