@@ -165,7 +165,7 @@ if [ "$p" = "yes" ]; then
         #eval $docomm 2>&1 | tee -a import.log
         if grep -q Error: import.log ; then
             echo "Error in log file exiting ...."
-            exit
+            pass
         fi
     done
 fi

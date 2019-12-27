@@ -4,3 +4,5 @@ aws.tf.sav
 terraform.tfstate*
 *.txt
 *.tf
+generated
+vpc/generated
