@@ -18,18 +18,6 @@ done
 
 
 c2=1
-#if [ "$count" -gt "0" ]; then
-#    count=`expr $count - 1`
-#    #loop through query id's
-#    for i in `seq 0 $count`; do
-#        qid=`echo $awsout | jq ".${pref[(${c})]}[(${i})]" | tr -d '"'`
-#        echo $qid
-#    done
-#fi
-
-#exit
-
-c2=1
 if [ "$count" -gt "0" ]; then
     count=`expr $count - 1`
     #loop through query id's
@@ -57,9 +45,5 @@ fi
 
 exit
 
-
-awsout=`aws athena list-named-queries`
-count=`echo $awsout | jq ".${pref[(${c})]} | length"`
-echo $qrys | jq '.NamedQueryIds'
 
 
