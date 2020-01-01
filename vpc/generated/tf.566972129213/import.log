@@ -38,3 +38,234 @@ validate
 finish refresh
 aws ec2 describe-vpcs --vpc-ids vpc-06e16361c872f0aa5
 vpc-06e16361c872f0aa5
+[0m[1maws_vpc.vpc-06e16361c872f0aa5: Importing from ID "vpc-06e16361c872f0aa5"...[0m
+[0m[1m[32maws_vpc.vpc-06e16361c872f0aa5: Import prepared![0m
+[0m[32m  Prepared aws_vpc for import[0m
+[0m[1maws_vpc.vpc-06e16361c872f0aa5: Refreshing state... [id=vpc-06e16361c872f0aa5][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_vpc__vpc-06e16361c872f0aa5.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-032229a4338d46144
+[0m[1maws_subnet.subnet-032229a4338d46144: Importing from ID "subnet-032229a4338d46144"...[0m
+[0m[1m[32maws_subnet.subnet-032229a4338d46144: Import prepared![0m
+[0m[32m  Prepared aws_subnet for import[0m
+[0m[1maws_subnet.subnet-032229a4338d46144: Refreshing state... [id=subnet-032229a4338d46144][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_subnet__subnet-032229a4338d46144.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-0404b10902a7c9ae8
+[0m[1maws_subnet.subnet-0404b10902a7c9ae8: Importing from ID "subnet-0404b10902a7c9ae8"...[0m
+[0m[1m[32maws_subnet.subnet-0404b10902a7c9ae8: Import prepared![0m
+[0m[32m  Prepared aws_subnet for import[0m
+[0m[1maws_subnet.subnet-0404b10902a7c9ae8: Refreshing state... [id=subnet-0404b10902a7c9ae8][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_subnet__subnet-0404b10902a7c9ae8.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-08156b3ed0184aa79
+[0m[1maws_subnet.subnet-08156b3ed0184aa79: Importing from ID "subnet-08156b3ed0184aa79"...[0m
+[0m[1m[32maws_subnet.subnet-08156b3ed0184aa79: Import prepared![0m
+[0m[32m  Prepared aws_subnet for import[0m
+[0m[1maws_subnet.subnet-08156b3ed0184aa79: Refreshing state... [id=subnet-08156b3ed0184aa79][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_subnet__subnet-08156b3ed0184aa79.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-095b8dae044c0a92d
+[0m[1maws_subnet.subnet-095b8dae044c0a92d: Importing from ID "subnet-095b8dae044c0a92d"...[0m
+[0m[1m[32maws_subnet.subnet-095b8dae044c0a92d: Import prepared![0m
+[0m[32m  Prepared aws_subnet for import[0m
+[0m[1maws_subnet.subnet-095b8dae044c0a92d: Refreshing state... [id=subnet-095b8dae044c0a92d][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_subnet__subnet-095b8dae044c0a92d.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-0cda58fd15cd796c6
+[0m[1maws_subnet.subnet-0cda58fd15cd796c6: Importing from ID "subnet-0cda58fd15cd796c6"...[0m
+[0m[1m[32maws_subnet.subnet-0cda58fd15cd796c6: Import prepared![0m
+[0m[32m  Prepared aws_subnet for import[0m
+[0m[1maws_subnet.subnet-0cda58fd15cd796c6: Refreshing state... [id=subnet-0cda58fd15cd796c6][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_subnet__subnet-0cda58fd15cd796c6.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+subnet-0f08e521a267fb541
+[0m[1maws_subnet.subnet-0f08e521a267fb541: Importing from ID "subnet-0f08e521a267fb541"...[0m
+[0m[1m[32maws_subnet.subnet-0f08e521a267fb541: Import prepared![0m
+[0m[32m  Prepared aws_subnet for import[0m
+[0m[1maws_subnet.subnet-0f08e521a267fb541: Refreshing state... [id=subnet-0f08e521a267fb541][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_subnet__subnet-0f08e521a267fb541.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+sg-058fcd5161aeb7ca3
+[0m[1maws_security_group.sg-058fcd5161aeb7ca3: Importing from ID "sg-058fcd5161aeb7ca3"...[0m
+[0m[1m[32maws_security_group.sg-058fcd5161aeb7ca3: Import prepared![0m
+[0m[32m  Prepared aws_security_group for import[0m
+[0m[32m  Prepared aws_security_group_rule for import[0m
+[0m[32m  Prepared aws_security_group_rule for import[0m
+[0m[32m  Prepared aws_security_group_rule for import[0m
+[0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3-1: Refreshing state... [id=sgrule-1906673740][0m
+[0m[1maws_security_group.sg-058fcd5161aeb7ca3: Refreshing state... [id=sg-058fcd5161aeb7ca3][0m
+[0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3-2: Refreshing state... [id=sgrule-1792246724][0m
+[0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3: Refreshing state... [id=sgrule-492057480][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+Removed aws_security_group_rule.sg-058fcd5161aeb7ca3
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-058fcd5161aeb7ca3-1
+Successfully removed 1 resource instance(s).
+Removed aws_security_group_rule.sg-058fcd5161aeb7ca3-2
+Successfully removed 1 resource instance(s).
+aws_security_group__sg-058fcd5161aeb7ca3.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+sg-0adc3c54ee93b100a
+sg-0adc3c54ee93b100a
+[0m[1maws_security_group.sg-0adc3c54ee93b100a: Importing from ID "sg-0adc3c54ee93b100a"...[0m
+[0m[1m[32maws_security_group.sg-0adc3c54ee93b100a: Import prepared![0m
+[0m[32m  Prepared aws_security_group for import[0m
+[0m[32m  Prepared aws_security_group_rule for import[0m
+[0m[1maws_security_group_rule.sg-0adc3c54ee93b100a: Refreshing state... [id=sgrule-3866098026][0m
+[0m[1maws_security_group.sg-0adc3c54ee93b100a: Refreshing state... [id=sg-0adc3c54ee93b100a][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+Removed aws_security_group_rule.sg-0adc3c54ee93b100a
+Successfully removed 1 resource instance(s).
+aws_security_group__sg-0adc3c54ee93b100a.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+arn:aws:iam::566972129213:role/eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9
+aws iam list-roles | jq '.Roles[] | select(.Arn=="arn:aws:iam::566972129213:role/eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9")'
+eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9
+[0m[1maws_iam_role.eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9: Importing from ID "eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9"...[0m
+[0m[1m[32maws_iam_role.eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9: Import prepared![0m
+[0m[32m  Prepared aws_iam_role for import[0m
+[0m[1maws_iam_role.eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9: Refreshing state... [id=eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+fmt
+aws_iam_role__eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9.tf
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+kcount=0
+***k=0
+cluster name ateks1
+jcount=1
+***** node gorup = ng-3cd4aad1
+inner command=aws eks describe-nodegroup --cluster-name ateks1 --nodegroup-name ng-3cd4aad1
+awsout
+0
+cname = ateks1_ng-3cd4aad1
+pre-import
+total 192
+-rwxr-xr-x@ 1 awsandy  1896053708    339  1 Jan 11:36 aws.tf
+-rw-r--r--@ 1 awsandy  1896053708    716  1 Jan 11:36 aws_eks_cluster__ateks1.tf
+-rw-r--r--  1 awsandy  1896053708     53  1 Jan 11:37 aws_eks_node_group.ateks1_ng-3cd4aad1.tf
+-rw-r--r--  1 awsandy  1896053708    794  1 Jan 11:37 aws_iam_role__eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9.tf
+-rw-r--r--@ 1 awsandy  1896053708   1420  1 Jan 11:37 aws_security_group__sg-058fcd5161aeb7ca3.tf
+-rw-r--r--@ 1 awsandy  1896053708    867  1 Jan 11:37 aws_security_group__sg-0adc3c54ee93b100a.tf
+-rw-r--r--@ 1 awsandy  1896053708    630  1 Jan 11:36 aws_subnet__subnet-032229a4338d46144.tf
+-rw-r--r--@ 1 awsandy  1896053708    631  1 Jan 11:37 aws_subnet__subnet-0404b10902a7c9ae8.tf
+-rw-r--r--@ 1 awsandy  1896053708    633  1 Jan 11:37 aws_subnet__subnet-08156b3ed0184aa79.tf
+-rw-r--r--@ 1 awsandy  1896053708    633  1 Jan 11:37 aws_subnet__subnet-095b8dae044c0a92d.tf
+-rw-r--r--@ 1 awsandy  1896053708    631  1 Jan 11:37 aws_subnet__subnet-0cda58fd15cd796c6.tf
+-rw-r--r--@ 1 awsandy  1896053708    632  1 Jan 11:37 aws_subnet__subnet-0f08e521a267fb541.tf
+-rw-r--r--@ 1 awsandy  1896053708    586  1 Jan 11:36 aws_vpc__vpc-06e16361c872f0aa5.tf
+-rw-r--r--@ 1 awsandy  1896053708    771  1 Jan 11:36 data-aws_eks_cluster.ateks1.tf
+-rw-r--r--@ 1 awsandy  1896053708   9131  1 Jan 11:37 import.log
+-rw-r--r--  1 awsandy  1896053708     41  1 Jan 11:37 processed.txt
+-rw-r--r--@ 1 awsandy  1896053708  24341  1 Jan 11:37 terraform.tfstate
+Importing .....
+[0m[1maws_eks_node_group.ateks1_ng-3cd4aad1: Importing from ID "ateks1:ng-3cd4aad1"...[0m
+[0m[1m[32maws_eks_node_group.ateks1_ng-3cd4aad1: Import prepared![0m
+[0m[32m  Prepared aws_eks_node_group for import[0m
+[0m[1maws_eks_node_group.ateks1_ng-3cd4aad1: Refreshing state... [id=ateks1:ng-3cd4aad1][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+-rwxr-xr-x@ 1 awsandy  1896053708   339  1 Jan 11:36 aws.tf
+-rw-r--r--@ 1 awsandy  1896053708   716  1 Jan 11:36 aws_eks_cluster__ateks1.tf
+-rw-r--r--  1 awsandy  1896053708    53  1 Jan 11:37 aws_eks_node_group.ateks1_ng-3cd4aad1.tf
+-rw-r--r--  1 awsandy  1896053708   794  1 Jan 11:37 aws_iam_role__eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9.tf
+-rw-r--r--@ 1 awsandy  1896053708  1420  1 Jan 11:37 aws_security_group__sg-058fcd5161aeb7ca3.tf
+-rw-r--r--@ 1 awsandy  1896053708   867  1 Jan 11:37 aws_security_group__sg-0adc3c54ee93b100a.tf
+-rw-r--r--@ 1 awsandy  1896053708   630  1 Jan 11:36 aws_subnet__subnet-032229a4338d46144.tf
+-rw-r--r--@ 1 awsandy  1896053708   631  1 Jan 11:37 aws_subnet__subnet-0404b10902a7c9ae8.tf
+-rw-r--r--@ 1 awsandy  1896053708   633  1 Jan 11:37 aws_subnet__subnet-08156b3ed0184aa79.tf
+-rw-r--r--@ 1 awsandy  1896053708   633  1 Jan 11:37 aws_subnet__subnet-095b8dae044c0a92d.tf
+-rw-r--r--@ 1 awsandy  1896053708   631  1 Jan 11:37 aws_subnet__subnet-0cda58fd15cd796c6.tf
+-rw-r--r--@ 1 awsandy  1896053708   632  1 Jan 11:37 aws_subnet__subnet-0f08e521a267fb541.tf
+-rw-r--r--@ 1 awsandy  1896053708   586  1 Jan 11:36 aws_vpc__vpc-06e16361c872f0aa5.tf
+-rw-r--r--@ 1 awsandy  1896053708   771  1 Jan 11:36 data-aws_eks_cluster.ateks1.tf
+aws.tf
+aws_eks_cluster__ateks1.tf
+aws_iam_role__eksctl-ateks1-cluster-ServiceRole-2GCMES4IN0I9.tf
+aws_security_group__sg-058fcd5161aeb7ca3.tf
+aws_security_group__sg-0adc3c54ee93b100a.tf
+aws_subnet__subnet-032229a4338d46144.tf
+aws_subnet__subnet-0404b10902a7c9ae8.tf
+aws_subnet__subnet-08156b3ed0184aa79.tf
+aws_subnet__subnet-095b8dae044c0a92d.tf
+aws_subnet__subnet-0cda58fd15cd796c6.tf
+aws_subnet__subnet-0f08e521a267fb541.tf
+aws_vpc__vpc-06e16361c872f0aa5.tf
+data-aws_eks_cluster.ateks1.tf
+fmt
+aws_eks_node_group__ateks1_ng-3cd4aad1.tf
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m

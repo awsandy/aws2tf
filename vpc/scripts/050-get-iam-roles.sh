@@ -4,9 +4,6 @@ if [ $1 != "" ]; then
 else
     cmd[0]="aws ec2 list-roles"
 fi
-c=0
-cm=${cmd[$c]}
-echo $cm
 
 
 pref[0]="Roles"
