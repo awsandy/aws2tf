@@ -145,6 +145,8 @@ if [ "$kcount" -gt "0" ]; then
             tcmd=`terraform output aws_eks_cluster_${cln}_vpc_id`
             ../../scripts/100-get-vpc.sh $tcmd
             #
+            ../../scripts/103-get-igw.sh $tcmd
+            #
             scmd=`terraform output aws_eks_cluster_${cln}_subnet_ids | tr -d '[|]|,|"'`
             for s1 in `echo $scmd` ; do
                 #echo $s1

@@ -10,7 +10,7 @@ cm=${cmd[$c]}
 echo $cm
 
 
-cmd[0]="aws ec2 describe-internet-gateways"
+#cmd[0]="aws ec2 describe-internet-gateways"
 
 pref[0]="InternetGateways"
 tft[0]="aws_internet_gateway"
