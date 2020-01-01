@@ -132,6 +132,7 @@ if [ "$kcount" -gt "0" ]; then
             terraform refresh > /dev/null
             echo "finish refresh"
             rm -f t*.txt
+            #
             tcmd=`terraform output aws_eks_cluster_${cln}_vpc_id`
             ../../scripts/100-get-vpc.sh $tcmd
             #
@@ -139,6 +140,15 @@ if [ "$kcount" -gt "0" ]; then
             for s1 in `echo $scmd` ; do
                 #echo $s1
                 ../../scripts/105-get-subnet.sh $s1
+            done
+            #
+            csg=`aws_eks_cluster_${cln}_cluster_security_group_id`
+            ../../scripts/115-get-security_group.sh $csg
+            #
+            sgs=`terraform output aws_eks_cluster_${cln}_security_group_ids | tr -d '[|]|,|"'`
+            for s1 in `echo $sgs` ; do
+                #echo $s1
+                ../../scripts/115-get-security_group.sh $s1
             done
         fi
         

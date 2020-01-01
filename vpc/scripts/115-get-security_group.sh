@@ -1,5 +1,10 @@
 #1/bin/bash
-cmd[0]="aws ec2 describe-security-groups"
+if [ $1 != "" ]; then
+    cmd[0]="aws ec2 describe-security-groups --group-ids $1"
+else
+    cmd[0]="aws ec2 describe-security-groups"
+fi
+
 pref[0]="SecurityGroups"
 tft[0]="aws_security_group"
 

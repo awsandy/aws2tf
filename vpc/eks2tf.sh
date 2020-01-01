@@ -185,7 +185,7 @@ echo "loop through providers"
 pwd
 for com in `ls ../../scripts/3*-get-*.sh | cut -d'/' -f4 | sort -g`; do    
         echo "$com"
-        docomm="../../scripts/$com"
+        docomm="../../scripts/$com all"
         if [ "$f" = "no" ]; then
             eval $docomm 2>&1 | tee -a import.log
         else
