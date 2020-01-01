@@ -35,48 +35,6 @@ data-aws_eks_cluster.ateks1.tf
 validate
 [32m[1mSuccess![0m The configuration is valid.
 [0m
-../../scripts/300-get-eks-cluster.sh: line 130: [: !=: unary operator expected
-kcount=0
-***k=0
-cluster name ateks1
-jcount=1
-***** node gorup = ng-3cd4aad1
-inner command=aws eks describe-nodegroup --cluster-name ateks1 --nodegroup-name ng-3cd4aad1
-awsout
-0
-cname = ateks1_ng-3cd4aad1
-pre-import
-total 80
--rwxr-xr-x@ 1 awsandy  1896053708   339 31 Dec 16:39 aws.tf
--rw-r--r--@ 1 awsandy  1896053708   125 20 Dec 16:13 aws_ec2_client_vpn_network_association__.tf.new
--rw-r--r--  1 awsandy  1896053708   716 31 Dec 16:39 aws_eks_cluster__ateks1.tf
--rw-r--r--  1 awsandy  1896053708    53 31 Dec 16:39 aws_eks_node_group.ateks1_ng-3cd4aad1.tf
--rw-r--r--  1 awsandy  1896053708   620 31 Dec 16:39 data-aws_eks_cluster.ateks1.tf
--rw-r--r--  1 awsandy  1896053708  1597 31 Dec 16:39 import.log
--rw-r--r--  1 awsandy  1896053708    37 31 Dec 16:39 processed.txt
--rw-r--r--  1 awsandy  1896053708  3012 31 Dec 16:39 t1.txt
--rw-r--r--  1 awsandy  1896053708  3324 31 Dec 16:39 t2.txt
--rw-r--r--  1 awsandy  1896053708  3768 31 Dec 16:39 terraform.tfstate
-Importing .....
-[0m[1maws_eks_node_group.ateks1_ng-3cd4aad1: Importing from ID "ateks1:ng-3cd4aad1"...[0m
-[0m[1m[32maws_eks_node_group.ateks1_ng-3cd4aad1: Import prepared![0m
-[0m[32m  Prepared aws_eks_node_group for import[0m
-[0m[1maws_eks_node_group.ateks1_ng-3cd4aad1: Refreshing state... [id=ateks1:ng-3cd4aad1][0m
-[0m[32m
-Import successful!
-
-The resources that were imported are shown above. These resources are now in
-your Terraform state and will henceforth be managed by Terraform.
-[0m
--rwxr-xr-x@ 1 awsandy  1896053708  339 31 Dec 16:39 aws.tf
--rw-r--r--  1 awsandy  1896053708  716 31 Dec 16:39 aws_eks_cluster__ateks1.tf
--rw-r--r--  1 awsandy  1896053708   53 31 Dec 16:39 aws_eks_node_group.ateks1_ng-3cd4aad1.tf
--rw-r--r--  1 awsandy  1896053708  620 31 Dec 16:39 data-aws_eks_cluster.ateks1.tf
-aws.tf
-aws_eks_cluster__ateks1.tf
-data-aws_eks_cluster.ateks1.tf
-fmt
-aws_eks_node_group__ateks1_ng-3cd4aad1.tf
-validate
-[32m[1mSuccess![0m The configuration is valid.
-[0m
+finish refresh
+aws ec2 describe-vpcs --vpc-ids vpc-06e16361c872f0aa5
+vpc-06e16361c872f0aa5

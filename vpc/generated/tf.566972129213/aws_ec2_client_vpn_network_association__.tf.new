@@ -1,3 +1,0 @@
-resource "aws_ec2_client_vpn_network_association" "cvpn-assoc-0fa5edc46b7b62e1f" {
-subnet_id = "subnet-0ec3f52feec87b364" 
-}

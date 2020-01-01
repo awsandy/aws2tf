@@ -32,6 +32,15 @@ if [ "$kcount" -gt "0" ]; then
                     printf "name=\"%s\"\n" $ocname >> data-$ttft.$cname.tf
                     printf "}\n" >> data-$ttft.$cname.tf
 
+                    printf "data \"%s_auth\" \"%s\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "name=\"%s\"\n" $ocname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
+
+                    printf "output \"%s_%s_role_arn\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.role_arn\n" $cname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
+
+
                     printf "output \"%s_%s_endpoint\" {\n" $ttft $cname >> data-$ttft.$cname.tf
                     printf "\t value = data.aws_eks_cluster.%s.endpoint\n" $cname >> data-$ttft.$cname.tf
                     printf "}\n" >> data-$ttft.$cname.tf   
@@ -142,14 +151,20 @@ if [ "$kcount" -gt "0" ]; then
                 ../../scripts/105-get-subnet.sh $s1
             done
             #
-            csg=`aws_eks_cluster_${cln}_cluster_security_group_id`
+            csg=`terraform output aws_eks_cluster_${cln}_cluster_security_group_id`
             ../../scripts/115-get-security_group.sh $csg
             #
             sgs=`terraform output aws_eks_cluster_${cln}_security_group_ids | tr -d '[|]|,|"'`
             for s1 in `echo $sgs` ; do
-                #echo $s1
+                echo $s1
                 ../../scripts/115-get-security_group.sh $s1
             done
+            rarn=`terraform output aws_eks_cluster_${cln}_role_arn`
+            echo $rarn
+            ../../scripts/050-get-iam-roles.sh $rarn
+            #
+
+
         fi
         
     done  # k  
