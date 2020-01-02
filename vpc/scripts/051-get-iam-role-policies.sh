@@ -1,13 +1,16 @@
 #!/bin/bash
 if [ $1 != "" ]; then
-    cmd[0]="aws iam list-roles | jq '.Roles[] | select(.Arn==\"${1}\")'"
+    cmd[0]="aws iam list-role-policies --role-name $1"
 else
-    cmd[0]="aws ec2 list-roles"
+    exit
 fi
+c=0
+cm=${cmd[$c]}
+echo $cm
 
 
-pref[0]="Roles"
-tft[0]="aws_iam_role"
+pref[0]="PolicyNames"
+tft[0]="aws_iam_role_policy"
 
 for c in `seq 0 0`; do
     
@@ -15,27 +18,23 @@ for c in `seq 0 0`; do
     ttft=${tft[(${c})]}
     #echo $cm
     awsout=`eval $cm`
-    if [ $1 != "" ]; then
-        count=1
-    else
-        count=`echo $awsout | jq ".${pref[(${c})]} | length"`
-    fi
+    echo "awsout $awsout"
+
+    count=`echo $awsout | jq ".${pref[(${c})]} | length"`
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
+        echo $count
         for i in `seq 0 $count`; do
-            #echo $i
-            if [ $1 != "" ]; then
-                cname=`echo $awsout | jq ".RoleName" | tr -d '"'` 
-            else
-                cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].RoleName" | tr -d '"'`
-            fi
+            pname=`echo $awsout | jq ".${pref[(${c})]}[(${i})]" | tr -d '"'`     
+            awsout2=`aws iam get-role-policy --role-name ${1} --policy-name ${pname}`
+            cname=`echo $awsout2 | jq ".PolicyName" | tr -d '"'`
             ocname=`echo $cname`
             cname=${cname//./_}
             echo $cname
             
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" >> $ttft.$cname.tf
-            terraform import $ttft.$cname $ocname
+            terraform import $ttft.$cname $1:$pname
             terraform state show $ttft.$cname > t2.txt
             rm $ttft.$cname.tf
             cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
@@ -77,9 +76,6 @@ for c in `seq 0 0`; do
             done <"$file"   # done while
             
         done # done for i
-        # Get attached role policies
-        ../../scripts/051-get-iam-role-policies.sh $ocname
-        ../../scripts/052-get-iam-attached-role-policies.sh $ocname
     fi
 done
 echo "fmt"
