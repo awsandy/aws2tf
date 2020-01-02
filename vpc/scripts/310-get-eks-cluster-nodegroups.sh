@@ -43,15 +43,15 @@ if [ "$kcount" -gt "0" ]; then
 
                             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
                             printf "}" >> $ttft.$cname.tf
-                            echo "pre-import"
-                            ls -l
+                            #echo "pre-import"
+                            #ls -l
                             echo "Importing ....."
                             terraform import $ttft.$cname $ocname
                             terraform state show $ttft.$cname > t2.txt
                             
-                            ls -l *.tf
+                            #ls -l *.tf
                             rm $ttft.$cname.tf
-                            ls *.tf
+                            #ls *.tf
                             cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
                             #	for k in `cat t1.txt`; do
                             #		echo $k
@@ -73,6 +73,9 @@ if [ "$kcount" -gt "0" ]; then
                                     if [[ ${tt1} == "arn" ]];then skip=1; fi
                                     if [[ ${tt1} == "id" ]];then skip=1; fi
                                     #if [[ ${tt1} == "role_arn" ]];then skip=1;fi
+                                    if [[ ${tt1} == "node_role_arn" ]];then 
+                                    rarn=`echo $tt2 | tr -d '"'`
+                                    fi
                                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
                                     if [[ ${tt1} == "association_id" ]];then skip=1;fi
                                     if [[ ${tt1} == "unique_id" ]];then skip=1;fi
@@ -118,6 +121,19 @@ if [ "$kcount" -gt "0" ]; then
                     fi
                 done
             done
+            if [ $1 != "" ]; then
+                # get other stuff
+                terraform refresh > /dev/null
+                echo "finish refresh"
+                rm -f t*.txt
+
+                echo $rarn
+                ../../scripts/050-get-iam-roles.sh $rarn
+            fi
+
+
+
+
         fi
         
     done
