@@ -1,5 +1,13 @@
-#1/bin/bash
-cmd[0]="aws ec2 describe-nat-gateways"
+#!/bin/bash
+if [ $1 != "" ]; then
+    cmd[0]="aws ec2 describe-nat-gateways --filter \"Name=vpc-id,Values=$1\""
+else
+    cmd[0]="aws describe-nat-gateways"
+fi
+c=0
+cm=${cmd[$c]}
+echo $cm
+
 pref[0]="NatGateways"
 tft[0]="aws_nat_gateway"
 

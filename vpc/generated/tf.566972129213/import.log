@@ -220,9 +220,9 @@ sg-058fcd5161aeb7ca3
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
-[0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3-2: Refreshing state... [id=sgrule-1792246724][0m
 [0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3: Refreshing state... [id=sgrule-492057480][0m
 [0m[1maws_security_group.sg-058fcd5161aeb7ca3: Refreshing state... [id=sg-058fcd5161aeb7ca3][0m
+[0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3-2: Refreshing state... [id=sgrule-1792246724][0m
 [0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3-1: Refreshing state... [id=sgrule-1906673740][0m
 [0m[32m
 Import successful!
@@ -245,8 +245,8 @@ sg-0adc3c54ee93b100a
 [0m[1m[32maws_security_group.sg-0adc3c54ee93b100a: Import prepared![0m
 [0m[32m  Prepared aws_security_group for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
-[0m[1maws_security_group.sg-0adc3c54ee93b100a: Refreshing state... [id=sg-0adc3c54ee93b100a][0m
 [0m[1maws_security_group_rule.sg-0adc3c54ee93b100a: Refreshing state... [id=sgrule-3866098026][0m
+[0m[1maws_security_group.sg-0adc3c54ee93b100a: Refreshing state... [id=sg-0adc3c54ee93b100a][0m
 [0m[32m
 Import successful!
 

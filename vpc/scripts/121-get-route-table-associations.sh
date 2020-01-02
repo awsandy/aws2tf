@@ -27,7 +27,7 @@ for c in `seq 0 0`; do
             echo $cname
             # get the subnet id
             # Inner loop associations
-            awsout2=echo $awsout | jq ".${pref[(${c})]}[(${i})].Associations"
+            awsout2=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Associations"`
             jcount=`echo $awsout2 | jq ". | length"`
             if [ "$jcount" -gt "0" ]; then
                 jcount=`expr $jcount - 1`
@@ -35,7 +35,7 @@ for c in `seq 0 0`; do
 
                     sname=`echo $awsout2 | jq ".[(${j})].SubnetId" | tr -d '"'`
                     echo "sname= $sname"
-                    if [ "$sname" != "null" ]; then
+                    #if [ "$sname" != "null" ]; then
                         cname=`echo $awsout2 | jq ".[(${j})].RouteTableAssociationId" | tr -d '"'`
                         rtbid=`echo $awsout2 | jq ".[(${j})].RouteTableId" | tr -d '"'`
                         printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
@@ -75,9 +75,9 @@ for c in `seq 0 0`; do
                             fi
                             
                         done <"$file"
-                    else    
-                        echo "association null subnetID"
-                    fi
+                    #else    
+                    #    echo "association null subnetID"
+                    #fi
                 done
             fi
         done
