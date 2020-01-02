@@ -176,11 +176,6 @@ fi
 
 date
 
-
-
-date
-
-
 echo "loop through providers"
 pwd
 for com in `ls ../../scripts/3*-get-*.sh | cut -d'/' -f4 | sort -g`; do    
@@ -238,6 +233,13 @@ if [ "$v" = "yes" ]; then
     exit
 fi
 
+echo "---------------------------------------------------------------------------"
+echo "az2tf output files are in generated/tf.$mysub"
+echo "---------------------------------------------------------------------------"
+
 echo "Terraform Plan ..."
 terraform plan .
 
+echo "---------------------------------------------------------------------------"
+echo "az2tf output files are in generated/tf.$mysub"
+echo "---------------------------------------------------------------------------"

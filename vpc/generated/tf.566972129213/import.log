@@ -129,6 +129,7 @@ aws_route_table__rtb-0daff6912a087c1ad.tf
 aws_route_table__rtb-0ddebc6f566d9c311.tf
 [32m[1mSuccess![0m The configuration is valid.
 [0m
+../../scripts/300-get-eks-cluster.sh: line 152: ../../scripts/140-get-nat-gateway.sh: No such file or directory
 subnet-032229a4338d46144
 [0m[1maws_subnet.subnet-032229a4338d46144: Importing from ID "subnet-032229a4338d46144"...[0m
 [0m[1m[32maws_subnet.subnet-032229a4338d46144: Import prepared![0m
@@ -220,10 +221,10 @@ sg-058fcd5161aeb7ca3
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
-[0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3: Refreshing state... [id=sgrule-492057480][0m
-[0m[1maws_security_group.sg-058fcd5161aeb7ca3: Refreshing state... [id=sg-058fcd5161aeb7ca3][0m
-[0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3-2: Refreshing state... [id=sgrule-1792246724][0m
 [0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3-1: Refreshing state... [id=sgrule-1906673740][0m
+[0m[1maws_security_group.sg-058fcd5161aeb7ca3: Refreshing state... [id=sg-058fcd5161aeb7ca3][0m
+[0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3: Refreshing state... [id=sgrule-492057480][0m
+[0m[1maws_security_group_rule.sg-058fcd5161aeb7ca3-2: Refreshing state... [id=sgrule-1792246724][0m
 [0m[32m
 Import successful!
 
@@ -245,8 +246,8 @@ sg-0adc3c54ee93b100a
 [0m[1m[32maws_security_group.sg-0adc3c54ee93b100a: Import prepared![0m
 [0m[32m  Prepared aws_security_group for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
-[0m[1maws_security_group_rule.sg-0adc3c54ee93b100a: Refreshing state... [id=sgrule-3866098026][0m
 [0m[1maws_security_group.sg-0adc3c54ee93b100a: Refreshing state... [id=sg-0adc3c54ee93b100a][0m
+[0m[1maws_security_group_rule.sg-0adc3c54ee93b100a: Refreshing state... [id=sgrule-3866098026][0m
 [0m[32m
 Import successful!
 
