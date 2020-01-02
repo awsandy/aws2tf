@@ -1,5 +1,14 @@
 #1/bin/bash
-cmd[0]="aws ec2 describe-route-tables"
+if [ $1 != "" ]; then
+    cmd[0]="aws ec2 describe-route-tables --filters \"Name=vpc-id,Values=$1\""
+else
+    cmd[0]="aws describe-route-tables"
+fi
+c=0
+cm=${cmd[$c]}
+echo $cm
+
+
 pref[0]="RouteTables"
 tft[0]="aws_route_table"
 

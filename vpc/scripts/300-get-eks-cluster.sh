@@ -147,6 +147,8 @@ if [ "$kcount" -gt "0" ]; then
             #
             ../../scripts/103-get-igw.sh $tcmd
             #
+            ../../scripts/120-get-route-table.sh $tcmd
+            #
             scmd=`terraform output aws_eks_cluster_${cln}_subnet_ids | tr -d '[|]|,|"'`
             for s1 in `echo $scmd` ; do
                 #echo $s1
