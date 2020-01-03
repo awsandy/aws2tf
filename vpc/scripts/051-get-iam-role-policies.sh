@@ -18,7 +18,7 @@ for c in `seq 0 0`; do
     ttft=${tft[(${c})]}
     #echo $cm
     awsout=`eval $cm`
-    echo "awsout $awsout"
+    #echo "awsout $awsout"
 
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
     if [ "$count" -gt "0" ]; then
@@ -30,6 +30,7 @@ for c in `seq 0 0`; do
             cname=`echo $awsout2 | jq ".PolicyName" | tr -d '"'`
             ocname=`echo $cname`
             cname=${cname//./_}
+            cname=`printf "%s__%s" $1 $cname`
             echo $cname
             
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
