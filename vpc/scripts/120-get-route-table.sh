@@ -59,6 +59,11 @@ for c in `seq 0 0`; do
                         tt2=`echo $tt2 | tr -d '"'`
                         t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
                     fi
+                    if [[ ${tt1} == "customer_gateway_id" ]]; then
+                        tt2=`echo $tt2 | tr -d '"'`
+                        t1=`printf "%s = aws_customer_gateway.%s.id" $tt1 $tt2`
+                    fi
+
                 fi
                 if [ "$skip" == "0" ]; then
                     #echo $skip $t1

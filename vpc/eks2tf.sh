@@ -175,7 +175,7 @@ fi
 #../scripts/193_azurerm_application_gateway.sh $myrg
 
 date
-
+lc=0
 echo "loop through providers"
 pwd
 for com in `ls ../../scripts/3*-get-*.sh | cut -d'/' -f4 | sort -g`; do    

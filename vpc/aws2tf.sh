@@ -176,10 +176,6 @@ fi
 
 date
 
-
-
-date
-
 lc=0
 echo "loop through providers"
 pwd
