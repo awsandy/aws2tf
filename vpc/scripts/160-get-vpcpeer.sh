@@ -52,10 +52,11 @@ for c in `seq 0 0`; do
                         tt2=`echo $tt2 | tr -d '"'`
                         t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
                     fi
-                    if [[ ${tt1} == "peer_vpc_id" ]]; then
-                        tt2=`echo $tt2 | tr -d '"'`
-                        t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
-                    fi
+                    # can't do this a vpc is in remote account
+                    #if [[ ${tt1} == "peer_vpc_id" ]]; then
+                    #    tt2=`echo $tt2 | tr -d '"'`
+                    #    t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
+                    #fi
                 fi
                 if [ "$skip" == "0" ]; then
                     #echo $skip $t1

@@ -59,9 +59,29 @@ for c in `seq 0 0`; do
                         tt2=`echo $tt2 | tr -d '"'`
                         t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
                     fi
-                    if [[ ${tt1} == "customer_gateway_id" ]]; then
+                    if [[ ${tt1} == "nat_gateway_id" ]]; then
                         tt2=`echo $tt2 | tr -d '"'`
-                        t1=`printf "%s = aws_customer_gateway.%s.id" $tt1 $tt2`
+                        if [ "$tt2" != "" ]; then
+                            t1=`printf "%s = aws_nat_gateway.%s.id" $tt1 $tt2`
+                        fi
+                    fi
+                    if [[ ${tt1} == "transit_gateway_id" ]]; then
+                        tt2=`echo $tt2 | tr -d '"'`
+                        if [ "$tt2" != "" ]; then
+                            t1=`printf "%s = aws_ec2_transit_gateway.%s.id" $tt1 $tt2`
+                        fi
+                    fi
+                    if [[ ${tt1} == "gateway_id" ]]; then
+                        tt2=`echo $tt2 | tr -d '"'`
+                        if [ "$tt2" != "" ]; then
+                            t1=`printf "%s = aws_internet_gateway.%s.id" $tt1 $tt2`
+                        fi
+                    fi
+                    if [[ ${tt1} == "vpc_peering_connection_id" ]]; then
+                        tt2=`echo $tt2 | tr -d '"'`
+                        if [ "$tt2" != "" ]; then
+                            t1=`printf "%s = aws_vpc_peering_connection.%s.id" $tt1 $tt2`
+                        fi
                     fi
 
                 fi
