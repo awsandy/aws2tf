@@ -1,15 +1,46 @@
 #!/bin/bash
 pref[0]="cluster"
 tft[0]="aws_eks_cluster"
-
-
+echo $1
+c=0
 kcount=`aws eks list-clusters | jq ".clusters | length"`
 if [ "$kcount" -gt "0" ]; then
     kcount=`expr $kcount - 1`
     for k in `seq 0 $kcount`; do
         cln=`aws eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`
         echo cluster name $cln        
-        cmd[0]=`echo "aws eks describe-cluster --name $cln"`      
+        cmd[0]=`echo "aws eks describe-cluster --name $cln"` 
+        cm=${cmd[$c]}
+        awsout=`eval $cm`
+        
+        if [ $1 != "" ]; then
+            echo "get other stuff"
+            tcmd=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.vpcId" | tr -d '"'`
+            ../../scripts/100-get-vpc.sh $tcmd
+            ../../scripts/105-get-subnet.sh $tcmd
+            #
+            ../../scripts/103-get-igw.sh $tcmd
+            #
+            ../../scripts/120-get-route-table.sh $tcmd
+            #
+            ../../scripts/140-get-natgw.sh $tcmd
+
+            rarn=`echo $awsout | jq ".${pref[(${c})]}.roleArn" | tr -d '"'`
+            echo $rarn
+            ../../scripts/050-get-iam-roles.sh $rarn
+            csg=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.clusterSecurityGroupId" | tr -d '"'`
+            ../../scripts/115-get-security_group.sh $csg
+
+            sgs=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.securityGroupIds[]" | tr -d '"'`
+            for s1 in `echo $sgs` ; do
+                echo $s1
+                ../../scripts/115-get-security_group.sh $s1
+            done
+
+
+        
+        fi
+
               
         for c in `seq 0 0`; do
             
@@ -119,7 +150,18 @@ if [ "$kcount" -gt "0" ]; then
                             if [[ ${tt1} == "platform_version" ]];then skip=1;fi
                             if [[ ${tt1} == "vpc_id" ]];then skip=1;fi
                             if [[ ${tt1} == "cluster_security_group_id" ]];then skip=1;fi
+                            if [[ ${tt1} == "platform_version" ]];then skip=1;fi
+                        else
+                            if [[ "$t1" == *"subnet-"* ]]; then
+                                t1=`echo $t1 | tr -d '"|,'`
+                                t1=`printf "aws_subnet.%s.id," $t1`
+                            fi
+                            if [[ "$t1" == *"sg-"* ]]; then
+                                t1=`echo $t1 | tr -d '"|,'`
+                                t1=`printf "aws_security_group.%s.id," $t1`
+                            fi
                         fi
+                        
                         if [ "$skip" == "0" ]; then
                             #echo $skip $t1
                             echo $t1 >> $fn
@@ -135,42 +177,6 @@ if [ "$kcount" -gt "0" ]; then
         terraform fmt
         echo "validate"
         terraform validate
-
-        if [ $1 != "" ]; then
-            # get other stuff
-            terraform refresh > /dev/null
-            echo "finish refresh"
-            rm -f t*.txt
-            #
-            tcmd=`terraform output aws_eks_cluster_${cln}_vpc_id`
-            ../../scripts/100-get-vpc.sh $tcmd
-            #
-            ../../scripts/103-get-igw.sh $tcmd
-            #
-            ../../scripts/120-get-route-table.sh $tcmd
-            #
-            ../../scripts/140-get-natgw.sh $tcmd
-            scmd=`terraform output aws_eks_cluster_${cln}_subnet_ids | tr -d '[|]|,|"'`
-            for s1 in `echo $scmd` ; do
-                #echo $s1
-                ../../scripts/105-get-subnet.sh $s1
-            done
-            #
-            csg=`terraform output aws_eks_cluster_${cln}_cluster_security_group_id`
-            ../../scripts/115-get-security_group.sh $csg
-            #
-            sgs=`terraform output aws_eks_cluster_${cln}_security_group_ids | tr -d '[|]|,|"'`
-            for s1 in `echo $sgs` ; do
-                echo $s1
-                ../../scripts/115-get-security_group.sh $s1
-            done
-            rarn=`terraform output aws_eks_cluster_${cln}_role_arn`
-            echo $rarn
-            ../../scripts/050-get-iam-roles.sh $rarn
-            #
-
-
-        fi
         
     done  # k  
 fi

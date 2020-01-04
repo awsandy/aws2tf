@@ -2,7 +2,7 @@
 if [ $1 != "" ]; then
     cmd[0]="aws ec2 describe-nat-gateways --filter \"Name=vpc-id,Values=$1\""
 else
-    cmd[0]="aws describe-nat-gateways"
+    cmd[0]="aws ec2 describe-nat-gateways"
 fi
 c=0
 cm=${cmd[$c]}
@@ -57,6 +57,10 @@ for c in `seq 0 0`; do
                     #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi
+                    if [[ ${tt1} == "subnet_id" ]]; then
+                        tt2=`echo $tt2 | tr -d '"'`
+                        t1=`printf "%s = aws_subnet.%s.id" $tt1 $tt2`
+                    fi
                 fi
                 if [ "$skip" == "0" ]; then
                     #echo $skip $t1

@@ -2,7 +2,7 @@
 if [ $1 != "" ]; then
     cmd[0]="aws iam list-roles | jq '.Roles[] | select(.Arn==\"${1}\")'"
 else
-    cmd[0]="aws ec2 list-roles"
+    cmd[0]="aws iam list-roles"
 fi
 
 

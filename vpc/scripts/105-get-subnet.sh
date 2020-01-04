@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ $1 != "" ]; then
-    cmd[0]="aws ec2 describe-subnets --subnet-ids $1"
+    cmd[0]="aws ec2 describe-subnets --filters \"Name=vpc-id,Values=$1\"" 
 else
     cmd[0]="aws ec2 describe-subnets"
 fi
@@ -48,6 +48,10 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
                     if [[ ${tt1} == "availability_zone" ]];then skip=1;fi
                     if [[ ${tt1} == "availability_zone_id" ]];then skip=1;fi
+                    if [[ ${tt1} == "vpc_id" ]]; then
+                        tt2=`echo $tt2 | tr -d '"'`
+                        t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
+                    fi
                     #if [[ ${tt1} == "default_route_table_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "owner_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
