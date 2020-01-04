@@ -180,7 +180,7 @@ date
 
 date
 
-
+lc=0
 echo "loop through providers"
 pwd
 for com in `ls ../../scripts/*-get-*.sh | cut -d'/' -f4 | sort -g`; do    

@@ -17,8 +17,8 @@ for c in `seq 0 0`; do
     echo $count
 ttft=${tft[0]}
 done
-echo $ttft
-cat tmp.txt
+
+
 
 
 if [ "$count" -gt "0" ]; then
@@ -27,7 +27,7 @@ if [ "$count" -gt "0" ]; then
         echo $cname
         cm=${cmd[0]}
 	    ttft=${tft[0]}
-        echo "ttft="$ttft
+        
 
         printf "resource \"%s\" \"%s\" {" $ttft $cname > $cname.tf
         printf "}" $cname >> $cname.tf
