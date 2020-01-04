@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ $1 != "" ]; then
+if [ "$1" != "" ]; then
     cmd[0]="aws ec2 describe-nat-gateways --filter \"Name=vpc-id,Values=$1\""
 else
     cmd[0]="aws ec2 describe-nat-gateways"

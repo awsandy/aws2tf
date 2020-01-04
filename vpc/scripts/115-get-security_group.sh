@@ -1,5 +1,5 @@
 #1/bin/bash
-if [ $1 != "" ]; then
+if [ "$1" != "" ]; then
     cmd[0]="aws ec2 describe-security-groups --group-ids $1"
 else
     cmd[0]="aws ec2 describe-security-groups"

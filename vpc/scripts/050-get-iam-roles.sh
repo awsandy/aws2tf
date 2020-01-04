@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ $1 != "" ]; then
+if [ "$1" != "" ]; then
     cmd[0]="aws iam list-roles | jq '.Roles[] | select(.Arn==\"${1}\")'"
 else
     cmd[0]="aws iam list-roles"
@@ -15,7 +15,7 @@ for c in `seq 0 0`; do
     ttft=${tft[(${c})]}
     #echo $cm
     awsout=`eval $cm`
-    if [ $1 != "" ]; then
+    if [ "$1" != "" ]; then
         count=1
     else
         count=`echo $awsout | jq ".${pref[(${c})]} | length"`
@@ -24,7 +24,7 @@ for c in `seq 0 0`; do
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
             #echo $i
-            if [ $1 != "" ]; then
+            if [ "$1" != "" ]; then
                 cname=`echo $awsout | jq ".RoleName" | tr -d '"'` 
             else
                 cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].RoleName" | tr -d '"'`

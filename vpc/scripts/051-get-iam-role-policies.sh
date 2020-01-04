@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ $1 != "" ]; then
+if [ "$1" != "" ]; then
     cmd[0]="aws iam list-role-policies --role-name $1"
 else
     exit

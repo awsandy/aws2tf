@@ -1,5 +1,5 @@
 #!/bin/bash
-if [ $1 != "" ]; then
+if [ "$1" != "" ]; then
     cmd[0]="aws iam list-attached-role-policies --role-name $1"
 else
     exit
@@ -19,7 +19,7 @@ for c in `seq 0 0`; do
     #echo $cm
     awsout=`eval $cm`
     #echo "awsout $awsout"
-    if [ $1 != "" ]; then
+    if [ "$1" != "" ]; then
         count=1
     else
         count=`echo $awsout | jq ".${pref[(${c})]} | length"`

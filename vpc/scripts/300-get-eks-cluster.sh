@@ -13,7 +13,7 @@ if [ "$kcount" -gt "0" ]; then
         cm=${cmd[$c]}
         awsout=`eval $cm`
         
-        if [ $1 != "" ]; then
+        if [ "$1" != "" ]; then
             echo "get other stuff"
             tcmd=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.vpcId" | tr -d '"'`
             ../../scripts/100-get-vpc.sh $tcmd
