@@ -19,7 +19,7 @@ if [ "$kcount" -gt "0" ]; then
             ../../scripts/100-get-vpc.sh $tcmd
             ../../scripts/102-get-subnet.sh $tcmd
             #
-            ../../scripts/103-get-igw.sh $tcmd
+            ../../scripts/130-get-igw.sh $tcmd
             #
             ../../scripts/120-get-route-table.sh $tcmd
             ../../scripts/121-get-route-table-associations.sh $tcmd
@@ -31,12 +31,12 @@ if [ "$kcount" -gt "0" ]; then
             echo $rarn
             ../../scripts/050-get-iam-roles.sh $rarn
             csg=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.clusterSecurityGroupId" | tr -d '"'`
-            ../../scripts/115-get-security_group.sh $csg
+            ../../scripts/103-get-security_group.sh $csg
 
             sgs=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.securityGroupIds[]" | tr -d '"'`
             for s1 in `echo $sgs` ; do
                 echo $s1
-                ../../scripts/115-get-security_group.sh $s1
+                ../../scripts/103-get-security_group.sh $s1
             done
 
 
