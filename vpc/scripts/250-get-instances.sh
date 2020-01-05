@@ -1,4 +1,11 @@
-#1/bin/bash
+#!/bin/bash
+if [ "$1" != "" ]; then
+    cmd[0]="aws ec2 describe-instances --filters \"Name=vpc-id,Values=$1\""
+else
+    cmd[0]="aws ec2 describe--instances"
+fi
+
+
 cmd[0]="aws ec2 describe-instances"
 pref[0]="Reservations"
 tft[0]="aws_instance"

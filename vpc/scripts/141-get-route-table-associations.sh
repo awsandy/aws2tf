@@ -35,7 +35,7 @@ for c in `seq 0 0`; do
                     ismain=`echo $awsout2 | jq ".[(${j})].Main" | tr -d '"'`
                     if [ $ismain == false ]; then
                         sname=`echo $awsout2 | jq ".[(${j})].SubnetId" | tr -d '"'`
-                        echo "sname= $sname"
+                        #echo "sname= $sname"
                         #if [ "$sname" != "null" ]; then
                             cname=`echo $awsout2 | jq ".[(${j})].RouteTableAssociationId" | tr -d '"'`
                             rtbid=`echo $awsout2 | jq ".[(${j})].RouteTableId" | tr -d '"'`

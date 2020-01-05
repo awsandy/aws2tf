@@ -87,12 +87,12 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
-        
+            ../../scripts/get-eip.sh $cname
             
         done
     fi
 done
 terraform fmt
 terraform validate
-rm t*.txt
+rm -f t*.txt
 
