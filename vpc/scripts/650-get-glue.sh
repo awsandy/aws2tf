@@ -43,7 +43,7 @@ for c in `seq 0 1`; do
                 fi
 				
                 if [[ ${t1} == *"role_arn"*"="* ]];then skip=0;fi
-                if [[ ${t1} == *"number_of_workers"*"="* ]];then skip=0;fi
+                if [[ ${t1} == *"number_of_workers"*"="* ]];then skip=1;fi
 				if [[ ${t1} == *"allocated_capacity"*"="* ]];then skip=1;fi
 
 				if [ "$skip" == "0" ]; then

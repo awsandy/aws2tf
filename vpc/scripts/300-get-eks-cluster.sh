@@ -17,13 +17,15 @@ if [ "$kcount" -gt "0" ]; then
             echo "get other stuff"
             tcmd=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.vpcId" | tr -d '"'`
             ../../scripts/100-get-vpc.sh $tcmd
-            ../../scripts/105-get-subnet.sh $tcmd
+            ../../scripts/102-get-subnet.sh $tcmd
             #
             ../../scripts/103-get-igw.sh $tcmd
             #
             ../../scripts/120-get-route-table.sh $tcmd
+            ../../scripts/121-get-route-table-associations.sh $tcmd
             #
             ../../scripts/140-get-natgw.sh $tcmd
+            #../../scripts/115-get-security_group.sh $tcmd
 
             rarn=`echo $awsout | jq ".${pref[(${c})]}.roleArn" | tr -d '"'`
             echo $rarn

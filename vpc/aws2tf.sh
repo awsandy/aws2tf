@@ -5,6 +5,7 @@ x="no"
 p="no"
 f="no"
 v="no"
+r="*"
 #while getopts ":s:g:r:x:p:f:" o; do
 while getopts ":r:x:f:v:" o; do
     case "${o}" in
@@ -177,9 +178,10 @@ fi
 date
 
 lc=0
+echo "r=$r"
 echo "loop through providers"
 pwd
-for com in `ls ../../scripts/*-get-*.sh | cut -d'/' -f4 | sort -g`; do    
+for com in `ls ../../scripts/*-get-$r.sh | cut -d'/' -f4 | sort -g`; do    
         echo "$com"
         docomm="../../scripts/$com"
         if [ "$f" = "no" ]; then
@@ -214,6 +216,7 @@ for com in `ls ../../scripts/*-get-*.sh | cut -d'/' -f4 | sort -g`; do
     
     rm -f terraform*.backup
 done
+
 date
 
 #if [ "$x" = "yes" ]; then

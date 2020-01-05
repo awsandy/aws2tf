@@ -1,4 +1,16 @@
-#1/bin/bash
+#!/bin/bash
+dh=`wc -l eks2tf.sh | awk '{ print $1 }'`
+echo $dh
+fh=200
+echo $fh
+if [[ $fh < $dh ]]; then
+echo "less"
+fi
+
+
+
+exit
+
 cmd[0]="aws ec2 describe-instances"
 pref[0]="Reservations"
 tft[0]="aws_instance"

@@ -14,7 +14,7 @@ for c in `seq 0 0`; do
 	#echo $cm
     eval $cm > tmp.txt
     count=`cat tmp.txt | wc -l | awk '{print $1}'`
-    echo $count
+    echo "number buckets =$count"
 ttft=${tft[0]}
 done
 
@@ -40,7 +40,12 @@ if [ "$count" -gt "0" ]; then
         #	done
         file="t1.txt"
         fn=`printf "%s__%s.tf" $ttft $cname`
-
+        flines=`wc -l $file | awk '{ print $1 }'`
+        #echo "lines in file t1.txt= $flines"
+        if [[ $flines > 0 ]]; then
+        flc=0
+        fd=0
+        acl=0
         while IFS= read line
         do
 			skip=0
@@ -67,22 +72,44 @@ if [ "$count" -gt "0" ]; then
                     printf "provider = \"aws.regional\"\n" >> $fn
                     skip=0;
                 fi
-                if [[ ${tt1} == "force_destroy" ]];then skip=1;fi
+                if [[ ${tt1} == "force_destroy" ]];then
+                skip=0
+                fd=1
+                fi
+                if [[ ${tt1} == "acl" ]];then
+                skip=0
+                acl=1
+                fi
                 if [[ ${tt1} == "bucket_domain_name" ]];then skip=1;fi
                 if [[ ${tt1} == "bucket_regional_domain_name" ]];then skip=1;fi
                 if [[ ${tt1} == "allocated_capacity" ]];then skip=1;fi
             fi
-			if [ "$skip" == "0" ]; then
 
+
+            ((flc=flc+1))
+            if [[ $flc = $flines ]];then
+                if [[ $fd = 0 ]]; then
+                    echo "force_destroy=false" >> $fn
+                fi
+                if [[ $acl = 0 ]]; then
+                    printf "acl = \"private\" \n" >> $fn
+                fi
+            fi
+			if [ "$skip" == "0" ];then
 				#echo $skip $t1 $ttft
-
 				echo $t1 >> $fn
 			fi
-        done <"$file"  
+
+
+        done <"$file" 
+        else
+            terraform state rm $ttft.$cname
+        fi 
+        echo "Done $cname"
     done
 fi
 
 
-rm t*.txt
+rm -f t*.txt
 exit
 

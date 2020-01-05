@@ -18,6 +18,9 @@ for c in `seq 0 0`; do
             #echo "i=$i"
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Instances[].InstanceId" | tr -d '"'`
             echo $cname
+            # get instance user_data
+            aws ec2 describe-instance-attribute --instance-id $cname --attribute userData | jq .UserData.Value | tr -d '"' | base64 --decode -o $cname.sh
+
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
@@ -45,7 +48,9 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "private_dns" ]];then skip=1;fi
 
                     if [[ ${tt1} == "volume_id" ]];then skip=1;fi
-                    if [[ ${tt1} == "user_data" ]];then skip=1;fi
+                    if [[ ${tt1} == "user_data" ]];then 
+                        t1=`printf "%s = file(\"%s.sh\")" $tt1 $cname`
+                    fi
                     if [[ ${tt1} == "public_ip" ]];then skip=1;fi
                     if [[ ${tt1} == "public_dns" ]];then skip=1;fi
                     #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi

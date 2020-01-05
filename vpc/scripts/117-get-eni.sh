@@ -1,16 +1,13 @@
 #!/bin/bash
+
 if [ "$1" != "" ]; then
-    cmd[0]="aws ec2 describe-route-tables --filters \"Name=vpc-id,Values=$1\""
+    cmd[0]="aws ec2 describe-network-interfaces --filters \"Name=vpc-id,Values=$1\""
 else
-    cmd[0]="aws ec2 describe-route-tables"
+    cmd[0]="aws ec2 describe-network-interfaces"
 fi
-c=0
-cm=${cmd[$c]}
-echo $cm
 
-
-pref[0]="RouteTables"
-tft[0]="aws_route_table"
+pref[0]="NetworkInterfaces"
+tft[0]="aws_network_interface"
 
 for c in `seq 0 0`; do
     
@@ -23,7 +20,7 @@ for c in `seq 0 0`; do
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
             #echo $i
-            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].RouteTableId" | tr -d '"'`
+            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].NetworkInterfaceId" | tr -d '"'`
             echo $cname
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
@@ -48,42 +45,41 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "id" ]];then skip=1; fi          
                     if [[ ${tt1} == "role_arn" ]];then skip=1;fi
                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
-                    if [[ ${tt1} == "availability_zone" ]];then skip=1;fi
-                    if [[ ${tt1} == "availability_zone_id" ]];then skip=1;fi
-                    #if [[ ${tt1} == "default_route_table_id" ]];then skip=1;fi
-                    #if [[ ${tt1} == "owner_id" ]];then skip=1;fi
+                    #if [[ ${tt1} == "association_id" ]];then skip=1;fi
+                    #if [[ ${tt1} == "public_dns" ]];then skip=1;fi
+                    if [[ ${tt1} == "private_dns_name" ]];then skip=1;fi
+                    #if [[ ${tt1} == "public_ip" ]];then skip=1;fi
+                    #if [[ ${tt1} == "private_ip" ]];then skip=1;fi
+                    if [[ ${tt1} == "domain" ]];then skip=1;fi
+                    if [[ ${tt1} == "attachment_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi
+
                     if [[ ${tt1} == "vpc_id" ]]; then
                         tt2=`echo $tt2 | tr -d '"'`
                         t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
                     fi
-                    if [[ ${tt1} == "nat_gateway_id" ]]; then
+                    if [[ ${tt1} == "subnet_id" ]]; then
                         tt2=`echo $tt2 | tr -d '"'`
-                        if [ "$tt2" != "" ]; then
-                            t1=`printf "%s = aws_nat_gateway.%s.id" $tt1 $tt2`
-                        fi
+                        t1=`printf "%s = aws_subnet.%s.id" $tt1 $tt2`
                     fi
-                    if [[ ${tt1} == "transit_gateway_id" ]]; then
-                        tt2=`echo $tt2 | tr -d '"'`
-                        if [ "$tt2" != "" ]; then
-                            t1=`printf "%s = aws_ec2_transit_gateway.%s.id" $tt1 $tt2`
-                        fi
+                else
+                    
+                    if [[ "$t1" == *"sg-"* ]]; then
+                        t1=`echo $t1 | tr -d '"|,'`
+                        t1=`printf "aws_security_group.%s.id," $t1`
                     fi
-                    if [[ ${tt1} == "gateway_id" ]]; then
-                        tt2=`echo $tt2 | tr -d '"'`
-                        if [ "$tt2" != "" ]; then
-                            t1=`printf "%s = aws_internet_gateway.%s.id" $tt1 $tt2`
-                        fi
+                    if [[ $t1 == *"attachment {"* ]]; then 
+                        #echo "matched attachment"
+                        skip=1
+                        while [[ "$t1" != "}" ]] ;do
+                            read line
+                            t1=`echo "$line"`
+                            #echo $t1
+                        done
                     fi
-                    if [[ ${tt1} == "vpc_peering_connection_id" ]]; then
-                        tt2=`echo $tt2 | tr -d '"'`
-                        if [ "$tt2" != "" ]; then
-                            t1=`printf "%s = aws_vpc_peering_connection.%s.id" $tt1 $tt2`
-                        fi
-                    fi
-
+                
                 fi
                 if [ "$skip" == "0" ]; then
                     #echo $skip $t1
@@ -91,6 +87,20 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
+            
+            devind=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Attachment.DeviceIndex" | tr -d '"'`
+            insid=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Attachment.InstanceId" | tr -d '"'`
+            if [ "$insid" != "null" ]; then
+                echo "NOT NULL"
+                printf "\n" >> $fn
+                printf "resource \"aws_network_interface_attachment\" \"%s\" {\n" $cname >> $fn
+                printf "instance_id = aws_instance.%s.id\n" $insid >> $fn
+                printf "network_interface_id = aws_network_interface.%s.id\n" $cname >> $fn
+                printf "device_index = %s\n" $devind >> $fn
+                printf "}\n" $cname >> $fn
+            fi
+
+
             
         done
     fi
