@@ -81,7 +81,7 @@ if [ "$mysub" == "null" ]; then
     echo "Account is null exiting"
     exit
 fi
-
+rm -rf generated/tf.$mysub
 mkdir -p generated/tf.$mysub
 
 s=`echo $mysub`
