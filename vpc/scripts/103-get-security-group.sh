@@ -15,6 +15,7 @@ for c in `seq 0 0`; do
 	#echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
+    echo $count
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
@@ -50,6 +51,12 @@ for i in `cat tf1.tmp` ; do
 
     file="t1.txt"
     fn=`printf "%s.tf" $i`
+    ssg=0
+    grep source_security_group_id t1.txt
+    if [ $? -eq 0 ]; then
+        ssg=1
+    fi
+    echo $ssg
     echo "$fn $ttft $cname"
                 while IFS= read line
                 do
@@ -70,10 +77,29 @@ for i in `cat tf1.tmp` ; do
                         #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
                         #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
                         #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi
+                        if [[ ${tt1} == "cidr_blocks" ]];then 
+                            if [ $ssg -eq 1 ]; then
+                                skip=1
+                            fi
+                        fi
+                        #if [[ ${tt1} == "self" ]];then 
+                        #    if [ $ssg -eq 1 ]; then
+                        #        skip=1
+                        #    fi
+                        #fi
                         if [[ ${tt1} == "vpc_id" ]]; then
                             tt2=`echo $tt2 | tr -d '"'`
                             t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
                         fi
+                        if [[ ${tt1} == "security_group_id" ]]; then
+                            tt2=`echo $tt2 | tr -d '"'`
+                            t1=`printf "%s = aws_security_group.%s.id" $tt1 $tt2`
+                        fi
+                        if [[ ${tt1} == "source_security_group_id" ]]; then
+                            tt2=`echo $tt2 | tr -d '"'`
+                            t1=`printf "%s = aws_security_group.%s.id" $tt1 $tt2`
+                        fi
+                        
 
                     fi
 
@@ -87,5 +113,5 @@ done
 
 #terraform fmt
 #terraform validate
-rm t*.txt tf1.tmp
+#rm t*.txt tf1.tmp
 
