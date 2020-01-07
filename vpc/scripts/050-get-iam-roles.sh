@@ -78,7 +78,10 @@ for c in `seq 0 0`; do
             
         done # done for i
         # Get attached role policies
+        pwd
+        echo "role policies $ocname"
         ../../scripts/051-get-iam-role-policies.sh $ocname
+         echo "attached role policies $ocname"
         ../../scripts/052-get-iam-attached-role-policies.sh $ocname
     fi
 done

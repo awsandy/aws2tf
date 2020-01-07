@@ -29,12 +29,12 @@ if [ "$kcount" -gt "0" ]; then
             echo $rarn
             ../../scripts/050-get-iam-roles.sh $rarn
             csg=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.clusterSecurityGroupId" | tr -d '"'`
-            ../../scripts/103-get-security_group.sh $csg
+            #../../scripts/103-get-security_group.sh $csg
 
             sgs=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.securityGroupIds[]" | tr -d '"'`
             for s1 in `echo $sgs` ; do
                 echo $s1
-                ../../scripts/103-get-security_group.sh $s1
+                #../../scripts/103-get-security_group.sh $s1
             done
 
 

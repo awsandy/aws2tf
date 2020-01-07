@@ -83,7 +83,7 @@ if [ "$mysub" == "null" ]; then
     exit
 fi
 
-generated/tf.566972129213
+rm -rf generated/tf.566972129213
 mkdir -p generated/tf.$mysub
 
 s=`echo $mysub`
@@ -186,11 +186,11 @@ pwd
 ../../scripts/100* vpc-06e16361c872f0aa5
 ../../scripts/102* vpc-06e16361c872f0aa5
 ../../scripts/security-group-vpc.sh vpc-06e16361c872f0aa5
-../../scripts/110*.sh vpc-06e16361c872f0aa5
-../../scripts/120*.sh vpc-06e16361c872f0aa5
-../../scripts/130*.sh vpc-06e16361c872f0aa5
-../../scripts/140*.sh vpc-06e16361c872f0aa5
-../../scripts/141*.sh vpc-06e16361c872f0aa5
+#../../scripts/110*.sh vpc-06e16361c872f0aa5
+#../../scripts/120*.sh vpc-06e16361c872f0aa5
+#../../scripts/130*.sh vpc-06e16361c872f0aa5
+#../../scripts/140*.sh vpc-06e16361c872f0aa5
+#../../scripts/141*.sh vpc-06e16361c872f0aa5
 
 
 date

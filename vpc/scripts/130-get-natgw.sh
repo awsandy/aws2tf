@@ -49,6 +49,7 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "role_arn" ]];then skip=1;fi
                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
                     if [[ ${tt1} == "association_id" ]];then skip=1;fi
+
                     #if [[ ${tt1} == "public_dns" ]];then skip=1;fi
                     #if [[ ${tt1} == "private_dns" ]];then skip=1;fi
                     if [[ ${tt1} == "public_ip" ]];then skip=1;fi
@@ -61,6 +62,11 @@ for c in `seq 0 0`; do
                         tt2=`echo $tt2 | tr -d '"'`
                         t1=`printf "%s = aws_subnet.%s.id" $tt1 $tt2`
                     fi
+                    if [[ ${tt1} == "allocation_id" ]]; then
+                        tt2=`echo $tt2 | tr -d '"'`
+                        t1=`printf "%s = aws_eip.%s.id" $tt1 $tt2`
+                    fi
+
                 fi
                 if [ "$skip" == "0" ]; then
                     #echo $skip $t1
