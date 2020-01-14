@@ -82,11 +82,11 @@ for i in `cat tf1.tmp` ; do
                                 skip=1
                             fi
                         fi
-                        #if [[ ${tt1} == "self" ]];then 
-                        #    if [ $ssg -eq 1 ]; then
-                        #        skip=1
-                        #    fi
-                        #fi
+                        if [[ ${tt1} == "self" ]];then 
+                            if [ $ssg -eq 1 ]; then
+                                skip=1
+                            fi
+                        fi
                         if [[ ${tt1} == "vpc_id" ]]; then
                             tt2=`echo $tt2 | tr -d '"'`
                             t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`

@@ -183,9 +183,9 @@ echo "r=$r"
 echo "loop through providers"
 pwd
 
-../../scripts/100* vpc-06e16361c872f0aa5
-../../scripts/102* vpc-06e16361c872f0aa5
-../../scripts/103-get-security-group.sh vpc-06e16361c872f0aa5
+../../scripts/100* vpc-02e5cd2401beeb0bb
+../../scripts/102* vpc-02e5cd2401beeb0bb
+../../scripts/103-get-security-group.sh vpc-02e5cd2401beeb0bb
 #../../scripts/110*.sh vpc-06e16361c872f0aa5
 #../../scripts/120*.sh vpc-06e16361c872f0aa5
 #../../scripts/130*.sh vpc-06e16361c872f0aa5
