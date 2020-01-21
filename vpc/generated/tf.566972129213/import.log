@@ -114,8 +114,8 @@ tcount= 6
 [0m[1m[32maws_security_group.sg-0059089b6a432f0a1: Import prepared![0m
 [0m[32m  Prepared aws_security_group for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
-[0m[1maws_security_group_rule.sg-0059089b6a432f0a1: Refreshing state... [id=sgrule-4244179417][0m
 [0m[1maws_security_group.sg-0059089b6a432f0a1: Refreshing state... [id=sg-0059089b6a432f0a1][0m
+[0m[1maws_security_group_rule.sg-0059089b6a432f0a1: Refreshing state... [id=sgrule-4244179417][0m
 [0m[32m
 Import successful!
 
@@ -131,9 +131,9 @@ tcount= 6
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[1maws_security_group_rule.sg-01f01c0a5ec300baf-1: Refreshing state... [id=sgrule-2433548261][0m
+[0m[1maws_security_group_rule.sg-01f01c0a5ec300baf: Refreshing state... [id=sgrule-3422555357][0m
 [0m[1maws_security_group.sg-01f01c0a5ec300baf: Refreshing state... [id=sg-01f01c0a5ec300baf][0m
 [0m[1maws_security_group_rule.sg-01f01c0a5ec300baf-2: Refreshing state... [id=sgrule-2946956225][0m
-[0m[1maws_security_group_rule.sg-01f01c0a5ec300baf: Refreshing state... [id=sgrule-3422555357][0m
 [0m[32m
 Import successful!
 
@@ -148,10 +148,10 @@ tcount= 2
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
 [0m[32m  Prepared aws_security_group_rule for import[0m
-[0m[1maws_security_group_rule.sg-021b9b71abd2025c5-1: Refreshing state... [id=sgrule-490260074][0m
 [0m[1maws_security_group.sg-021b9b71abd2025c5: Refreshing state... [id=sg-021b9b71abd2025c5][0m
-[0m[1maws_security_group_rule.sg-021b9b71abd2025c5-2: Refreshing state... [id=sgrule-1246750365][0m
-[0m[1maws_security_group_rule.sg-021b9b71abd2025c5: Refreshing state... [id=sgrule-1077163346][0m
+[0m[1maws_security_group_rule.sg-021b9b71abd2025c5: Refreshing state... [id=sgrule-1246750365][0m
+[0m[1maws_security_group_rule.sg-021b9b71abd2025c5-1: Refreshing state... [id=sgrule-1077163346][0m
+[0m[1maws_security_group_rule.sg-021b9b71abd2025c5-2: Refreshing state... [id=sgrule-490260074][0m
 [0m[32m
 Import successful!
 
@@ -173,40 +173,16 @@ aws_security_group_rule.sg-01f01c0a5ec300baf-2
 0
 aws_security_group_rule.sg-01f01c0a5ec300baf-2.tf aws_security_group_rule sg-01f01c0a5ec300baf-2
 aws_security_group_rule.sg-021b9b71abd2025c5
-    source_security_group_id = "sg-01f01c0a5ec300baf"
-1
+0
 aws_security_group_rule.sg-021b9b71abd2025c5.tf aws_security_group_rule sg-021b9b71abd2025c5
 aws_security_group_rule.sg-021b9b71abd2025c5-1
-    source_security_group_id = "sg-021b9b71abd2025c5"
+    source_security_group_id = "sg-01f01c0a5ec300baf"
 1
 aws_security_group_rule.sg-021b9b71abd2025c5-1.tf aws_security_group_rule sg-021b9b71abd2025c5-1
 aws_security_group_rule.sg-021b9b71abd2025c5-2
-0
+    source_security_group_id = "sg-021b9b71abd2025c5"
+1
 aws_security_group_rule.sg-021b9b71abd2025c5-2.tf aws_security_group_rule sg-021b9b71abd2025c5-2
-eni-023f7f6daa493998b
-[0m[1maws_network_interface.eni-023f7f6daa493998b: Importing from ID "eni-023f7f6daa493998b"...[0m
-[0m[1m[32maws_network_interface.eni-023f7f6daa493998b: Import prepared![0m
-[0m[32m  Prepared aws_network_interface for import[0m
-[0m[1maws_network_interface.eni-023f7f6daa493998b: Refreshing state... [id=eni-023f7f6daa493998b][0m
-[0m[32m
-Import successful!
-
-The resources that were imported are shown above. These resources are now in
-your Terraform state and will henceforth be managed by Terraform.
-[0m
-aws_network_interface__eni-023f7f6daa493998b.tf
-aws_security_group__sg-0059089b6a432f0a1.tf
-aws_security_group__sg-01f01c0a5ec300baf.tf
-aws_security_group__sg-021b9b71abd2025c5.tf
-aws_security_group_rule.sg-0059089b6a432f0a1.tf
-aws_security_group_rule.sg-01f01c0a5ec300baf-1.tf
-aws_security_group_rule.sg-01f01c0a5ec300baf-2.tf
-aws_security_group_rule.sg-01f01c0a5ec300baf.tf
-aws_security_group_rule.sg-021b9b71abd2025c5-1.tf
-aws_security_group_rule.sg-021b9b71abd2025c5-2.tf
-aws_security_group_rule.sg-021b9b71abd2025c5.tf
-[32m[1mSuccess![0m The configuration is valid.
-[0m
 eni-06ebee3e479292bbf
 [0m[1maws_network_interface.eni-06ebee3e479292bbf: Importing from ID "eni-06ebee3e479292bbf"...[0m
 [0m[1m[32maws_network_interface.eni-06ebee3e479292bbf: Import prepared![0m
@@ -219,34 +195,16 @@ The resources that were imported are shown above. These resources are now in
 your Terraform state and will henceforth be managed by Terraform.
 [0m
 aws_network_interface__eni-06ebee3e479292bbf.tf
-[32m[1mSuccess![0m The configuration is valid.
-[0m
-eni-05c04181ceb819bc4
-[0m[1maws_network_interface.eni-05c04181ceb819bc4: Importing from ID "eni-05c04181ceb819bc4"...[0m
-[0m[1m[32maws_network_interface.eni-05c04181ceb819bc4: Import prepared![0m
-[0m[32m  Prepared aws_network_interface for import[0m
-[0m[1maws_network_interface.eni-05c04181ceb819bc4: Refreshing state... [id=eni-05c04181ceb819bc4][0m
-[0m[32m
-Import successful!
-
-The resources that were imported are shown above. These resources are now in
-your Terraform state and will henceforth be managed by Terraform.
-[0m
-aws_network_interface__eni-05c04181ceb819bc4.tf
-[32m[1mSuccess![0m The configuration is valid.
-[0m
-eni-087a4bf7d7d80fedc
-[0m[1maws_network_interface.eni-087a4bf7d7d80fedc: Importing from ID "eni-087a4bf7d7d80fedc"...[0m
-[0m[1m[32maws_network_interface.eni-087a4bf7d7d80fedc: Import prepared![0m
-[0m[32m  Prepared aws_network_interface for import[0m
-[0m[1maws_network_interface.eni-087a4bf7d7d80fedc: Refreshing state... [id=eni-087a4bf7d7d80fedc][0m
-[0m[32m
-Import successful!
-
-The resources that were imported are shown above. These resources are now in
-your Terraform state and will henceforth be managed by Terraform.
-[0m
-aws_network_interface__eni-087a4bf7d7d80fedc.tf
+aws_security_group__sg-0059089b6a432f0a1.tf
+aws_security_group__sg-01f01c0a5ec300baf.tf
+aws_security_group__sg-021b9b71abd2025c5.tf
+aws_security_group_rule.sg-0059089b6a432f0a1.tf
+aws_security_group_rule.sg-01f01c0a5ec300baf-1.tf
+aws_security_group_rule.sg-01f01c0a5ec300baf-2.tf
+aws_security_group_rule.sg-01f01c0a5ec300baf.tf
+aws_security_group_rule.sg-021b9b71abd2025c5-1.tf
+aws_security_group_rule.sg-021b9b71abd2025c5-2.tf
+aws_security_group_rule.sg-021b9b71abd2025c5.tf
 [32m[1mSuccess![0m The configuration is valid.
 [0m
 eni-04fa48c2b91f59db4
@@ -275,20 +233,6 @@ aws_eip__eipalloc-0f372e2bf8902bc5b.tf
 aws_network_interface__eni-04fa48c2b91f59db4.tf
 [32m[1mSuccess![0m The configuration is valid.
 [0m
-eni-0b48f2a8252d0c47f
-[0m[1maws_network_interface.eni-0b48f2a8252d0c47f: Importing from ID "eni-0b48f2a8252d0c47f"...[0m
-[0m[1m[32maws_network_interface.eni-0b48f2a8252d0c47f: Import prepared![0m
-[0m[32m  Prepared aws_network_interface for import[0m
-[0m[1maws_network_interface.eni-0b48f2a8252d0c47f: Refreshing state... [id=eni-0b48f2a8252d0c47f][0m
-[0m[32m
-Import successful!
-
-The resources that were imported are shown above. These resources are now in
-your Terraform state and will henceforth be managed by Terraform.
-[0m
-aws_network_interface__eni-0b48f2a8252d0c47f.tf
-[32m[1mSuccess![0m The configuration is valid.
-[0m
 eni-076c64485abddb774
 [0m[1maws_network_interface.eni-076c64485abddb774: Importing from ID "eni-076c64485abddb774"...[0m
 [0m[1m[32maws_network_interface.eni-076c64485abddb774: Import prepared![0m
@@ -301,6 +245,62 @@ The resources that were imported are shown above. These resources are now in
 your Terraform state and will henceforth be managed by Terraform.
 [0m
 aws_network_interface__eni-076c64485abddb774.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+eni-05c04181ceb819bc4
+[0m[1maws_network_interface.eni-05c04181ceb819bc4: Importing from ID "eni-05c04181ceb819bc4"...[0m
+[0m[1m[32maws_network_interface.eni-05c04181ceb819bc4: Import prepared![0m
+[0m[32m  Prepared aws_network_interface for import[0m
+[0m[1maws_network_interface.eni-05c04181ceb819bc4: Refreshing state... [id=eni-05c04181ceb819bc4][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_network_interface__eni-05c04181ceb819bc4.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+eni-023f7f6daa493998b
+[0m[1maws_network_interface.eni-023f7f6daa493998b: Importing from ID "eni-023f7f6daa493998b"...[0m
+[0m[1m[32maws_network_interface.eni-023f7f6daa493998b: Import prepared![0m
+[0m[32m  Prepared aws_network_interface for import[0m
+[0m[1maws_network_interface.eni-023f7f6daa493998b: Refreshing state... [id=eni-023f7f6daa493998b][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_network_interface__eni-023f7f6daa493998b.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+eni-087a4bf7d7d80fedc
+[0m[1maws_network_interface.eni-087a4bf7d7d80fedc: Importing from ID "eni-087a4bf7d7d80fedc"...[0m
+[0m[1m[32maws_network_interface.eni-087a4bf7d7d80fedc: Import prepared![0m
+[0m[32m  Prepared aws_network_interface for import[0m
+[0m[1maws_network_interface.eni-087a4bf7d7d80fedc: Refreshing state... [id=eni-087a4bf7d7d80fedc][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_network_interface__eni-087a4bf7d7d80fedc.tf
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+eni-0b48f2a8252d0c47f
+[0m[1maws_network_interface.eni-0b48f2a8252d0c47f: Importing from ID "eni-0b48f2a8252d0c47f"...[0m
+[0m[1m[32maws_network_interface.eni-0b48f2a8252d0c47f: Import prepared![0m
+[0m[32m  Prepared aws_network_interface for import[0m
+[0m[1maws_network_interface.eni-0b48f2a8252d0c47f: Refreshing state... [id=eni-0b48f2a8252d0c47f][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+aws_network_interface__eni-0b48f2a8252d0c47f.tf
 [32m[1mSuccess![0m The configuration is valid.
 [0m
 [32m[1mSuccess![0m The configuration is valid.
@@ -473,8 +473,336 @@ aws_route_table_association__rtbassoc-0f728ebd48dd68200.tf
 [32m[1mSuccess![0m The configuration is valid.
 [0m
 arn:aws:iam::566972129213:role/eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH
+role command = aws iam list-roles | jq '.Roles[] | select(.Arn=="arn:aws:iam::566972129213:role/eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH")'
 eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH
 [0m[1maws_iam_role.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH: Importing from ID "eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH"...[0m
 [0m[1m[32maws_iam_role.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH: Import prepared![0m
 [0m[32m  Prepared aws_iam_role for import[0m
 [0m[1maws_iam_role.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH: Refreshing state... [id=eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+/Users/awsandy/odp/aws/sw/aws2tf/vpc/generated/tf.566972129213
+role policies eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH
+aws iam list-role-policies --role-name eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH
+1
+eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__eksctl-ateks1f-cluster-PolicyCloudWatchMetrics
+[0m[1maws_iam_role_policy.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__eksctl-ateks1f-cluster-PolicyCloudWatchMetrics: Importing from ID "eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH:eksctl-ateks1f-cluster-PolicyCloudWatchMetrics"...[0m
+[0m[1m[32maws_iam_role_policy.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__eksctl-ateks1f-cluster-PolicyCloudWatchMetrics: Import prepared![0m
+[0m[32m  Prepared aws_iam_role_policy for import[0m
+[0m[1maws_iam_role_policy.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__eksctl-ateks1f-cluster-PolicyCloudWatchMetrics: Refreshing state... [id=eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH:eksctl-ateks1f-cluster-PolicyCloudWatchMetrics][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__eksctl-ateks1f-cluster-PolicyNLB
+[0m[1maws_iam_role_policy.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__eksctl-ateks1f-cluster-PolicyNLB: Importing from ID "eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH:eksctl-ateks1f-cluster-PolicyNLB"...[0m
+[0m[1m[32maws_iam_role_policy.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__eksctl-ateks1f-cluster-PolicyNLB: Import prepared![0m
+[0m[32m  Prepared aws_iam_role_policy for import[0m
+[0m[1maws_iam_role_policy.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__eksctl-ateks1f-cluster-PolicyNLB: Refreshing state... [id=eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH:eksctl-ateks1f-cluster-PolicyNLB][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+fmt
+aws_iam_role__eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH.tf
+aws_iam_role_policy__eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__eksctl-ateks1f-cluster-PolicyCloudWatchMetrics.tf
+aws_iam_role_policy__eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__eksctl-ateks1f-cluster-PolicyNLB.tf
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+attached role policies eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH
+aws iam list-attached-role-policies --role-name eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH
+eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__AmazonEKSClusterPolicy
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__AmazonEKSClusterPolicy: Importing from ID "eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH/arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"...[0m
+[0m[1m[32maws_iam_role_policy_attachment.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__AmazonEKSClusterPolicy: Import prepared![0m
+[0m[32m  Prepared aws_iam_role_policy_attachment for import[0m
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__AmazonEKSClusterPolicy: Refreshing state... [id=eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH-arn:aws:iam::aws:policy/AmazonEKSClusterPolicy][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__AmazonEKSServicePolicy
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__AmazonEKSServicePolicy: Importing from ID "eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH/arn:aws:iam::aws:policy/AmazonEKSServicePolicy"...[0m
+[0m[1m[32maws_iam_role_policy_attachment.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__AmazonEKSServicePolicy: Import prepared![0m
+[0m[32m  Prepared aws_iam_role_policy_attachment for import[0m
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__AmazonEKSServicePolicy: Refreshing state... [id=eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH-arn:aws:iam::aws:policy/AmazonEKSServicePolicy][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+fmt
+aws_iam_role_policy_attachment__eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__AmazonEKSClusterPolicy.tf
+aws_iam_role_policy_attachment__eksctl-ateks1f-cluster-ServiceRole-VUMZA1X1GNNH__AmazonEKSServicePolicy.tf
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+fmt
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+sg-0059089b6a432f0a1
+fp-default
+fargate
+Fargate profile arn arn:aws:eks:eu-west-1:566972129213:fargateprofile/ateks1f/fp-default/8cb7e253-6178-717a-d180-22f7ebbb43e4
+Pod execution role arn arn:aws:iam::566972129213:role/eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK
+role command = aws iam list-roles | jq '.Roles[] | select(.Arn=="arn:aws:eks:eu-west-1:566972129213:fargateprofile/ateks1f/fp-default/8cb7e253-6178-717a-d180-22f7ebbb43e4")'
+
+[31mThe import command expects two arguments.[0m[0m
+[31mUsage: terraform import [options] ADDR ID
+
+  Import existing infrastructure into your Terraform state.
+
+  This will find and import the specified resource into your Terraform
+  state, allowing existing infrastructure to come under Terraform
+  management without having to be initially created by Terraform.
+
+  The ADDR specified is the address to import the resource to. Please
+  see the documentation online for resource addresses. The ID is a
+  resource-specific ID to identify that resource being imported. Please
+  reference the documentation for the resource type you're importing to
+  determine the ID syntax to use. It typically matches directly to the ID
+  that the provider uses.
+
+  The current implementation of Terraform import can only import resources
+  into the state. It does not generate configuration. A future version of
+  Terraform will also generate configuration.
+
+  Because of this, prior to running terraform import it is necessary to write
+  a resource configuration block for the resource manually, to which the
+  imported object will be attached.
+
+  This command will not modify your infrastructure, but it will make
+  network requests to inspect parts of your infrastructure relevant to
+  the resource being imported.
+
+Options:
+
+  -backup=path            Path to backup the existing state file before
+                          modifying. Defaults to the "-state-out" path with
+                          ".backup" extension. Set to "-" to disable backup.
+
+  -config=path            Path to a directory of Terraform configuration files
+                          to use to configure the provider. Defaults to pwd.
+                          If no config files are present, they must be provided
+                          via the input prompts or env vars.
+
+  -allow-missing-config   Allow import when no resource configuration block exists.
+
+  -input=true             Ask for input for variables if not directly set.
+
+  -lock=true              Lock the state file when locking is supported.
+
+  -lock-timeout=0s        Duration to retry a state lock.
+
+  -no-color               If specified, output won't contain any color.
+
+  -provider=provider      Deprecated: Override the provider configuration to use
+                          when importing the object. By default, Terraform uses the
+                          provider specified in the configuration for the target
+                          resource, and that is the best behavior in most cases.
+
+  -state=PATH             Path to the source state file. Defaults to the configured
+                          backend, or "terraform.tfstate"
+
+  -state-out=PATH         Path to the destination state file to write to. If this
+                          isn't specified, the source state file will be used. This
+                          can be a new or existing path.
+
+  -var 'foo=bar'          Set a variable in the Terraform configuration. This
+                          flag can be set multiple times. This is only useful
+                          with the "-config" flag.
+
+  -var-file=foo           Set variables in the Terraform configuration from
+                          a file. If "terraform.tfvars" or any ".auto.tfvars"
+                          files are present, they will be automatically loaded.[0m[0m
+[31m
+[1m[31mError: [0m[0m[1mInvalid resource name[0m
+
+[0m  on aws_iam_role..tf line 1, in resource "aws_iam_role" "":
+   1: resource "aws_iam_role" [4m""[0m {}
+[0m
+A name must start with a letter or underscore and may contain only letters,
+digits, underscores, and dashes.
+[0m[0m
+/Users/awsandy/odp/aws/sw/aws2tf/vpc/generated/tf.566972129213
+role policies 
+attached role policies 
+fmt
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+role command = aws iam list-roles | jq '.Roles[] | select(.Arn=="arn:aws:iam::566972129213:role/eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK")'
+eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK
+[0m[1maws_iam_role.eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK: Importing from ID "eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK"...[0m
+[0m[1m[32maws_iam_role.eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK: Import prepared![0m
+[0m[32m  Prepared aws_iam_role for import[0m
+[0m[1maws_iam_role.eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK: Refreshing state... [id=eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+/Users/awsandy/odp/aws/sw/aws2tf/vpc/generated/tf.566972129213
+role policies eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK
+aws iam list-role-policies --role-name eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK
+fmt
+aws_iam_role__eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK.tf
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+attached role policies eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK
+aws iam list-attached-role-policies --role-name eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK
+eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK__AmazonEKSFargatePodExecutionRolePolicy
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK__AmazonEKSFargatePodExecutionRolePolicy: Importing from ID "eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK/arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"...[0m
+[0m[1m[32maws_iam_role_policy_attachment.eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK__AmazonEKSFargatePodExecutionRolePolicy: Import prepared![0m
+[0m[32m  Prepared aws_iam_role_policy_attachment for import[0m
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK__AmazonEKSFargatePodExecutionRolePolicy: Refreshing state... [id=eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK-arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+fmt
+aws_iam_role_policy_attachment__eksctl-ateks1f-cluster-FargatePodExecutionRole-Z3ZPNYV95LOK__AmazonEKSFargatePodExecutionRolePolicy.tf
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+fmt
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+aws eks describe-cluster --name ateks1f
+cname = ateks1f
+[0m[1maws_eks_cluster.ateks1f: Importing from ID "ateks1f"...[0m
+[0m[1m[32maws_eks_cluster.ateks1f: Import prepared![0m
+[0m[32m  Prepared aws_eks_cluster for import[0m
+[0m[1maws_eks_cluster.ateks1f: Refreshing state... [id=ateks1f][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+
+fmt
+aws_eks_cluster__ateks1f.tf
+data-aws_eks_cluster.ateks1f.tf
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+***k=0
+cluster name ateks1f
+jcount=1
+0
+cname = ateks1f_ng-17c11e36
+Importing .....
+[0m[1maws_eks_node_group.ateks1f_ng-17c11e36: Importing from ID "ateks1f:ng-17c11e36"...[0m
+[0m[1m[32maws_eks_node_group.ateks1f_ng-17c11e36: Import prepared![0m
+[0m[32m  Prepared aws_eks_node_group for import[0m
+[0m[1maws_eks_node_group.ateks1f_ng-17c11e36: Refreshing state... [id=ateks1f:ng-17c11e36][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+finish refresh
+arn:aws:iam::566972129213:role/eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5
+role command = aws iam list-roles | jq '.Roles[] | select(.Arn=="arn:aws:iam::566972129213:role/eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5")'
+eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5
+[0m[1maws_iam_role.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5: Importing from ID "eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5"...[0m
+[0m[1m[32maws_iam_role.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5: Import prepared![0m
+[0m[32m  Prepared aws_iam_role for import[0m
+[0m[1maws_iam_role.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5: Refreshing state... [id=eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+/Users/awsandy/odp/aws/sw/aws2tf/vpc/generated/tf.566972129213
+role policies eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5
+aws iam list-role-policies --role-name eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5
+0
+eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__eksctl-ateks1f-nodegroup-ng-17c11e36-PolicyALBIngress
+[0m[1maws_iam_role_policy.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__eksctl-ateks1f-nodegroup-ng-17c11e36-PolicyALBIngress: Importing from ID "eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5:eksctl-ateks1f-nodegroup-ng-17c11e36-PolicyALBIngress"...[0m
+[0m[1m[32maws_iam_role_policy.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__eksctl-ateks1f-nodegroup-ng-17c11e36-PolicyALBIngress: Import prepared![0m
+[0m[32m  Prepared aws_iam_role_policy for import[0m
+[0m[1maws_iam_role_policy.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__eksctl-ateks1f-nodegroup-ng-17c11e36-PolicyALBIngress: Refreshing state... [id=eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5:eksctl-ateks1f-nodegroup-ng-17c11e36-PolicyALBIngress][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+fmt
+aws_eks_node_group__ateks1f_ng-17c11e36.tf
+aws_iam_role__eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5.tf
+aws_iam_role_policy__eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__eksctl-ateks1f-nodegroup-ng-17c11e36-PolicyALBIngress.tf
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+attached role policies eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5
+aws iam list-attached-role-policies --role-name eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5
+eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEKSWorkerNodePolicy
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEKSWorkerNodePolicy: Importing from ID "eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5/arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy"...[0m
+[0m[1m[32maws_iam_role_policy_attachment.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEKSWorkerNodePolicy: Import prepared![0m
+[0m[32m  Prepared aws_iam_role_policy_attachment for import[0m
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEKSWorkerNodePolicy: Refreshing state... [id=eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5-arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEC2ContainerRegistryReadOnly
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEC2ContainerRegistryReadOnly: Importing from ID "eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5/arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly"...[0m
+[0m[1m[32maws_iam_role_policy_attachment.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEC2ContainerRegistryReadOnly: Import prepared![0m
+[0m[32m  Prepared aws_iam_role_policy_attachment for import[0m
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEC2ContainerRegistryReadOnly: Refreshing state... [id=eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5-arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEKS_CNI_Policy
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEKS_CNI_Policy: Importing from ID "eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5/arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy"...[0m
+[0m[1m[32maws_iam_role_policy_attachment.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEKS_CNI_Policy: Import prepared![0m
+[0m[32m  Prepared aws_iam_role_policy_attachment for import[0m
+[0m[1maws_iam_role_policy_attachment.eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEKS_CNI_Policy: Refreshing state... [id=eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5-arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy][0m
+[0m[32m
+Import successful!
+
+The resources that were imported are shown above. These resources are now in
+your Terraform state and will henceforth be managed by Terraform.
+[0m
+fmt
+aws_iam_role_policy_attachment__eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEC2ContainerRegistryReadOnly.tf
+aws_iam_role_policy_attachment__eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEKSWorkerNodePolicy.tf
+aws_iam_role_policy_attachment__eksctl-ateks1f-nodegroup-ng-17c11-NodeInstanceRole-Q38HOYUWY9Y5__AmazonEKS_CNI_Policy.tf
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+fmt
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m
+fmt
+validate
+[32m[1mSuccess![0m The configuration is valid.
+[0m

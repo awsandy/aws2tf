@@ -45,11 +45,17 @@ if [ "$kcount" -gt "0" ]; then
             if [ "$np" -gt "0" ]; then
                 np=`expr $np - 1`
                 for p in `seq 0 $np`; do
-                    pname=`echo $np | jq ".fargateProfileNames[(${p})]" | tr -d '"'`
+                    pname=`echo $fgp | jq ".fargateProfileNames[(${p})]" | tr -d '"'`
                     echo $pname
                     fg=`aws eks describe-fargate-profile --cluster-name $cln --fargate-profile-name $pname`
                     echo "fargate"
-                    echo $fg | jq .
+                    fgparn=`echo $fg | jq ".fargateProfile.fargateProfileArn" | tr -d '"'`
+                    podarn=`echo $fg | jq ".fargateProfile.podExecutionRoleArn" | tr -d '"'`
+                    echo "Fargate profile arn $fgparn" 
+                    echo "Pod execution role arn $podarn" 
+                    ../../scripts/050-get-iam-roles.sh $fgparn 
+                    ../../scripts/050-get-iam-roles.sh $podarn
+
                 done
             fi
 

@@ -165,7 +165,7 @@ if [ "$p" = "yes" ]; then
         #eval $docomm 2>&1 | tee -a import.log
         if grep -q Error: import.log ; then
             echo "Error in log file exiting ...."
-            pass
+            
         fi
     done
 fi
@@ -202,7 +202,7 @@ for com in `ls ../../scripts/3*-get-*.sh | cut -d'/' -f4 | sort -g`; do
                     echo "Ignoring $line"
                 else
                     echo "Found Error: $line exiting .... (pass for now)"
-                    pass
+                    
                 fi
             fi
 
