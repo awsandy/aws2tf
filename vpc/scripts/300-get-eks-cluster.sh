@@ -19,7 +19,10 @@ if [ "$kcount" -gt "0" ]; then
             ../../scripts/100* $tcmd
             ../../scripts/102* $tcmd
             ../../scripts/103*.sh $tcmd
-            ../../scripts/110*.sh $tcmd
+            ../../scripts/120*.sh $tcmd
+            # don't keep eni's - created by nat gw and node group instances
+            # still need to call as eip is nested from eni's
+            rm -f aws_network_interface*.tf
             ../../scripts/120*.sh $tcmd
             ../../scripts/130*.sh $tcmd
             ../../scripts/140*.sh $tcmd

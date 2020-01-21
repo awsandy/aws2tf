@@ -56,8 +56,9 @@ for c in `seq 0 0`; do
                     #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi
                     if [[ ${tt1} == "network_interface" ]]; then
-                        tt2=`echo $tt2 | tr -d '"'`
-                        t1=`printf "%s = aws_network_interface.%s.id" $tt1 $tt2`
+                        skip=1 # don't specify it in EKS
+                        #tt2=`echo $tt2 | tr -d '"'`
+                        #t1=`printf "%s = aws_network_interface.%s.id" $tt1 $tt2`
                     fi
                 fi
                 if [ "$skip" == "0" ]; then

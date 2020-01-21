@@ -42,7 +42,9 @@ for c in `seq 0 0`; do
                     for t in `seq 0 $tcount`; do
                         tkey=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Tags[(${t})].Key" | tr -d '"'`
                         tval=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Tags[(${t})].Value" | tr -d '"'`
-                        printf "\"%s\" = \"%s\"\n" $tkey $tval >> $fn
+                        if [[ ${tkey}  != *"aws:cloudformation"* ]]; then
+                            printf "\"%s\" = \"%s\"\n" $tkey $tval >> $fn
+                        fi
                     done
                     printf "}\n" $cname >> $fn
                 fi
