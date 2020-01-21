@@ -2,7 +2,7 @@
 kcount=`aws eks list-clusters | jq ".clusters | length"`
 if [ "$kcount" -gt "0" ]; then
     kcount=`expr $kcount - 1`
-    echo kcount=$kcount
+    #echo kcount=$kcount
     for k in `seq 0 $kcount`; do
         echo "***k=$k"
         cln=`aws eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`
@@ -14,7 +14,7 @@ if [ "$kcount" -gt "0" ]; then
             jcount=`expr $jcount - 1`
             for j in `seq 0 $jcount`; do
                 ng=`aws eks list-nodegroups --cluster-name $cln   | jq ".nodegroups[(${j})]" | tr -d '"'`     
-                echo "***** node gorup = $ng"
+                #echo "***** node gorup = $ng"
                 cmd[0]=`echo "aws eks describe-nodegroup --cluster-name $cln --nodegroup-name $ng"`      
                 pref[0]="nodegroup"
                 tft[0]="aws_eks_node_group"
@@ -24,9 +24,9 @@ if [ "$kcount" -gt "0" ]; then
                     rm -f ${tft[0]}*.tf
                     cm=${cmd[$c]}
                     ttft=${tft[(${c})]}
-                    echo "inner command=$cm"
+                    #echo "inner command=$cm"
                     awsout=`eval $cm`
-                    echo awsout
+                    #echo awsout
                     #echo $awsout | jq .
                     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
                     count=1 # one cluster at a time !

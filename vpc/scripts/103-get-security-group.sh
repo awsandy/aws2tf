@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 if [ "$1" != "" ]; then
     cmd[0]="aws ec2 describe-security-groups --filters \"Name=vpc-id,Values=$1\"" 
 else
@@ -15,7 +15,7 @@ for c in `seq 0 0`; do
 	#echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
-    echo $count
+    echo "num SG's = $count"
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
@@ -24,12 +24,28 @@ for c in `seq 0 0`; do
             if [ "$gname" != "default" ]; then
                 cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].GroupId" | tr -d '"'`
                 desc=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Description" | tr -d '"'`
+                vpcid=`echo $awsout | jq ".${pref[(${c})]}[(${i})].VpcId" | tr -d '"'`
+                tags=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Tags"`
+                tcount=`echo $tags | jq ". | length"`
+              
+                
                 echo $cname
                 fn=`printf "%s__%s.tf" $ttft $cname`
                 printf "resource \"%s\" \"%s\" {\n" $ttft $cname > $fn
-# sg stuff
-                printf "description = \"%s\"\n" "$desc" >> $fn
 
+                printf "description = \"%s\"\n" "$desc" >> $fn
+                printf "vpc_id = aws_vpc.%s.id\n" "$vpcid" >> $fn
+                echo "tcount= $tcount"
+                if [ "$tcount" -gt "0" ]; then
+                    printf "tags = {\n" $cname >> $fn
+                    tcount=`expr $tcount - 1`
+                    for t in `seq 0 $tcount`; do
+                        tkey=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Tags[(${t})].Key" | tr -d '"'`
+                        tval=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Tags[(${t})].Value" | tr -d '"'`
+                        printf "\"%s\" = \"%s\"\n" $tkey $tval >> $fn
+                    done
+                    printf "}\n" $cname >> $fn
+                fi
 
                 printf "}\n" $cname >> $fn
                 terraform import $ttft.$cname $cname

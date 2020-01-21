@@ -37,6 +37,25 @@ if [ "$kcount" -gt "0" ]; then
                 #../../scripts/103-get-security_group.sh $s1
             done
 
+            # get the fargate profiles
+            #  aws eks list-fargate-profiles --cluster-name ateks1f
+            # aws eks describe-fargate-profile --cluster-name ateks1f --fargate-profile-name fp-default
+            fgp=`aws eks list-fargate-profiles --cluster-name $cln`
+            np=`echo $fgp | jq ".fargateProfileNames | length"`
+            if [ "$np" -gt "0" ]; then
+                np=`expr $np - 1`
+                for p in `seq 0 $np`; do
+                    pname=`echo $np | jq ".fargateProfileNames[(${p})]" | tr -d '"'`
+                    echo $pname
+                    fg=`aws eks describe-fargate-profile --cluster-name $cln --fargate-profile-name $pname`
+                    echo "fargate"
+                    echo $fg | jq .
+                done
+            fi
+
+
+
+
 
         
         fi
