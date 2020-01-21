@@ -18,7 +18,7 @@ if [ "$kcount" -gt "0" ]; then
             tcmd=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.vpcId" | tr -d '"'`
             ../../scripts/100* $tcmd
             ../../scripts/102* $tcmd
-            ../../scripts/security-group-vpc.sh $tcmd
+            ../../scripts/103*.sh $tcmd
             ../../scripts/110*.sh $tcmd
             ../../scripts/120*.sh $tcmd
             ../../scripts/130*.sh $tcmd

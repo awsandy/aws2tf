@@ -3,7 +3,7 @@
 
 [0m[1mInitializing provider plugins...[0m
 - Checking for available provider plugins...
-- Downloading plugin for provider "aws" (hashicorp/aws) 2.44.0...
+- Downloading plugin for provider "aws" (hashicorp/aws) 2.45.0...
 
 [0m[1m[32mTerraform has been successfully initialized![0m[32m[0m
 [0m[32m
@@ -14,3 +14,8 @@ should now work.
 If you ever set or change modules or backend configuration for Terraform,
 rerun this command to reinitialize your working directory. If you forget, other
 commands will detect it and remind you to do so if necessary.[0m
+all
+cluster name ateks1f
+get other stuff
+aws ec2 describe-vpcs --vpc-ids vpc-0b970f799ff159d67
+vpc-0b970f799ff159d67
