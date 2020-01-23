@@ -24,6 +24,13 @@ if [ "$kcount" -gt "0" ]; then
             # still need to call as eip is nested from eni's
             rm -f aws_network_interface*.tf
             # need to rip out eni state
+            terraform state list | grep aws_network_interface > tf2.tmp
+            for ts in `cat tf2.tmp` ; do
+                terraform state rm $ts > t2.txt
+            done
+
+
+
             ../../scripts/120*.sh $tcmd
             ../../scripts/130*.sh $tcmd
             ../../scripts/140*.sh $tcmd
