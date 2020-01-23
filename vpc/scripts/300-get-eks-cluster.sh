@@ -23,6 +23,7 @@ if [ "$kcount" -gt "0" ]; then
             # don't keep eni's - created by nat gw and node group instances
             # still need to call as eip is nested from eni's
             rm -f aws_network_interface*.tf
+            # need to rip out eni state
             ../../scripts/120*.sh $tcmd
             ../../scripts/130*.sh $tcmd
             ../../scripts/140*.sh $tcmd
