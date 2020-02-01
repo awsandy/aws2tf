@@ -6,7 +6,7 @@ else
 fi
 
 pref[0]="SecurityGroups"
-tft[0]="aws_security_group"
+tft[0]="aws_default_security_group"
 
 for c in `seq 0 0`; do
  
@@ -21,7 +21,7 @@ for c in `seq 0 0`; do
         for i in `seq 0 $count`; do
             #echo $i
             gname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].GroupName" | tr -d '"'`
-            if [ "$gname" != "default" ]; then
+            if [ "$gname" == "default" ]; then
                 cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].GroupId" | tr -d '"'`
                 desc=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Description" | tr -d '"'`
                 vpcid=`echo $awsout | jq ".${pref[(${c})]}[(${i})].VpcId" | tr -d '"'`
@@ -33,7 +33,7 @@ for c in `seq 0 0`; do
                 fn=`printf "%s__%s.tf" $ttft $cname`
                 printf "resource \"%s\" \"%s\" {\n" $ttft $cname > $fn
 
-                printf "description = \"%s\"\n" "$desc" >> $fn
+                #printf "description = \"%s\"\n" "$desc" >> $fn
                 printf "vpc_id = aws_vpc.%s.id\n" "$vpcid" >> $fn
                 echo "tcount= $tcount"
                 if [ "$tcount" -gt "0" ]; then
@@ -76,6 +76,7 @@ for i in `cat tf1.tmp` ; do
     fi
     echo $ssg
     echo "$fn $ttft $cname"
+    echo "# from aws_default_security_group" > $fn
                 while IFS= read line
                 do
                     skip=0
@@ -87,7 +88,7 @@ for i in `cat tf1.tmp` ; do
                         if [[ ${tt1} == "arn" ]];then skip=1; fi                
                         if [[ ${tt1} == "id" ]];then skip=1; fi          
                         if [[ ${tt1} == "role_arn" ]];then skip=1;fi
-                        #if [[ ${tt1} == "owner_id" ]];then skip=1;fi
+                        #if [[ ${tt1} == "description" ]];then skip=1;fi
                         #if [[ ${tt1} == "availability_zone" ]];then skip=1;fi
                         #if [[ ${tt1} == "availability_zone_id" ]];then skip=1;fi
                         #if [[ ${tt1} == "default_route_table_id" ]];then skip=1;fi

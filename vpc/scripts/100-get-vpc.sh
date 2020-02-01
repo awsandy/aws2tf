@@ -6,7 +6,7 @@ else
 fi
 pref[0]="Vpcs"
 tft[0]="aws_vpc"
-echo ${cmd[0]}
+#echo ${cmd[0]}
 
 
 for c in `seq 0 0`; do
