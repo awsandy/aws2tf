@@ -1,0 +1,12 @@
+# from aws_default_security_group
+# aws_security_group_rule.sg-0c8444a8f846d6c50-1:
+resource "aws_security_group_rule" "sg-0c8444a8f846d6c50-1" {
+from_port = 2049
+ipv6_cidr_blocks = []
+prefix_list_ids = []
+protocol = "tcp"
+security_group_id = aws_security_group.sg-0c8444a8f846d6c50.id
+source_security_group_id = aws_security_group.sg-0b70930caea1aac99.id
+to_port = 2049
+type = "ingress"
+}

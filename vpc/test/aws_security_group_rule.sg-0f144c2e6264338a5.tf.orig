@@ -1,0 +1,12 @@
+# from aws_default_security_group
+# aws_security_group_rule.sg-0f144c2e6264338a5:
+resource "aws_security_group_rule" "sg-0f144c2e6264338a5" {
+from_port = 0
+ipv6_cidr_blocks = []
+prefix_list_ids = []
+protocol = "-1"
+security_group_id = aws_security_group.sg-0f144c2e6264338a5.id
+source_security_group_id = aws_security_group.sg-0f144c2e6264338a5.id
+to_port = 0
+type = "ingress"
+}
