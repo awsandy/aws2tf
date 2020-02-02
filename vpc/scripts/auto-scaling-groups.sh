@@ -51,6 +51,11 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "arn" ]];then
                         if [[ ${tt2} == *"autoscaling"* ]];then
                             skip=1
+                            #printf "force_delete= false\n" >> $fn
+                            #printf "wait_for_capacity_timeout = \"10m\"\n" >> $fn
+                            printf "lifecycle {\n" >> $fn
+                            printf "\t ignore_changes = [force_delete,wait_for_capacity_timeout]\n"  >> $fn
+                            printf "}\n" >> $fn 
                         else
                             skip=0; 
                         fi
