@@ -44,8 +44,8 @@ for c in `seq 0 0`; do
                     for t in `seq 0 $tcount`; do
                         tkey=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Tags[(${t})].Key" | tr -d '"'`
                         tval=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Tags[(${t})].Value" | tr -d '"'`
-                        if [[ ${tkey}  != *"aws:cloudformation"* ]]; then
-                            printf "\"%s\" = \"%s\"\n" $tkey $tval >> $fn
+                        if [[ ${tkey}  != *"aws:"* ]]; then
+                            printf "\"%s\" = \"%s\"\n" "$tkey" "$tval" >> $fn
                         fi
                     done
                     printf "}\n" $cname >> $fn
@@ -120,9 +120,9 @@ for i in `cat tf1.tmp` ; do
                         if [[ ${tt1} == "source_security_group_id" ]]; then
                             tt2=`echo $tt2 | tr -d '"'`
                             t1=`printf "%s = aws_security_group.%s.id" $tt1 $tt2`
-                            printf "lifecycle {\n" > $fn
-                            printf "\t ignore_changes = [self]\n"
-                            printf "}\n" > $fn   
+                            printf "lifecycle {\n" >> $fn
+                            printf "\t ignore_changes = [self]\n"  >> $fn
+                            printf "}\n" >> $fn   
                         fi
                         
 
