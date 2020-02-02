@@ -4,9 +4,11 @@ if [ "$1" != "" ]; then
 else
     cmd[0]="aws ec2 describe-security-groups"
 fi
-
+c=0
 pref[0]="SecurityGroups"
 tft[0]="aws_security_group"
+idfilt[0]="GroupId"
+rm -f ${tft[(${c})]}.*.tf
 
 for c in `seq 0 0`; do
  
@@ -22,7 +24,7 @@ for c in `seq 0 0`; do
             #echo $i
             gname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].GroupName" | tr -d '"'`
             if [ "$gname" != "default" ]; then
-                cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].GroupId" | tr -d '"'`
+                cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].${idfilt[(${c})]}" | tr -d '"'`
                 desc=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Description" | tr -d '"'`
                 vpcid=`echo $awsout | jq ".${pref[(${c})]}[(${i})].VpcId" | tr -d '"'`
                 tags=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Tags"`
@@ -112,10 +114,15 @@ for i in `cat tf1.tmp` ; do
                         if [[ ${tt1} == "security_group_id" ]]; then
                             tt2=`echo $tt2 | tr -d '"'`
                             t1=`printf "%s = aws_security_group.%s.id" $tt1 $tt2`
+    
+    
                         fi
                         if [[ ${tt1} == "source_security_group_id" ]]; then
                             tt2=`echo $tt2 | tr -d '"'`
                             t1=`printf "%s = aws_security_group.%s.id" $tt1 $tt2`
+                            printf "lifecycle {\n" > $fn
+                            printf "\t ignore_changes = [self]\n"
+                            printf "}\n" > $fn   
                         fi
                         
 

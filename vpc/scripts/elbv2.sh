@@ -56,7 +56,7 @@ for c in `seq 0 0`; do
                     tt1=`echo "$line" | cut -f1 -d'=' | tr -d ' '` 
                     tt2=`echo "$line" | cut -f2- -d'='`
                     if [[ ${tt1} == "arn" ]];then
-                        if [[ ${tt2} == *"autoscaling"* ]];then
+                        if [[ ${tt2} == *"loadbalancer"* ]];then
                             skip=1
                         else
                             skip=0; 
@@ -67,13 +67,13 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
                     if [[ ${tt1} == "association_id" ]];then skip=1;fi
 
-                    #if [[ ${tt1} == "public_dns" ]];then skip=1;fi
-                    #if [[ ${tt1} == "private_dns" ]];then skip=1;fi
+                    if [[ ${tt1} == "dns_name" ]];then skip=1;fi
+                    if [[ ${tt1} == "vpc_id" ]];then skip=1;fi
                     if [[ ${tt1} == "default_version" ]];then skip=1;fi
                     if [[ ${tt1} == "latest_version" ]];then skip=1;fi
                     if [[ ${tt1} == "security_group_names" ]];then skip=1;fi
-                    #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
-                    #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
+                    if [[ ${tt1} == "zone_id" ]];then skip=1;fi
+                    if [[ ${tt1} == "arn_suffix" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi
                     if [[ ${tt1} == "subnet_id" ]]; then
                         tt2=`echo $tt2 | tr -d '"'`
