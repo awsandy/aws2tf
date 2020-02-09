@@ -1,16 +1,20 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws elbv2 describe-load-balancers --filter \"Name=vpc-id,Values=$1\""
+    cmd[0]="aws elbv2 describe-target-groups --load-balancer-arn \"$1\""
 else
-    cmd[0]="aws elbv2 describe-load-balancers"
+    echo "must pass lb arn"
+    exit
 fi
+
+
 c=0
 cm=${cmd[$c]}
 echo $cm
 
-pref[0]="LoadBalancers"
-tft[0]="aws_lb"
-idfilt[0]="LoadBalancerArn"
+pref[0]="TargetGroups"
+tft[0]="aws_lb_target_group"
+
+idfilt[0]="TargetGroupArn"
 rm -f ${tft[(${c})]}.*.tf
 
 for c in `seq 0 0`; do
@@ -25,9 +29,6 @@ for c in `seq 0 0`; do
         for i in `seq 0 $count`; do
             #echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].${idfilt[(${c})]}" | tr -d '"'`
-            lbarn=`echo $cname`
-            attribs=`aws elbv2 describe-load-balancer-attributes --load-balancer-arn ${lbarn}`
-            echo $attribs | jq ".Attributes"
             echo "$ttft $cname"
             rname=${cname//:/_}
             rname=${rname//\//_}
@@ -59,9 +60,7 @@ for c in `seq 0 0`; do
                     tt1=`echo "$line" | cut -f1 -d'=' | tr -d ' '` 
                     tt2=`echo "$line" | cut -f2- -d'='`
                     if [[ ${tt1} == "arn" ]];then
-                        if [[ ${tt2} == *"loadbalancer"* ]];then
-                            lbarn=`echo ${tt2}`
-                            printf "#%s\n" $lbarn >> $fn
+                        if [[ ${tt2} == *"targetgroup"* ]];then
                             skip=1
                         else
                             skip=0; 
@@ -99,13 +98,8 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
-            echo "Listener ......."
-            ../../scripts/elbv2_listener.sh $lbarn
-            echo "Target Group ......."
-            ../../scripts/elbv2-target-groups.sh $lbarn
-
+            
         done
-        
     fi
 done
 terraform fmt

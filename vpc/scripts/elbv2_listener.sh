@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws elbv2 describe-load-balancers --load-balancer-arn \"$1\""
+    cmd[0]="aws elbv2 describe-listeners --load-balancer-arn \"$1\""
 else
     echo "must pass lb arn"
     exit
@@ -12,7 +12,7 @@ cm=${cmd[$c]}
 echo $cm
 
 pref[0]="Listeners"
-tft[0]="aws_lb_listener"cccccckvtkkthlcfhbjniduuejhiuhjtccuctujrdbfk
+tft[0]="aws_lb_listener"
 
 idfilt[0]="ListenerArn"
 rm -f ${tft[(${c})]}.*.tf
@@ -24,17 +24,19 @@ for c in `seq 0 0`; do
 	#echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
+    echo $awsout | jq .
+
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
-            #echo $i
+            echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].${idfilt[(${c})]}" | tr -d '"'`
             echo "$ttft $cname"
             rname=${cname//:/_}
             rname=${rname//\//_}
             echo $rname
             fn=`printf "%s__%s.tf" $ttft $rname`
-            
+            echo $fn
 
             printf "resource \"%s\" \"%s\" {\n" $ttft $rname > $fn
             printf "}"  >> $fn
@@ -60,7 +62,7 @@ for c in `seq 0 0`; do
                     tt1=`echo "$line" | cut -f1 -d'=' | tr -d ' '` 
                     tt2=`echo "$line" | cut -f2- -d'='`
                     if [[ ${tt1} == "arn" ]];then
-                        if [[ ${tt2} == *"loadbalancer"* ]];then
+                        if [[ ${tt2} == *"listener"* ]];then
                             skip=1
                         else
                             skip=0; 
@@ -71,6 +73,7 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
                     if [[ ${tt1} == "association_id" ]];then skip=1;fi
 
+                    if [[ ${tt1} == "order" ]];then skip=1;fi
                     if [[ ${tt1} == "dns_name" ]];then skip=1;fi
                     if [[ ${tt1} == "vpc_id" ]];then skip=1;fi
                     if [[ ${tt1} == "default_version" ]];then skip=1;fi

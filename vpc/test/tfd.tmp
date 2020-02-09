@@ -1,3 +1,0 @@
-aws_default_security_group.sg-0c8444a8f846d6c50
-aws_default_security_group.sg-0f144c2e6264338a5
-aws_default_security_group.sg-307a915e
