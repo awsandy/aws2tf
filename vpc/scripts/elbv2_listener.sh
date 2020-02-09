@@ -24,7 +24,7 @@ for c in `seq 0 0`; do
 	#echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
-    echo $awsout | jq .
+    #echo $awsout | jq .
 
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
@@ -36,7 +36,7 @@ for c in `seq 0 0`; do
             rname=${rname//\//_}
             echo $rname
             fn=`printf "%s__%s.tf" $ttft $rname`
-            echo $fn
+            #echo $fn
 
             printf "resource \"%s\" \"%s\" {\n" $ttft $rname > $fn
             printf "}"  >> $fn
@@ -63,6 +63,8 @@ for c in `seq 0 0`; do
                     tt2=`echo "$line" | cut -f2- -d'='`
                     if [[ ${tt1} == "arn" ]];then
                         if [[ ${tt2} == *"listener"* ]];then
+                            listarn=`echo ${tt2}`
+                            echo $listarn
                             skip=1
                         else
                             skip=0; 
