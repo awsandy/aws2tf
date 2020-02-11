@@ -16,12 +16,14 @@ if [ "$kcount" -gt "0" ]; then
         if [ "$1" != "" ]; then
             echo "get other stuff"
             tcmd=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.vpcId" | tr -d '"'`
-            ../../scripts/100* $tcmd
-            ../../scripts/102* $tcmd
-            ../../scripts/103*.sh $tcmd
-            ../../scripts/120*.sh $tcmd
+            ../../scripts/100* $tcmd  # vpc
+            ../../scripts/102* $tcmd  # subnets
+            ../../scripts/103*.sh $tcmd  # security groups
+            
             # don't keep eni's - created by nat gw and node group instances
             # still need to call as eip is nested from eni's
+
+
             rm -f aws_network_interface*.tf
             # need to rip out eni state
             terraform state list | grep aws_network_interface > tf2.tmp
@@ -29,12 +31,16 @@ if [ "$kcount" -gt "0" ]; then
                 terraform state rm $ts > t2.txt
             done
 
+            natgw=`aws ec2 describe-nat-gateways --filter "Name=vpc-id,Values=${tcmd}"`
+            eipall=`echo $natgw | jq ".NatGateways[0].NatGatewayAddresses[0].AllocationId" | tr -d '"'`
+            ../../scripts/get-eip.sh $eipall
 
+            ../../scripts/120*.sh $tcmd  # igw
+            ../../scripts/130*.sh $tcmd  # nat gw
+            # still need to call as eip is nested from nat gw
 
-            ../../scripts/120*.sh $tcmd
-            ../../scripts/130*.sh $tcmd
-            ../../scripts/140*.sh $tcmd
-            ../../scripts/141*.sh $tcmd
+            ../../scripts/140*.sh $tcmd  # route table
+            ../../scripts/141*.sh $tcmd  # route table assoc
 
             rarn=`echo $awsout | jq ".${pref[(${c})]}.roleArn" | tr -d '"'`
             echo $rarn
@@ -57,7 +63,7 @@ if [ "$kcount" -gt "0" ]; then
                 np=`expr $np - 1`
                 for p in `seq 0 $np`; do
                     pname=`echo $fgp | jq ".fargateProfileNames[(${p})]" | tr -d '"'`
-                    echo $pname
+                    echo "faregate profile = $pname"
                     fg=`aws eks describe-fargate-profile --cluster-name $cln --fargate-profile-name $pname`
                     echo "fargate"
                     fgparn=`echo $fg | jq ".fargateProfile.fargateProfileArn" | tr -d '"'`
@@ -76,6 +82,8 @@ if [ "$kcount" -gt "0" ]; then
 
         
         fi
+
+        echo "pre-reqs complete - getting EKS"
 
               
         for c in `seq 0 0`; do
