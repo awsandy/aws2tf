@@ -68,9 +68,8 @@ if [ "$kcount" -gt "0" ]; then
                     echo "fargate"
                     fgparn=`echo $fg | jq ".fargateProfile.fargateProfileArn" | tr -d '"'`
                     podarn=`echo $fg | jq ".fargateProfile.podExecutionRoleArn" | tr -d '"'`
-                    echo "Fargate profile arn $fgparn" 
-                    echo "Pod execution role arn $podarn" 
-                    ../../scripts/050-get-iam-roles.sh $fgparn 
+                    echo "Fargate profile arn = $fgparn" 
+                    echo "Get Pod execution role arn = $podarn" 
                     ../../scripts/050-get-iam-roles.sh $podarn
 
                 done
