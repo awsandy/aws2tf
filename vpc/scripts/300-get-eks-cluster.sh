@@ -74,16 +74,10 @@ if [ "$kcount" -gt "0" ]; then
 
                 done
             fi
-
-
-
-
-
         
         fi
 
         echo "pre-reqs complete - getting EKS"
-
               
         for c in `seq 0 0`; do
             
