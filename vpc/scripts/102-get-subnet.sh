@@ -7,6 +7,7 @@ fi
 
 pref[0]="Subnets"
 tft[0]="aws_subnet"
+idfilt[0]="SubnetId"
 
 #rm -f ${tft[0]}.tf
 
@@ -21,19 +22,22 @@ for c in `seq 0 0`; do
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
             #echo $i
-            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].SubnetId" | tr -d '"'`
+            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].${idfilt[(${c})]}" | tr -d '"'`
             echo $cname
+            fn=`printf "%s__%s.tf" $ttft $cname`
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
             terraform state show $ttft.$cname > t2.txt
+            tfa=`printf "%s.%s" $ttft $cname`
+            terraform show  -json | jq --arg myt "$tfa" '.values.root_module.resources[] | select(.address==$myt)' > $tfa.json
             rm $ttft.$cname.tf
             cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
             #	for k in `cat t1.txt`; do
             #		echo $k
             #	done
             file="t1.txt"
-            fn=`printf "%s__%s.tf" $ttft $cname`
+            
             while IFS= read line
             do
 				skip=0
@@ -52,11 +56,7 @@ for c in `seq 0 0`; do
                         tt2=`echo $tt2 | tr -d '"'`
                         t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
                     fi
-                    #if [[ ${tt1} == "default_route_table_id" ]];then skip=1;fi
-                    #if [[ ${tt1} == "owner_id" ]];then skip=1;fi
-                    #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
-                    #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
-                    #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi
+               
                 fi
                 if [ "$skip" == "0" ]; then
                     #echo $skip $t1
