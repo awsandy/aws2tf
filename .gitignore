@@ -7,3 +7,5 @@ terraform.tfstate*
 generated
 vpc/generated
 *.orig
+old
+setup-local-git.sh

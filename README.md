@@ -4,6 +4,7 @@ Work in progress - please report any issues you find.
 
 This utility 'AWS to Terraform' (aws2tf)
 reads an AWS Account and generates all the required terraform configuration files (.tf) from each of the composite AWS resources
+
 It also imports the terraform state using a
 
 "terraform import ...." command
@@ -16,9 +17,9 @@ There should hopefully be no subsequent additions or deletions reported by the t
 
 ## Requirements & Prerequisites
 + The tool is written for the bash shell script & Python3 and has been tested on macOS
-+ AWS cli (V1) **version 1.16.290 or higher** needs to be installed and you need a login with at least "Read" priviledges
-+ terraform **version v0.12.16 or higher** needs to be installed
-+ Python **version 3.6.1 or higher**
++ AWS cli (V1) **version 1.17.4 or higher** needs to be installed and you need a login with at least "Read" priviledges
++ terraform **version v0.12.20 or higher** needs to be installed
++ jq **version 1.6 or higher**
 
 
 ## Quickstart guide to using the tool
@@ -63,9 +64,9 @@ To include AWS account Policies and Roles:
 ./aws2tf.sh -p yes
 ```
 
-To generate the terraform files for a specific Resource Group in a account:
+To generate the terraform files for an EKS cluster
 ```
-./aws2tf.sh -g <Resource Group>
+./eks2tf.sh
 ```
 
 To include the secrets from a Key Vault in terraform files (secrets will be in plain text):
@@ -102,18 +103,8 @@ Be patient - lots of output is given as aws2tf:
 The following terraform resource types are supported by this tool at this time:
 
 Base Resources
-* AWSrm_resource_group
+* aws_resource_group
 
-
-## Other AWS Clouds
-
-Global AWSCloud is used by default. To set a specific regional cloud, use `-c <Cloud Name>`
-
-The following are acceptable values:
-* AWSCloud
-* AWSChinaCloud
-* AWSGermanCloud
-* AWSUSGovernment
 
 ## Planned Additions
 
@@ -130,15 +121,13 @@ It can take a lot of time to loop around everything in large accounts, in partic
 
 ### KMS:
 
-Can fail if your login/SPN doesn't have acccess to the KeyVault
-
-
+Can fail if your login doesn't have acccess to KMS
 
 
 ### S3 Buckets
 
-Can fail if your login/SPN doesn't have acccess to the KeyVault used for encryption.
-Can also fail if resource locks are in place
+Can fail if your login/SPN doesn't have acccess to the KMS used for encryption.
+
 
 
 
