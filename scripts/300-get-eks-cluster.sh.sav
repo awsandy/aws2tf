@@ -96,16 +96,46 @@ if [ "$kcount" -gt "0" ]; then
                     cname=${cname//./_}
                     echo cname = $cname
 
+                    printf "data \"%s\" \"%s\" {\n" $ttft $cname > data-$ttft.$cname.tf
+                    printf "name=\"%s\"\n" $ocname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
+
+                    printf "data \"%s_auth\" \"%s\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "name=\"%s\"\n" $ocname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
+
+                    printf "output \"%s_%s_role_arn\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.role_arn\n" $cname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
+
+
+                    printf "output \"%s_%s_endpoint\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.endpoint\n" $cname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf   
+
+                    printf "output \"%s_%s_cluster_security_group_id\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.vpc_config.0.cluster_security_group_id\n" $cname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
+
+                    printf "output \"%s_%s_security_group_ids\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.vpc_config.0.security_group_ids\n" $cname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
+
+                    printf "output \"%s_%s_subnet_ids\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.vpc_config.0.subnet_ids\n" $cname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
+
+                    printf "output \"%s_%s_vpc_id\" {\n" $ttft $cname >> data-$ttft.$cname.tf
+                    printf "\t value = data.aws_eks_cluster.%s.vpc_config.0.vpc_id\n" $cname >> data-$ttft.$cname.tf
+                    printf "}\n" >> data-$ttft.$cname.tf
+
                     printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
                     printf "}" >> $ttft.$cname.tf
                     terraform import $ttft.$cname $ocname
                     terraform state show $ttft.$cname > t2.txt
                     tfa=`printf "%s.%s" $ttft $cname`
-                    terraform show  -json | jq --arg myt "$tfa" '.values.root_module.resources[] | select(.address==$myt)' > $tfa.json
-                    #cat $tfa.json | jq .
-                    aj=`cat aws_eks_cluster.ateks1.json`
-                    trole=`echo $aj | jq .values.role_arn | cut -f2 -d'/' | tr -d '"'`
-
+                    awsj=`terraform show  -json | jq --arg myt "$tfa" '.values.root_module.resources[] | select(.address==$myt)'`
+                    echo $awsj | jq .
 
 
                     rm $ttft.$cname.tf
@@ -126,9 +156,7 @@ if [ "$kcount" -gt "0" ]; then
                             if [[ ${tt1} == *":"* ]];then
                                 t1=`printf "\"%s\"=%s" $tt1 $tt2`
                             fi
-                            if [[ ${tt1} == "arn" ]];then 
-                                t1=`printf "depends_on = [aws_iam_role.%s] \n"=%s" $trole`
-                            fi
+                            if [[ ${tt1} == "arn" ]];then skip=1; fi
                             if [[ ${tt1} == "id" ]];then skip=1; fi
                             #if [[ ${tt1} == "role_arn" ]];then skip=1;fi
                             if [[ ${tt1} == "owner_id" ]];then skip=1;fi

@@ -48,14 +48,15 @@ if [ "$kcount" -gt "0" ]; then
                             echo "Importing ....."
                             terraform import $ttft.$cname $ocname
                             terraform state show $ttft.$cname > t2.txt
-                            
+                            tfa=`printf "%s.%s" $ttft $cname`
+                            terraform show  -json | jq --arg myt "$tfa" '.values.root_module.resources[] | select(.address==$myt)' > $tfa.json
+                            echo $tfa.json | jq .
+                  
                             #ls -l *.tf
                             rm $ttft.$cname.tf
                             #ls *.tf
                             cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
-                            #	for k in `cat t1.txt`; do
-                            #		echo $k
-                            #	done
+
                             file="t1.txt"
                             fn=`printf "%s__%s.tf" $ttft $cname`
                             
@@ -70,7 +71,9 @@ if [ "$kcount" -gt "0" ]; then
                                     if [[ ${tt1} == *":"* ]];then
                                         t1=`printf "\"%s\"=%s" $tt1 $tt2`
                                     fi
-                                    if [[ ${tt1} == "arn" ]];then skip=1; fi
+                                    if [[ ${tt1} == "arn" ]];then 
+                                        t1=`printf "depends_on = [aws_eks_cluster.%s]\n" $cln`
+                                    fi
                                     if [[ ${tt1} == "id" ]];then skip=1; fi
                                     #if [[ ${tt1} == "role_arn" ]];then skip=1;fi
                                     if [[ ${tt1} == "node_role_arn" ]];then 
@@ -129,8 +132,8 @@ if [ "$kcount" -gt "0" ]; then
             done
             if [ "$1" != "" ]; then
                 # get other stuff
-                terraform refresh > /dev/null
-                echo "finish refresh"
+                #terraform refresh > /dev/null
+                #echo "finish refresh"
                 rm -f t*.txt
 
                 echo $rarn
