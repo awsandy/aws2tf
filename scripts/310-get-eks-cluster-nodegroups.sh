@@ -4,12 +4,12 @@ if [ "$kcount" -gt "0" ]; then
     kcount=`expr $kcount - 1`
     #echo kcount=$kcount
     for k in `seq 0 $kcount`; do
-        echo "***k=$k"
+        #echo "***k=$k"
         cln=`aws eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`
         echo cluster name $cln
         cname=`echo $cln`
         jcount=`aws eks list-nodegroups --cluster-name $cln | jq ".nodegroups | length"`
-        echo jcount=$jcount
+        #echo jcount=$jcount
         if [ "$jcount" -gt "0" ]; then
             jcount=`expr $jcount - 1`
             for j in `seq 0 $jcount`; do
