@@ -127,7 +127,7 @@ if [ "$kcount" -gt "0" ]; then
                                 t1=`printf "\"%s\"=%s" $tt1 $tt2`
                             fi
                             if [[ ${tt1} == "arn" ]];then 
-                                t1=`printf "depends_on = [aws_iam_role.%s] \n"=%s" $trole`
+                                t1=`printf "depends_on = [aws_iam_role.%s] \n" $trole`
                             fi
                             if [[ ${tt1} == "id" ]];then skip=1; fi
                             #if [[ ${tt1} == "role_arn" ]];then skip=1;fi
