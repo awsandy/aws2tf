@@ -51,7 +51,8 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "id" ]];then skip=1; fi          
                     if [[ ${tt1} == "role_arn" ]];then skip=1;fi
                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
-                    if [[ ${tt1} == "availability_zone" ]];then skip=1;fi
+                    if [[ ${tt1} == "ipv6_cidr_block_association_id" ]];then skip=1;fi
+                    #if [[ ${tt1} == "availability_zone" ]];then skip=1;fi
                     if [[ ${tt1} == "availability_zone_id" ]];then skip=1;fi
                     if [[ ${tt1} == "vpc_id" ]]; then
                         tt2=`echo $tt2 | tr -d '"'`

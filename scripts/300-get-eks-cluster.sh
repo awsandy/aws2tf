@@ -127,7 +127,8 @@ if [ "$kcount" -gt "0" ]; then
                                 t1=`printf "\"%s\"=%s" $tt1 $tt2`
                             fi
                             if [[ ${tt1} == "arn" ]];then 
-                                t1=`printf "depends_on = [aws_iam_role.%s,aws_iam_role_policy_attachment.%s__AmazonEKSClusterPolicy] \n" $trole $trole`
+                                skip=1
+                                #t1=`printf "depends_on = [aws_iam_role.%s,aws_iam_role_policy_attachment.%s__AmazonEKSClusterPolicy] \n" $trole $trole`
                             fi
                             if [[ ${tt1} == "id" ]];then skip=1; fi
                             #if [[ ${tt1} == "role_arn" ]];then skip=1;fi
