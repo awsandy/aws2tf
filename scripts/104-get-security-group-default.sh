@@ -35,7 +35,7 @@ for c in `seq 0 0`; do
 
                 #printf "description = \"%s\"\n" "$desc" >> $fn
                 printf "vpc_id = aws_vpc.%s.id\n" "$vpcid" >> $fn
-                echo "tcount= $tcount"
+                #echo "tcount= $tcount"
                 if [ "$tcount" -gt "0" ]; then
                     printf "tags = {\n" $cname >> $fn
                     tcount=`expr $tcount - 1`
