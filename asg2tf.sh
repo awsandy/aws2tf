@@ -8,17 +8,8 @@ v="no"
 #while getopts ":s:g:r:x:p:f:" o; do
 while getopts ":r:x:f:v:" o; do
     case "${o}" in
-    #    a)
-    #        s=${OPTARG}
-    #    ;;
-    #    g)
-    #        g=${OPTARG}
-    #    ;;
         r)
             r=${OPTARG}
-        ;;
-        x)
-            x="yes"
         ;;
         p)
             p="yes"
@@ -181,9 +172,10 @@ pwd
 ../../scripts/100-get-vpc.sh
 ../../scripts/102-get-subnet.sh
 ../../scripts/103-get-security-group.sh
-../../scripts/104-get-security-group-default.sh
+#../../scripts/104-get-security-group-default.sh
 ../../scripts/launch_template.sh
 ../../scripts/auto-scaling-groups.sh
+../../scripts/elbv2.sh
 date
 
 #if [ "$x" = "yes" ]; then

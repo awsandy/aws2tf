@@ -10,3 +10,8 @@ vpc/generated
 old
 setup-local-git.sh
 *.xlsx
+test*
+*.new
+*.sav
+get*.sh
+
