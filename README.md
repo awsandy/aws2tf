@@ -1,6 +1,6 @@
 # aws2tf supports Terraform v0.12
 
-Work in progress - please report any issues you find.
+**Work in progress - please report any issues you find.**
 
 This utility 'AWS to Terraform' (aws2tf)
 reads an AWS Account and generates all the required terraform configuration files (.tf) from each of the composite AWS resources
