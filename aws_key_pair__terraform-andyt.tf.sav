@@ -1,5 +1,0 @@
-# aws_key_pair.terraform-andyt:
-resource "aws_key_pair" "terraform-andyt" {
-  fingerprint = "97:d8:c4:a1:10:56:12:01:03:01:e2:43:5b:bd:8e:12"
-  key_name    = "terraform-andyt"
-}
