@@ -69,11 +69,7 @@ To generate the terraform files for an EKS cluster
 ./eks2tf.sh
 ```
 
-To include the secrets from a Key Vault in terraform files (secrets will be in plain text):
-```
-```
-./aws2tf.sh -x yes
-```
+
 
 To filter the terraform resource type: (eg: just availability sets)
 ```
@@ -109,7 +105,7 @@ Base Resources
 ## Planned Additions
 
 + PaaS databases and other missing providers (feel free to contribute !)
-+ ongoing better AKS support as AKS evolves
++ ongoing better EKS support as EKS evolves
 + Other terraform providers as terraform supports
 
 
