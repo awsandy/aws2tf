@@ -23,7 +23,7 @@ for c in `seq 0 0`; do
         for i in `seq 0 $count`; do
             #echo $i
             gname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].GroupName" | tr -d '"'`
-            if [ "$gname" != "default" ]; then
+            #if [ "$gname" != "default" ]; then
                 cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].${idfilt[(${c})]}" | tr -d '"'`
                 desc=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Description" | tr -d '"'`
                 vpcid=`echo $awsout | jq ".${pref[(${c})]}[(${i})].VpcId" | tr -d '"'`
@@ -54,7 +54,7 @@ for c in `seq 0 0`; do
                 printf "}\n" $cname >> $fn
                 terraform import $ttft.$cname $cname
                 
-            fi
+            #fi
         done
     fi
 done

@@ -1,5 +1,10 @@
 #!/bin/bash
-cmd[0]="aws ec2 describe-dhcp-options"
+if [ "$1" != "" ]; then
+    cmd[0]="aws ec2 describe-dhcp-options --filters \"Name=vpc-id,Values=$1\"" 
+else
+    cmd[0]="aws ec2 describe-dhcp-options"
+fi
+
 pref[0]="DhcpOptions"
 tft[0]="aws_vpc_dhcp_options"
 echo ${cmd[0]}
