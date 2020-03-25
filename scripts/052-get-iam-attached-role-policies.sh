@@ -59,6 +59,11 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == *":"* ]];then
                         t1=`printf "\"%s\"=%s" $tt1 $tt2`
                     fi
+                    if [[ ${tt1} == "role" ]];then 
+                        tsel=`echo $tt2 |  tr -d '"'`
+                        t1=`printf "%s = aws_iam_role.%s.id" $tt1 $tsel`
+                        skip=0;
+                    fi
                     if [[ ${tt1} == "arn" ]];then skip=1; fi
                     if [[ ${tt1} == "id" ]];then skip=1; fi
                     if [[ ${tt1} == "role_arn" ]];then skip=1;fi

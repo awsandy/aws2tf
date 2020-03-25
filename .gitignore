@@ -16,3 +16,4 @@ test*
 get*.sh
 clean*
 *.xlsx
+quotas

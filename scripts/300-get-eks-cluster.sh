@@ -14,10 +14,11 @@ if [ "$kcount" -gt "0" ]; then
         awsout=`eval $cm`
         
         if [ "$1" != "" ]; then
-            echo "get other stuff"
+            
             tcmd=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.vpcId" | tr -d '"'`
             ../../scripts/100* $tcmd  # vpc
             ../../scripts/102* $tcmd  # subnets
+            ## EKS creates it's own SG's - no it doesn't
             ../../scripts/103*.sh $tcmd  # security groups
             
             # don't keep eni's - created by nat gw and node group instances
@@ -39,6 +40,7 @@ if [ "$kcount" -gt "0" ]; then
             ../../scripts/130*.sh $tcmd  # nat gw
             # still need to call as eip is nested from nat gw
 
+            ## need these or will it do it's own ?
             ../../scripts/140*.sh $tcmd  # route table
             ../../scripts/141*.sh $tcmd  # route table assoc
 
@@ -54,9 +56,7 @@ if [ "$kcount" -gt "0" ]; then
                 #../../scripts/103-get-security_group.sh $s1
             done
 
-            # get the fargate profiles
-            #  aws eks list-fargate-profiles --cluster-name ateks1f
-            # aws eks describe-fargate-profile --cluster-name ateks1f --fargate-profile-name fp-default
+
             fgp=`aws eks list-fargate-profiles --cluster-name $cln`
             np=`echo $fgp | jq ".fargateProfileNames | length"`
             if [ "$np" -gt "0" ]; then
@@ -69,7 +69,7 @@ if [ "$kcount" -gt "0" ]; then
                     fgparn=`echo $fg | jq ".fargateProfile.fargateProfileArn" | tr -d '"'`
                     podarn=`echo $fg | jq ".fargateProfile.podExecutionRoleArn" | tr -d '"'`
                     echo "Fargate profile arn = $fgparn" 
-                    echo "Get Pod execution role arn = $podarn" 
+                    echo "Get Fargate Pod execution role arn = $podarn" 
                     ../../scripts/050-get-iam-roles.sh $podarn
 
                 done
@@ -92,6 +92,7 @@ if [ "$kcount" -gt "0" ]; then
                 for i in `seq 0 $count`; do
                     #echo $i
                     cname=`echo $awsout | jq ".${pref[(${c})]}.name" | tr -d '"'`
+                    
                     ocname=`echo $cname`
                     cname=${cname//./_}
                     echo cname = $cname
@@ -126,12 +127,14 @@ if [ "$kcount" -gt "0" ]; then
                             if [[ ${tt1} == *":"* ]];then
                                 t1=`printf "\"%s\"=%s" $tt1 $tt2`
                             fi
-                            if [[ ${tt1} == "arn" ]];then 
-                                skip=1
-                                #t1=`printf "depends_on = [aws_iam_role.%s,aws_iam_role_policy_attachment.%s__AmazonEKSClusterPolicy] \n" $trole $trole`
-                            fi
+                            if [[ ${tt1} == "arn" ]];then skip=1; fi
                             if [[ ${tt1} == "id" ]];then skip=1; fi
-                            #if [[ ${tt1} == "role_arn" ]];then skip=1;fi
+                            if [[ ${tt1} == "role_arn" ]];then 
+                                skip=0;
+                                trole=`echo "$tt2" | cut -f2- -d'/' | tr -d '"'`
+                                echo "depends_on = [aws_iam_role.$trole]" >> $fn              
+                                t1=`printf "%s = aws_iam_role.%s.arn" $tt1 $trole`
+                            fi
                             if [[ ${tt1} == "owner_id" ]];then skip=1;fi
                             if [[ ${tt1} == "association_id" ]];then skip=1;fi
                             if [[ ${tt1} == "unique_id" ]];then skip=1;fi
@@ -183,7 +186,11 @@ if [ "$kcount" -gt "0" ]; then
                         fi
                         
                     done <"$file"   # done while
-                    
+
+                    # Get the fargate profile
+                    ../../scripts/fargate_profile.sh $cname
+                    echo "run command ....."
+                    echo "aws eks update-kubeconfig --name $cname"
                 done # done for i
             fi
         done 
