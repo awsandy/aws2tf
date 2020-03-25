@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 kcount=`aws eks list-clusters | jq ".clusters | length"`
 if [ "$kcount" -gt "0" ]; then
     kcount=`expr $kcount - 1`
