@@ -6,7 +6,7 @@ p="default"
 f="no"
 v="no"
 r="no"
-t="no"
+t="*"
 #while getopts ":p:g:r:x:t:" o; do
 while getopts ":p:r:x:f:v:t:" o; do
     case "${o}" in
@@ -98,7 +98,7 @@ printf "}\n" >> aws.tf
 
 cat aws.tf
 
-
+pwd
 
 echo "terraform init"
 terraform init 2>&1 | tee -a import.log
@@ -117,12 +117,12 @@ terraform init 2>&1 | tee -a import.log
 #fi
 
 date
-
+pwd
 lc=0
 echo "t=$t"
 echo "loop through providers"
 pwd
-for com in `ls ../../scripts/*-get-$r.sh | cut -d'/' -f4 | sort -g`; do    
+for com in `ls ../../scripts/*-get-$t.sh | cut -d'/' -f4 | sort -g`; do    
         echo "$com"
         docomm="../../scripts/$com"
         if [ "$f" = "no" ]; then

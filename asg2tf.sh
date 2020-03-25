@@ -83,18 +83,6 @@ echo "terraform init"
 terraform init 2>&1 | tee -a import.log
 
 
-# subscription level stuff - roles & policies
-if [ "$p" = "yes" ]; then
-    for j in `seq 51 54`; do
-        docomm="../../scripts/${res[$j]}.sh $mysub"
-        #echo $docomm
-        #eval $docomm 2>&1 | tee -a import.log
-        if grep -q Error: import.log ; then
-            echo "Error in log file exiting ...."
-            
-        fi
-    done
-fi
 
 
 date
@@ -110,10 +98,6 @@ pwd
 ../../scripts/elbv2.sh
 date
 
-#if [ "$x" = "yes" ]; then
-#    echo "Attempting to extract secrets"
-#    ../../scripts/350_key_vault_secret.sh
-#fi
 
 echo "---------------------------------------------------------------------------"
 echo "aws2tf output files are in generated/tf.$mysub"
