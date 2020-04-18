@@ -88,11 +88,12 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
-            
+            ../../scripts/get-ecs-service.sh $cname
         done
     fi
 done
 terraform fmt
 terraform validate
 rm t*.txt
+
 

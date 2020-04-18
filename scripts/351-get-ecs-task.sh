@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws ecs list-task-definitions --family-prefix web-client" 
+    cmd[0]="aws ecs list-task-definitions --family-prefix $1" 
 else
     cmd[0]="aws ecs list-task-definitions"
 fi
@@ -23,7 +23,7 @@ for c in `seq 0 0`; do
         for i in `seq 0 $count`; do
             #echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})]" | tr -d '"'`
-            echo $cname
+            
             rname=${cname//:/_}
             rname=${rname//\//_}
             echo $rname

@@ -1,45 +1,44 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws ecs describe-clusters --cluster $1" 
-    pref[0]="clusters"
-    idfilt[0]="clusterName"
+    arn=`echo $1`
+    arn="arn:aws:servicediscovery:eu-west-1:566972129213:service/srv-pdhsivbua7ukgz6i"
+    comm=`printf "aws servicediscovery list-services | jq '.Services[] | select(.Arn==\"%s\").Id' | tr -d '\"'" $arn`
+    srvid=`eval $comm`
+    nsid=`aws servicediscovery get-service --id $srvid | jq .Service.NamespaceId | tr -d '\"'`
+    echo $nsid
+    # get zone id
+    hzid=`aws servicediscovery get-namespace --id $nsid | jq .Namespace.Properties.DnsProperties.HostedZoneId | tr -d '"'`
+    echo $hzid
+    cmd[0]="aws route53 list-resource-record-sets --hosted-zone-id $hzid" 
 else
-    cmd[0]="aws ecs list-clusters"
-    pref[0]="clusterArns"
-    idfilt[0]=""
+    echo "Must provide a service Arn - exiting ..."
+    exit
 fi
 
-tft[0]="aws_ecs_cluster"
+ttft="aws_route53_zone"
 
 
 #rm -f ${tft[0]}.tf
 
-for c in `seq 0 0`; do
-    
-    cm=${cmd[$c]}
-	ttft=${tft[(${c})]}
-	echo $cm
-    awsout=`eval $cm`
-    count=`echo $awsout | jq ".${pref[(${c})]} | length"`
-    if [ "$count" -gt "0" ]; then
-        count=`expr $count - 1`
-        for i in `seq 0 $count`; do
-            #echo $i
-            if [ "$1" != "" ]; then
-                cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].${idfilt[(${c})]}" | tr -d '"'`
-            else
-                cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})]" | cut -f2 -d'/' | tr -d '"'`
-            fi
-            echo $cname
-            fn=`printf "%s__%s.tf" $ttft $cname`
-            printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
-            printf "}" $cname >> $ttft.$cname.tf
-            terraform import $ttft.$cname $cname
-            terraform state show $ttft.$cname > t2.txt
-            tfa=`printf "%s.%s" $ttft $cname`
+
+            cname=`echo $hzid`
+            
+            rname=${cname//:/_}
+            rname=${rname//\//_}
+            echo $rname
+            fn=`printf "%s__%s.tf" $ttft $rname`
+            printf "resource \"%s\" \"%s\" {\n" $ttft $rname > $fn
+            printf "}"  >> $fn
+            
+            terraform import $ttft.$rname $rname
+            terraform state show $ttft.$rname > t2.txt
+            
+            rm $fn
+
+            tfa=`printf "%s.%s" $ttft $rname`
             terraform show  -json | jq --arg myt "$tfa" '.values.root_module.resources[] | select(.address==$myt)' > $tfa.json
             #echo $awsj | jq . 
-            rm $ttft.$cname.tf
+           
             cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
             #	for k in `cat t1.txt`; do
             #		echo $k
@@ -58,14 +57,14 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "id" ]];then skip=1; fi          
                     if [[ ${tt1} == "role_arn" ]];then skip=1;fi
                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
-                    if [[ ${tt1} == "ipv6_cidr_block_association_id" ]];then skip=1;fi
+                    if [[ ${tt1} == "propagate_tags" ]];then skip=1;fi
                     #if [[ ${tt1} == "availability_zone" ]];then skip=1;fi
                     if [[ ${tt1} == "availability_zone_id" ]];then skip=1;fi
                     if [[ ${tt1} == "state" ]];then skip=1;fi
                     if [[ ${tt1} == "dns_entry" ]];then skip=1;fi
 
                     if [[ ${tt1} == "requester_managed" ]];then skip=1;fi
-                    if [[ ${tt1} == "prefix_list_id" ]];then skip=1;fi
+                    if [[ ${tt1} == "revision" ]];then skip=1;fi
                     if [[ ${tt1} == "cidr_blocks" ]];then
                         echo "matched cidr"  
                         skip=1
@@ -89,10 +88,16 @@ for c in `seq 0 0`; do
                 
             done <"$file"
             
-        done
-    fi
-done
+
 terraform fmt
 terraform validate
 rm t*.txt
+#aws route53 get-hosted-zone --id Z0956511MQ670ZMC5AV9
+# get vpc-id from above
+# resource "aws_service_discovery_private_dns_namespace" "example" {
+# name from   aws servicediscovery get-namespace --id $nsid
+# vpc =
+# }  
+
+
 
