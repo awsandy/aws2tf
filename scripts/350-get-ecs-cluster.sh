@@ -97,3 +97,10 @@ terraform validate
 rm t*.txt
 
 
+# aws ecs list-attributes --target-type container-instance --cluster myecsprod
+# aws ecs list-container-instances --cluster myecsprod
+# aws ecs describe-container-instances --container-instances arn:aws:ecs:eu-west-1:566972129213:container-instance/b05e4516-71c3-487f-a2cf-31b42f7bc722 --cluster myecsprod 
+# get instance id
+# use above to find asg
+# aws autoscaling describe-auto-scaling-groups
+
