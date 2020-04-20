@@ -119,13 +119,14 @@ echo "${clusters[$i]}"
 done
 echo ${clusters[0]}
 echo ${clusters[1]}
-
+vpcs=()
 cinst=`aws ecs list-container-instances --cluster myecsprod | jq .containerInstanceArns[0] | tr -d '"' | cut -f2 -d'/'`
 echo $cinst
 inst=`aws ecs describe-container-instances --cluster myecsprod --container-instances $cinst | jq .containerInstances[0].ec2InstanceId | tr -d '"'`
 echo $inst
-vpc=`aws ecs describe-container-instances --cluster myecsprod --container-instances $inst | jq '.containerInstances[0].attributes[] | select(.name=="ecs.vpc-id").value'`
+vpc=`aws ecs describe-container-instances --cluster myecsprod --container-instances $inst | jq '.containerInstances[0].attributes[] | select(.name=="ecs.vpc-id").value'| tr -d '"'`
 echo $vpc
+vpcs+=("$vpc")
 # aws autoscaling describe-auto-scaling-groups --filter \"Name=vpc-id,Values=$1\"
 # cmd[0]="aws elbv2 describe-load-balancers --filter \"Name=vpc-id,Values=$1\""
 
