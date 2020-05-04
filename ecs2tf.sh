@@ -109,7 +109,6 @@ echo "clusters"
 clusters=()
 for i in `aws ecs list-clusters | jq .clusterArns[]`; do
 cl=`echo $i | tr -d '"' | cut -f2 -d'/'`
-echo $cl
 clusters+=("$cl")
 done
 len=${#clusters[@]}
@@ -117,23 +116,54 @@ echo $len
 for (( i=0; i<$len; i++ )); do 
 echo "${clusters[$i]}" 
 done
-echo ${clusters[0]}
-echo ${clusters[1]}
+
 vpcs=()
 cinst=`aws ecs list-container-instances --cluster myecsprod | jq .containerInstanceArns[0] | tr -d '"' | cut -f2 -d'/'`
-echo $cinst
+echo "cinst=$cinst"
+if [ $cinst != "null" ]; then
 inst=`aws ecs describe-container-instances --cluster myecsprod --container-instances $cinst | jq .containerInstances[0].ec2InstanceId | tr -d '"'`
 echo $inst
 vpc=`aws ecs describe-container-instances --cluster myecsprod --container-instances $inst | jq '.containerInstances[0].attributes[] | select(.name=="ecs.vpc-id").value'| tr -d '"'`
 echo $vpc
 vpcs+=("$vpc")
-# aws autoscaling describe-auto-scaling-groups --filter \"Name=vpc-id,Values=$1\"
-# cmd[0]="aws elbv2 describe-load-balancers --filter \"Name=vpc-id,Values=$1\""
+fi
 
+aserv=`aws ecs list-services --cluster myecsprod | jq .serviceArns[0] | tr -d '"'`
+echo $aserv
+asubnet=`aws ecs describe-services --cluster myecsprod --services $aserv | jq .services[0].networkConfiguration.awsvpcConfiguration.subnets[0] | tr -d '"'`
+echo $asubnet
+comm=`printf "aws ec2 describe-subnets | jq '.Subnets[] | select(.SubnetId==\"%s\").VpcId'" $asubnet`
+echo $comm
 exit
 
 echo "terraform init"
 terraform init 2>&1 | tee -a import.log
+
+len=${#vpcs[@]}
+echo $len
+for (( i=0; i<$len; i++ )); do 
+echo "${vpcs[$i]}" 
+../../vpc2tf.sh ${vpcs[$i]}
+../../asg2tf.sh ${vpcs[$i]}
+../../elbv2.sh ${vpcs[$i]}
+done
+
+# get vpc
+
+# get asg
+# get alb
+../../scripts/351-get-ecs-task.sh
+
+len=${#clusters[@]}
+echo $len
+for (( i=0; i<$len; i++ )); do 
+echo "${clusters[$i]}" 
+../../scripts/350-get-ecs-cluster.sh ${clusters[$i]}
+
+done
+
+
+
 
 # gather ECS resources - from container instances
 FilesToExtarct=()
