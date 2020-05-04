@@ -16,7 +16,7 @@ for i in `terraform state list | grep aws_s3_bucket_policy`; do
 
         if [[ ${t1} == *"="* ]];then
             tt1=`echo "$line" | cut -f1 -d'=' | tr -d ' '` 
-                                    
+            tt2=`echo "$line" | cut -f2- -d'='`                     
             if [[ ${tt1} == "arn" ]];then	
                 #printf "acl = \"private\" \n" >> $fn
                 #printf "force_destroy = false \n" >> $fn
@@ -28,20 +28,11 @@ for i in `terraform state list | grep aws_s3_bucket_policy`; do
                 #printf "force_destroy = false \n" >> $fn
                 skip=1
             fi
-                                    
-            if [[ ${tt1} == "role_arn" ]];then 
-                printf "provider = \"aws.regional\"\n" >> $fn
-                skip=0;
+
+            if [[ ${tt1} == *":"* ]];then
+                t1=`printf "\"%s\"=%s" $tt1 $tt2`
             fi
-            if [[ ${tt1} == "force_destroy" ]];then
-                skip=0
-                fd=1
-            fi
-            
-            if [[ ${tt1} == "acl" ]];then
-                skip=0
-                acl=1
-            fi
+
         fi
                             
         if [ "$skip" == "0" ];then
