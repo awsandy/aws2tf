@@ -111,5 +111,13 @@ for c in `seq 0 0`; do
     echo "Done $cname"
 done
 
+# get the policies that were pulled out:
+
+
+
+terraform fmt
+terraform validate
+
+
 rm -f t*.txt
 exit
