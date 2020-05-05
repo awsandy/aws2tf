@@ -95,7 +95,7 @@ printf " shared_credentials_file = \"~/.aws/credentials\" \n"  >> aws.tf
 printf " version = \">= 2.53\" \n"  >> aws.tf
 printf " profile = \"%s\" \n" $p >> aws.tf
 printf "}\n" >> aws.tf
-
+export AWS="aws --profile $p --region $r"
 cat aws.tf
 
 pwd
@@ -103,18 +103,7 @@ pwd
 echo "terraform init"
 terraform init 2>&1 | tee -a import.log
 
-# subscription level stuff - roles & policies
-#if [ "$p" = "yes" ]; then
-#    for j in `seq 51 54`; do
-#        docomm="../../scripts/${res[$j]}.sh $mysub"
-#        #echo $docomm
-#        #eval $docomm 2>&1 | tee -a import.log
-#        if grep -q Error: import.log ; then
-#            echo "Error in log file exiting ...."
-#            pass
-#        fi
-#    done
-#fi
+#############################################################################
 
 date
 pwd
@@ -124,7 +113,7 @@ echo "loop through providers"
 pwd
 for com in `ls ../../scripts/*-get-$t.sh | cut -d'/' -f4 | sort -g`; do    
         echo "$com"
-        docomm="../../scripts/$com"
+        docomm=". ../../scripts/$com"
         if [ "$f" = "no" ]; then
             eval $docomm 2>&1 | tee -a import.log
         else
@@ -157,6 +146,9 @@ for com in `ls ../../scripts/*-get-$t.sh | cut -d'/' -f4 | sort -g`; do
     
     rm -f terraform*.backup
 done
+
+#########################################################################
+
 
 date
 
