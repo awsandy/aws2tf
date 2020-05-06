@@ -1,5 +1,5 @@
 #1/bin/bash
-cmd[0]="aws ec2 describe-transit-gateway-route-tables"
+cmd[0]="$AWS ec2 describe-transit-gateway-route-tables"
 pref[0]="TransitGatewayRouteTables"
 tft[0]="aws_ec2_transit_gateway_route_table"
 

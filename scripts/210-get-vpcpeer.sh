@@ -1,5 +1,5 @@
 #1/bin/bash
-cmd[0]="aws ec2 describe-vpc-peering-connections"
+cmd[0]="$AWS ec2 describe-vpc-peering-connections"
 pref[0]="VpcPeeringConnections"
 tft[0]="aws_vpc_peering_connection"
 

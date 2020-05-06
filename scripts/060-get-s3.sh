@@ -1,4 +1,4 @@
-export AWS="aws --region eu-west-2 --profile Net1"
+export AWS="$AWS --region eu-west-2 --profile Net1"
 cmd[0]="$AWS s3api list-buckets"
 pref[0]="Buckets"
 tft[0]="aws_s3_bucket"
@@ -22,7 +22,7 @@ for c in `seq 0 0`; do
                 
             
                 # check region
-                br=`aws s3api get-bucket-location --bucket ${cname}`
+                br=`$AWS s3api get-bucket-location --bucket ${cname}`
                 if [ $? -ne 0 ]; then
                     br="null"
                 else

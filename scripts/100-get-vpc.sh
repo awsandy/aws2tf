@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws ec2 describe-vpcs --vpc-ids $1"
+    cmd[0]="$AWS ec2 describe-vpcs --vpc-ids $1"
 else
-    cmd[0]="aws ec2 describe-vpcs"
+    cmd[0]="$AWS ec2 describe-vpcs"
 fi
 pref[0]="Vpcs"
 tft[0]="aws_vpc"

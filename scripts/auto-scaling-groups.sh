@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws autoscaling describe-auto-scaling-groups --filter \"Name=vpc-id,Values=$1\""
+    cmd[0]="$AWS autoscaling describe-auto-scaling-groups --filter \"Name=vpc-id,Values=$1\""
 else
-    cmd[0]="aws autoscaling describe-auto-scaling-groups"
+    cmd[0]="$AWS autoscaling describe-auto-scaling-groups"
 fi
 c=0
 cm=${cmd[$c]}

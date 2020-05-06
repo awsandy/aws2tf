@@ -1,5 +1,5 @@
 #1/bin/bash
-cmd[0]="aws ec2 describe-transit-gateways"
+cmd[0]="$AWS ec2 describe-transit-gateways"
 pref[0]="TransitGateways"
 tft[0]="aws_ec2_transit_gateway"
 

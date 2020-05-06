@@ -1,5 +1,5 @@
 #1/bin/bash
-cmd[0]="aws ec2 describe-vpn-connections"
+cmd[0]="$AWS ec2 describe-vpn-connections"
 pref[0]="VpnConnections"
 tft[0]="aws_vpn_connection"
 

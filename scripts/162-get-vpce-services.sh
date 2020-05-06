@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws ec2 describe-vpc-endpoint-services --filters \"Name=vpc-id,Values=$1\"" 
+    cmd[0]="$AWS ec2 describe-vpc-endpoint-services --filters \"Name=vpc-id,Values=$1\"" 
 else
-    cmd[0]="aws ec2 describe-vpc-endpoint-services"
+    cmd[0]="$AWS ec2 describe-vpc-endpoint-services"
 fi
 
 pref[0]="VpcEndpoints"

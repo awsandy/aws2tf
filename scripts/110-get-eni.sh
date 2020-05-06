@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [ "$1" != "" ]; then
-    cmd[0]="aws ec2 describe-network-interfaces --filters \"Name=vpc-id,Values=$1\""
+    cmd[0]="$AWS ec2 describe-network-interfaces --filters \"Name=vpc-id,Values=$1\""
 else
-    cmd[0]="aws ec2 describe-network-interfaces"
+    cmd[0]="$AWS ec2 describe-network-interfaces"
 fi
 
 pref[0]="NetworkInterfaces"

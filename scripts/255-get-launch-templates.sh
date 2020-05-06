@@ -1,5 +1,5 @@
 #1/bin/bash
-cmd[0]="aws ec2 describe-launch-templates"
+cmd[0]="$AWS ec2 describe-launch-templates"
 pref[0]="LaunchTemplates"
 tft[0]="aws_launch_template"
 

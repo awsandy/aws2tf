@@ -1,5 +1,5 @@
 #1/bin/bash
-cmd[0]="aws ec2 describe-transit-gateway-vpc-attachments"
+cmd[0]="$AWS ec2 describe-transit-gateway-vpc-attachments"
 pref[0]="TransitGatewayVpcAttachments"
 tft[0]="aws_ec2_transit_gateway_vpc_attachment"
 

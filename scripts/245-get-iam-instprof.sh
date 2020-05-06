@@ -1,5 +1,5 @@
 #1/bin/bash
-cmd[0]="aws iam list-instance-profiles"
+cmd[0]="$AWS iam list-instance-profiles"
 pref[0]="InstanceProfiles"
 tft[0]="aws_iam_instance_profile"
 

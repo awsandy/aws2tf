@@ -1,6 +1,6 @@
 ttft="aws_s3_bucket_policy"
-acct=`aws sts get-caller-identity | jq .Account | tr -d '"'`
-cmd[0]="aws s3control list-access-points --account-id $acct"
+acct=`$AWS sts get-caller-identity | jq .Account | tr -d '"'`
+cmd[0]="$AWS s3control list-access-points --account-id $acct"
 
 pref[0]="AccessPointList"
 tft[0]="aws_s3_access_point"

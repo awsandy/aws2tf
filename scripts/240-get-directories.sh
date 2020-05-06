@@ -1,5 +1,5 @@
 #!/bin/bash
-cmd[0]="aws ds describe-directories"
+cmd[0]="$AWS ds describe-directories"
 pref[0]="DirectoryDescriptions"
 tft[0]="aws_directory_service_directory"
 

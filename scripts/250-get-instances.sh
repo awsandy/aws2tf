@@ -1,12 +1,12 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws ec2 describe-instances --filters \"Name=vpc-id,Values=$1\""
+    cmd[0]="$AWS ec2 describe-instances --filters \"Name=vpc-id,Values=$1\""
 else
-    cmd[0]="aws ec2 describe--instances"
+    cmd[0]="$AWS ec2 describe--instances"
 fi
 
 
-cmd[0]="aws ec2 describe-instances"
+cmd[0]="$AWS ec2 describe-instances"
 pref[0]="Reservations"
 tft[0]="aws_instance"
 
@@ -26,7 +26,7 @@ for c in `seq 0 0`; do
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Instances[].InstanceId" | tr -d '"'`
             echo $cname
             # get instance user_data
-            aws ec2 describe-instance-attribute --instance-id $cname --attribute userData | jq .UserData.Value | tr -d '"' | base64 --decode -o $cname.sh
+            $AWS ec2 describe-instance-attribute --instance-id $cname --attribute userData | jq .UserData.Value | tr -d '"' | base64 --decode -o $cname.sh
 
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf

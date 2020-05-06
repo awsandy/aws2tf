@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws elbv2 describe-load-balancers --filter \"Name=vpc-id,Values=$1\""
+    cmd[0]="$AWS elbv2 describe-load-balancers --filter \"Name=vpc-id,Values=$1\""
 else
-    cmd[0]="aws elbv2 describe-load-balancers"
+    cmd[0]="$AWS elbv2 describe-load-balancers"
 fi
 c=0
 cm=${cmd[$c]}
@@ -26,7 +26,7 @@ for c in `seq 0 0`; do
             #echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].${idfilt[(${c})]}" | tr -d '"'`
             lbarn=`echo $cname`
-            attribs=`aws elbv2 describe-load-balancer-attributes --load-balancer-arn ${lbarn}`
+            attribs=`$AWS elbv2 describe-load-balancer-attributes --load-balancer-arn ${lbarn}`
             echo $attribs | jq ".Attributes"
             echo "$ttft $cname"
             rname=${cname//:/_}

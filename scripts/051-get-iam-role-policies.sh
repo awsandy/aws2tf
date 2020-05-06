@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws iam list-role-policies --role-name $1"
+    cmd[0]="$AWS iam list-role-policies --role-name $1"
 else
     exit
 fi
@@ -26,7 +26,7 @@ for c in `seq 0 0`; do
         echo $count
         for i in `seq 0 $count`; do
             pname=`echo $awsout | jq ".${pref[(${c})]}[(${i})]" | tr -d '"'`     
-            awsout2=`aws iam get-role-policy --role-name ${1} --policy-name ${pname}`
+            awsout2=`$AWS iam get-role-policy --role-name ${1} --policy-name ${pname}`
             cname=`echo $awsout2 | jq ".PolicyName" | tr -d '"'`
             ocname=`echo $cname`
             cname=${cname//./_}

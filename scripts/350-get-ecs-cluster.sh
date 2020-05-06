@@ -1,10 +1,10 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws ecs describe-clusters --cluster $1" 
+    cmd[0]="$AWS ecs describe-clusters --cluster $1" 
     pref[0]="clusters"
     idfilt[0]="clusterName"
 else
-    cmd[0]="aws ecs list-clusters"
+    cmd[0]="$AWS ecs list-clusters"
     pref[0]="clusterArns"
     idfilt[0]=""
 fi
@@ -97,10 +97,10 @@ terraform validate
 rm t*.txt
 
 
-# aws ecs list-attributes --target-type container-instance --cluster myecsprod
-# aws ecs list-container-instances --cluster myecsprod
-# aws ecs describe-container-instances --container-instances arn:aws:ecs:eu-west-1:566972129213:container-instance/b05e4516-71c3-487f-a2cf-31b42f7bc722 --cluster myecsprod 
+# $AWS ecs list-attributes --target-type container-instance --cluster myecsprod
+# $AWS ecs list-container-instances --cluster myecsprod
+# $AWS ecs describe-container-instances --container-instances arn:aws:ecs:eu-west-1:566972129213:container-instance/b05e4516-71c3-487f-a2cf-31b42f7bc722 --cluster myecsprod 
 # get instance id
 # use above to find asg
-# aws autoscaling describe-auto-scaling-groups
+# $AWS autoscaling describe-auto-scaling-groups
 

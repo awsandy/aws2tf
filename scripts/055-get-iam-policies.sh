@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cmd[0]="aws iam list-policies --scope Local"
+cmd[0]="$AWS iam list-policies --scope Local"
 pref[0]="Policies"
 tft[0]="aws_iam_policy"
 

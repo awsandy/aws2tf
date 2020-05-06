@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws elbv2 describe-target-groups --load-balancer-arn \"$1\""
+    cmd[0]="$AWS elbv2 describe-target-groups --load-balancer-arn \"$1\""
 else
     echo "must pass lb arn"
     exit

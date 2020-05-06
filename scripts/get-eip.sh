@@ -3,9 +3,9 @@
 # use --allocation-ids "string"
 #
 if [ "$1" != "" ]; then
-    cmd[0]="aws ec2 describe-addresses --allocation-ids $1"
+    cmd[0]="$AWS ec2 describe-addresses --allocation-ids $1"
 else
-    cmd[0]="aws ec2 describe-addresses"
+    cmd[0]="$AWS ec2 describe-addresses"
 fi
 
 

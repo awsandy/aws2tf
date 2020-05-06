@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws ecs list-task-definitions --family-prefix $1" 
+    cmd[0]="$AWS ecs list-task-definitions --family-prefix $1" 
 else
-    cmd[0]="aws ecs list-task-definitions"
+    cmd[0]="$AWS ecs list-task-definitions"
 fi
 
 tft[0]="aws_ecs_task_definition"

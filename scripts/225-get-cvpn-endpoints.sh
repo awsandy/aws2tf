@@ -1,8 +1,8 @@
 #1/bin/bash
-cmd[0]="aws ec2 describe-client-vpn-endpoints"
+cmd[0]="$AWS ec2 describe-client-vpn-endpoints"
 pref[0]="ClientVpnEndpoints"
 tft[0]="aws_ec2_client_vpn_endpoint"
-cmd[1]="aws ec2 describe-client-vpn-target-networks --client-vpn-endpoint-id "
+cmd[1]="$AWS ec2 describe-client-vpn-target-networks --client-vpn-endpoint-id "
 pref[1]="ClientVpnTargetNetworks"
 tft[1]="aws_ec2_client_vpn_network_association"
 

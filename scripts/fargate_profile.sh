@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$1" != "" ]; then
-    cmd[0]="aws eks list-fargate-profiles --cluster-name $1"
+    cmd[0]="$AWS eks list-fargate-profiles --cluster-name $1"
 else
     echo "Must supply Cluster Name as a parameter - exiting ..."
     exit

@@ -1,15 +1,15 @@
 #1/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws ec2 describe-internet-gateways --filters \"Name=attachment.vpc-id,Values=$1\""
+    cmd[0]="$AWS ec2 describe-internet-gateways --filters \"Name=attachment.vpc-id,Values=$1\""
 else
-    cmd[0]="aws ec2 describe-internet-gateways"
+    cmd[0]="$AWS ec2 describe-internet-gateways"
 fi
 c=0
 cm=${cmd[$c]}
 echo $cm
 
 
-#cmd[0]="aws ec2 describe-internet-gateways"
+#cmd[0]="$AWS ec2 describe-internet-gateways"
 
 pref[0]="InternetGateways"
 tft[0]="aws_internet_gateway"

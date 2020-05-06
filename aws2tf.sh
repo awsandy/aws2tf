@@ -71,6 +71,7 @@ fi
 #if [ "$f" = "no" ]; then
 #    ../../scripts/resources.sh 2>&1 | tee -a import.log
 #fi
+export AWS="aws --profile $p --region $r"
 echo " "
 echo "Account ID = ${s}"
 echo "AWS Resource Group Filter = ${g}"
@@ -79,6 +80,7 @@ echo "AWS Profile = ${p}"
 echo "Extract KMS Secrets to .tf files (insecure) = ${x}"
 echo "Fast Forward = ${f}"
 echo "Verify only = ${v}"
+echo "AWS command = ${AWS}"
 echo " "
 
 
@@ -95,7 +97,7 @@ printf " shared_credentials_file = \"~/.aws/credentials\" \n"  >> aws.tf
 printf " version = \">= 2.53\" \n"  >> aws.tf
 printf " profile = \"%s\" \n" $p >> aws.tf
 printf "}\n" >> aws.tf
-export AWS="aws --profile $p --region $r"
+
 cat aws.tf
 
 pwd
@@ -103,7 +105,10 @@ pwd
 echo "terraform init"
 terraform init 2>&1 | tee -a import.log
 
+
 #############################################################################
+
+
 
 date
 pwd

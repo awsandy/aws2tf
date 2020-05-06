@@ -3,13 +3,13 @@ pref[0]="cluster"
 tft[0]="aws_eks_cluster"
 echo $1
 c=0
-kcount=`aws eks list-clusters | jq ".clusters | length"`
+kcount=`$AWS eks list-clusters | jq ".clusters | length"`
 if [ "$kcount" -gt "0" ]; then
     kcount=`expr $kcount - 1`
     for k in `seq 0 $kcount`; do
-        cln=`aws eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`
+        cln=`$AWS eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`
         echo cluster name $cln        
-        cmd[0]=`echo "aws eks describe-cluster --name $cln"` 
+        cmd[0]=`echo "$AWS eks describe-cluster --name $cln"` 
         cm=${cmd[$c]}
         awsout=`eval $cm`
         

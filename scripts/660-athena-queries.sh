@@ -1,7 +1,7 @@
-cmd[0]="aws athena list-named-queries"
+cmd[0]="$AWS athena list-named-queries"
 pref[0]="NamedQueryIds"
 tft[0]="aws_glue_crawler"
-cmd[1]="aws athena get-named-query --named-query-id"
+cmd[1]="$AWS athena get-named-query --named-query-id"
 pref[1]="NamedQuery"
 tft[1]="aws_athena_named_query"
 

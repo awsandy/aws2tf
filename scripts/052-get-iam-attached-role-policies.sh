@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws iam list-attached-role-policies --role-name $1"
+    cmd[0]="$AWS iam list-attached-role-policies --role-name $1"
 else
     exit
 fi

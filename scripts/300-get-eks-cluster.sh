@@ -1,15 +1,16 @@
 #!/bin/bash
+echo $AWS
 pref[0]="cluster"
 tft[0]="aws_eks_cluster"
 echo $1
 c=0
-kcount=`aws eks list-clusters | jq ".clusters | length"`
+kcount=`$AWS eks list-clusters | jq ".clusters | length"`
 if [ "$kcount" -gt "0" ]; then
     kcount=`expr $kcount - 1`
     for k in `seq 0 $kcount`; do
-        cln=`aws eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`
+        cln=`$AWS eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`
         echo cluster name $cln        
-        cmd[0]=`echo "aws eks describe-cluster --name $cln"` 
+        cmd[0]=`echo "$AWS eks describe-cluster --name $cln"` 
         cm=${cmd[$c]}
         awsout=`eval $cm`
         
@@ -32,7 +33,7 @@ if [ "$kcount" -gt "0" ]; then
                 terraform state rm $ts > t2.txt
             done
 
-            natgw=`aws ec2 describe-nat-gateways --filter "Name=vpc-id,Values=${tcmd}"`
+            natgw=`$AWS ec2 describe-nat-gateways --filter "Name=vpc-id,Values=${tcmd}"`
             eipall=`echo $natgw | jq ".NatGateways[0].NatGatewayAddresses[0].AllocationId" | tr -d '"'`
             ../../scripts/get-eip.sh $eipall
 
@@ -57,14 +58,14 @@ if [ "$kcount" -gt "0" ]; then
             done
 
 
-            fgp=`aws eks list-fargate-profiles --cluster-name $cln`
+            fgp=`$AWS eks list-fargate-profiles --cluster-name $cln`
             np=`echo $fgp | jq ".fargateProfileNames | length"`
             if [ "$np" -gt "0" ]; then
                 np=`expr $np - 1`
                 for p in `seq 0 $np`; do
                     pname=`echo $fgp | jq ".fargateProfileNames[(${p})]" | tr -d '"'`
                     echo "faregate profile = $pname"
-                    fg=`aws eks describe-fargate-profile --cluster-name $cln --fargate-profile-name $pname`
+                    fg=`$AWS eks describe-fargate-profile --cluster-name $cln --fargate-profile-name $pname`
                     echo "fargate"
                     fgparn=`echo $fg | jq ".fargateProfile.fargateProfileArn" | tr -d '"'`
                     podarn=`echo $fg | jq ".fargateProfile.podExecutionRoleArn" | tr -d '"'`
@@ -190,7 +191,7 @@ if [ "$kcount" -gt "0" ]; then
                     # Get the fargate profile
                     ../../scripts/fargate_profile.sh $cname
                     echo "run command ....."
-                    echo "aws eks update-kubeconfig --name $cname"
+                    echo "$AWS eks update-kubeconfig --name $cname"
                 done # done for i
             fi
         done 

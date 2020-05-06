@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="aws iam list-roles | jq '.Roles[] | select(.Arn==\"${1}\")'"
+    cmd[0]="$AWS iam list-roles | jq '.Roles[] | select(.Arn==\"${1}\")'"
 else
-    cmd[0]="aws iam list-roles"
+    cmd[0]="$AWS iam list-roles"
 fi
 
 

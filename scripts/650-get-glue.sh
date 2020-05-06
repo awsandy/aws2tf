@@ -1,7 +1,7 @@
-cmd[0]="aws glue get-crawlers"
+cmd[0]="$AWS glue get-crawlers"
 pref[0]="Crawlers"
 tft[0]="aws_glue_crawler"
-cmd[1]="aws glue get-jobs"
+cmd[1]="$AWS glue get-jobs"
 pref[1]="Jobs"
 tft[1]="aws_glue_job"
 

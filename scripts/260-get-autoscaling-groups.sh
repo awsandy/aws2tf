@@ -1,5 +1,5 @@
 #1/bin/bash
-cmd[0]="aws autoscaling describe-auto-scaling-groups"
+cmd[0]="$AWS autoscaling describe-auto-scaling-groups"
 pref[0]="AutoScalingGroups"
 tft[0]="aws_autoscaling_group"
 
