@@ -94,7 +94,7 @@ cp ../../stub/*.tf .
 printf "provider \"aws\" {\n" > aws.tf
 printf " region = \"%s\" \n" $r >> aws.tf
 printf " shared_credentials_file = \"~/.aws/credentials\" \n"  >> aws.tf
-printf " version = \">= 2.53\" \n"  >> aws.tf
+printf " version = \"= 2.59\" \n"  >> aws.tf
 printf " profile = \"%s\" \n" $p >> aws.tf
 printf "}\n" >> aws.tf
 

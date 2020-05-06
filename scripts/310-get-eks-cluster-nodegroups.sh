@@ -14,7 +14,7 @@ if [ "$kcount" -gt "0" ]; then
             jcount=`expr $jcount - 1`
             for j in `seq 0 $jcount`; do
                 ng=`$AWS eks list-nodegroups --cluster-name $cln   | jq ".nodegroups[(${j})]" | tr -d '"'`     
-                #echo "***** node gorup = $ng"
+                #echo "***** node group = $ng"
                 cmd[0]=`echo "$AWS eks describe-nodegroup --cluster-name $cln --nodegroup-name $ng"`      
                 pref[0]="nodegroup"
                 tft[0]="aws_eks_node_group"
@@ -24,18 +24,18 @@ if [ "$kcount" -gt "0" ]; then
                     rm -f ${tft[0]}*.tf
                     cm=${cmd[$c]}
                     ttft=${tft[(${c})]}
-                    #echo "inner command=$cm"
+                    echo "inner command=$cm"
                     awsout=`eval $cm`
                     #echo awsout
-                    #echo $AWS out | jq .
-                    count=`echo $AWS out | jq ".${pref[(${c})]} | length"`
+                    #echo $awsout | jq .
+                    count=`echo $awsout | jq ".${pref[(${c})]} | length"`
                     count=1 # one cluster at a time !
                     if [ "$count" -gt "0" ]; then
                         count=`expr $count - 1`
                         for i in `seq 0 $count`; do
                             echo $i
-                            cname=`echo $AWS out | jq ".${pref[(${c})]}.clusterName" | tr -d '"'`
-                            ngnam=`echo $AWS out | jq ".${pref[(${c})]}.nodegroupName" | tr -d '"'`
+                            cname=`echo $awsout | jq ".${pref[(${c})]}.clusterName" | tr -d '"'`
+                            ngnam=`echo $awsout | jq ".${pref[(${c})]}.nodegroupName" | tr -d '"'`
                             ocname=`printf "%s:%s" $cname $ngnam`
 
                             cname=${ocname//:/_}

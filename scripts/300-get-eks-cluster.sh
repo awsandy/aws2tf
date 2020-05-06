@@ -34,8 +34,12 @@ if [ "$kcount" -gt "0" ]; then
             done
 
             natgw=`$AWS ec2 describe-nat-gateways --filter "Name=vpc-id,Values=${tcmd}"`
+            ## this needs to loop !!
             eipall=`echo $natgw | jq ".NatGateways[0].NatGatewayAddresses[0].AllocationId" | tr -d '"'`
+            
             ../../scripts/get-eip.sh $eipall
+            ##
+
 
             ../../scripts/120*.sh $tcmd  # igw
             ../../scripts/130*.sh $tcmd  # nat gw
