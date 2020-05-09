@@ -36,7 +36,7 @@ if [ "$kcount" -gt "0" ]; then
             natgw=`$AWS ec2 describe-nat-gateways --filter "Name=vpc-id,Values=${tcmd}"`
             
             ## this needs to loop !!
-            cnatgw=`echo $natgw | jq .NatGateways | length`
+            cnatgw=`echo $natgw | jq ".NatGateways | length"`
             echo "found $cnatgw NAT GW's"
             if [ "$cnatgw" -gt "0" ]; then
                 np=`expr $cnatgw - 1`

@@ -1,4 +1,5 @@
 #!/bin/bash
+echo $AWS
 kcount=`$AWS eks list-clusters | jq ".clusters | length"`
 if [ "$kcount" -gt "0" ]; then
     kcount=`expr $kcount - 1`
@@ -9,12 +10,13 @@ if [ "$kcount" -gt "0" ]; then
         echo cluster name $cln
         cname=`echo $cln`
         jcount=`$AWS eks list-nodegroups --cluster-name $cln | jq ".nodegroups | length"`
-        #echo jcount=$jcount
+        
+        echo jcount=$jcount
         if [ "$jcount" -gt "0" ]; then
             jcount=`expr $jcount - 1`
             for j in `seq 0 $jcount`; do
                 ng=`$AWS eks list-nodegroups --cluster-name $cln   | jq ".nodegroups[(${j})]" | tr -d '"'`     
-                #echo "***** node group = $ng"
+                echo "***** node group = $ng"
                 cmd[0]=`echo "$AWS eks describe-nodegroup --cluster-name $cln --nodegroup-name $ng"`      
                 pref[0]="nodegroup"
                 tft[0]="aws_eks_node_group"

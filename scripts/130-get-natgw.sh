@@ -31,7 +31,7 @@ for c in `seq 0 0`; do
             terraform state show $ttft.$cname > t2.txt
             tfa=`printf "%s.%s" $ttft $cname`
             terraform show  -json | jq --arg myt "$tfa" '.values.root_module.resources[] | select(.address==$myt)' > $tfa.json
-            cat $tfa.json | jq .
+            #cat $tfa.json | jq .
 
             rm $ttft.$cname.tf
             cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt

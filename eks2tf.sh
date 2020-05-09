@@ -113,7 +113,7 @@ date
 lc=0
 echo "loop through providers"
 pwd
-for com in `ls ../../scripts/3*-get-*.sh | cut -d'/' -f4 | sort -g`; do    
+for com in `ls ../../scripts/30*-get-eks*.sh | cut -d'/' -f4 | sort -g`; do    
         echo "$com"
         docomm=". ../../scripts/$com all"
         if [ "$f" = "no" ]; then
