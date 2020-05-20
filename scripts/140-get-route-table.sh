@@ -36,6 +36,7 @@ for c in `seq 0 0`; do
             #	done
             file="t1.txt"
             fn=`printf "%s__%s.tf" $ttft $cname`
+            pcxs=()
             while IFS= read line
             do
 				skip=0
@@ -78,9 +79,11 @@ for c in `seq 0 0`; do
                         fi
                     fi
                     if [[ ${tt1} == "vpc_peering_connection_id" ]]; then
-                        tt2=`echo $tt2 | tr -d '"'`
-                        if [ "$tt2" != "" ]; then
-                            t1=`printf "%s = aws_vpc_peering_connection.%s.id" $tt1 $tt2`
+                        ttt2=`echo $tt2 | tr -d '"'`
+                        if [ "$ttt2" != "" ]; then
+                            t1=`printf "%s = aws_vpc_peering_connection.%s.id" $tt1 $ttt2`
+                            echo "adding $tt2"
+                            pcxs+=$tt2
                         fi
                     fi
 
@@ -91,7 +94,13 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
-            
+            for ip in ${pcxs[@]}; do
+                pcx=`echo $ip | tr -d '"'`
+                echo "calling for $pcx"
+                ../../scripts/210-get-vpcpeer.sh $pcx
+            done
+
+                     
         done
     fi
 done

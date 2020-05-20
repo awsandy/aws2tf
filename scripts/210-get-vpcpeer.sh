@@ -1,5 +1,10 @@
 #1/bin/bash
-cmd[0]="$AWS ec2 describe-vpc-peering-connections"
+if [ "$1" != "" ]; then
+    cmd[0]="$AWS ec2 describe-vpc-peering-connections --vpc-peering-connection-ids $1"
+else
+    cmd[0]="$AWS ec2 describe-vpc-peering-connections"
+fi
+
 pref[0]="VpcPeeringConnections"
 tft[0]="aws_vpc_peering_connection"
 
