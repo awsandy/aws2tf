@@ -107,7 +107,7 @@ printf "}\n" >> aws.tf
 cat aws.tf
 pre="*"
 if [ "$t" == "vpc" ]; then
-pre="10*"
+pre="1*"
 t="*"
 if [ "$i" == "no" ]; then
     echo "VPC ID null exiting"

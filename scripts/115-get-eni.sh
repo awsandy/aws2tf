@@ -87,8 +87,10 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
-            ../../scripts/get-eip.sh $cname
-            
+            eipa=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Association.AllocationId"`
+            if [ "$eipa" != "null" ];then 
+                ../../scripts/get-eip.sh $cname
+            fi            
         done
     fi
 done
