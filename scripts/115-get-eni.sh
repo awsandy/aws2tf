@@ -48,7 +48,7 @@ for c in `seq 0 0`; do
                     #if [[ ${tt1} == "association_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "public_dns" ]];then skip=1;fi
                     if [[ ${tt1} == "private_dns_name" ]];then skip=1;fi
-                    #if [[ ${tt1} == "public_ip" ]];then skip=1;fi
+                    if [[ ${tt1} == "mac_address" ]];then skip=1;fi
                     #if [[ ${tt1} == "private_ip" ]];then skip=1;fi
                     if [[ ${tt1} == "domain" ]];then skip=1;fi
                     if [[ ${tt1} == "attachment_id" ]];then skip=1;fi

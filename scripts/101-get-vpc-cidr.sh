@@ -1,42 +1,44 @@
 #!/bin/bash
-#
-# use --allocation-ids "string"
-#
 if [ "$1" != "" ]; then
-    cmd[0]="$AWS ec2 describe-addresses --allocation-ids $1"
+    cmd[0]="$AWS ec2 describe-vpcs --filters \"Name=vpc-id,Values=$1\"" 
 else
-    cmd[0]="$AWS ec2 describe-addresses"
+    cmd[0]="$AWS ec2 describe-vpcs"
 fi
 
+pref[0]="Vpcs[].CidrBlockAssociationSet"
+tft[0]="aws_vpc_ipv4_cidr_block_association"
+idfilt[0]="AssociationId"
 
-pref[0]="Addresses"
-tft[0]="aws_eip"
-
+#rm -f ${tft[0]}.tf
 
 for c in `seq 0 0`; do
     
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
-	echo $cm
+	#echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
             #echo $i
-            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].AllocationId" | tr -d '"'`
+            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].${idfilt[(${c})]}" | tr -d '"'`
             echo $cname
+            fn=`printf "%s__%s.tf" $ttft $cname`
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
             terraform state show $ttft.$cname > t2.txt
+            tfa=`printf "%s.%s" $ttft $cname`
+            terraform show  -json | jq --arg myt "$tfa" '.values.root_module.resources[] | select(.address==$myt)' > $tfa.json
+            #echo $awsj | jq . 
             rm $ttft.$cname.tf
             cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
             #	for k in `cat t1.txt`; do
             #		echo $k
             #	done
             file="t1.txt"
-            fn=`printf "%s__%s.tf" $ttft $cname`
+            
             while IFS= read line
             do
 				skip=0
@@ -49,20 +51,14 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "id" ]];then skip=1; fi          
                     if [[ ${tt1} == "role_arn" ]];then skip=1;fi
                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
-                    if [[ ${tt1} == "association_id" ]];then skip=1;fi
-                    if [[ ${tt1} == "public_dns" ]];then skip=1;fi
-                    if [[ ${tt1} == "private_dns" ]];then skip=1;fi
-                    if [[ ${tt1} == "public_ip" ]];then skip=1;fi
-                    if [[ ${tt1} == "private_ip" ]];then skip=1;fi
-                    if [[ ${tt1} == "domain" ]];then skip=1;fi
-                    #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
-                    #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
-                    #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi
-                    if [[ ${tt1} == "network_interface" ]]; then
-                        skip=1 # don't specify it in EKS
-                        #tt2=`echo $tt2 | tr -d '"'`
-                        #t1=`printf "%s = aws_network_interface.%s.id" $tt1 $tt2`
+                    if [[ ${tt1} == "ipv6_cidr_block_association_id" ]];then skip=1;fi
+                    #if [[ ${tt1} == "availability_zone" ]];then skip=1;fi
+                    if [[ ${tt1} == "availability_zone_id" ]];then skip=1;fi
+                    if [[ ${tt1} == "vpc_id" ]]; then
+                        tt2=`echo $tt2 | tr -d '"'`
+                        t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
                     fi
+               
                 fi
                 if [ "$skip" == "0" ]; then
                     #echo $skip $t1

@@ -6,13 +6,17 @@ p="default"
 f="no"
 v="no"
 r="no"
-t="*"
-#while getopts ":p:g:r:x:t:" o; do
-while getopts ":p:r:x:f:v:t:" o; do
+t="no"
+i="no"
+#while getopts ":p:g:r:x:t:i:" o; do
+while getopts ":p:r:x:f:v:t:i:" o; do
     case "${o}" in
     #    a)
     #        s=${OPTARG}
     #    ;;
+        i)
+            i=${OPTARG}
+        ;;
         t)
             t=${OPTARG}
         ;;
@@ -59,9 +63,10 @@ s=`echo $mysub`
 cd generated/tf.$mysub
 rm -rf .terraform
 if [ "$f" = "no" ]; then
+    echo "Cleaning generated/tf.$mysub"
     rm -f import.log resources*.txt
     rm -f processed.txt
-    rm -f *.tf
+    rm -f *.tf *.json
     rm -f terraform.*
     rm -rf .terraform
 else
@@ -80,6 +85,7 @@ echo "AWS Profile = ${p}"
 echo "Extract KMS Secrets to .tf files (insecure) = ${x}"
 echo "Fast Forward = ${f}"
 echo "Verify only = ${v}"
+echo "Type filter = ${t}"
 echo "AWS command = ${AWS}"
 echo " "
 
@@ -94,11 +100,20 @@ cp ../../stub/*.tf .
 printf "provider \"aws\" {\n" > aws.tf
 printf " region = \"%s\" \n" $r >> aws.tf
 printf " shared_credentials_file = \"~/.aws/credentials\" \n"  >> aws.tf
-printf " version = \">= 2.53\" \n"  >> aws.tf
+printf " version = \"= 2.58\" \n"  >> aws.tf
 printf " profile = \"%s\" \n" $p >> aws.tf
 printf "}\n" >> aws.tf
 
 cat aws.tf
+pre="*"
+if [ "$t" == "vpc" ]; then
+pre="10*"
+t="*"
+if [ "$i" == "no" ]; then
+    echo "VPC ID null exiting"
+    exit
+fi
+fi
 
 pwd
 
@@ -109,16 +124,16 @@ terraform init 2>&1 | tee -a import.log
 #############################################################################
 
 
-
 date
 pwd
 lc=0
+
 echo "t=$t"
 echo "loop through providers"
 pwd
-for com in `ls ../../scripts/*-get-$t.sh | cut -d'/' -f4 | sort -g`; do    
+for com in `ls ../../scripts/$pre-get-*$t*.sh | cut -d'/' -f4 | sort -g`; do    
         echo "$com"
-        docomm=". ../../scripts/$com"
+        docomm=". ../../scripts/$com $i"
         if [ "$f" = "no" ]; then
             eval $docomm 2>&1 | tee -a import.log
         else

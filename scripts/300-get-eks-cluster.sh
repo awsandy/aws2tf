@@ -2,7 +2,7 @@
 echo $AWS
 pref[0]="cluster"
 tft[0]="aws_eks_cluster"
-echo $1
+
 c=0
 kcount=`$AWS eks list-clusters | jq ".clusters | length"`
 if [ "$kcount" -gt "0" ]; then
@@ -14,7 +14,7 @@ if [ "$kcount" -gt "0" ]; then
         cm=${cmd[$c]}
         awsout=`eval $cm`
         
-        if [ "$1" != "" ]; then
+     
             
             tcmd=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.vpcId" | tr -d '"'`
             ../../scripts/100* $tcmd  # vpc
@@ -87,7 +87,7 @@ if [ "$kcount" -gt "0" ]; then
                 done
             fi
         
-        fi
+        
 
         echo "pre-reqs complete - getting EKS"
               
