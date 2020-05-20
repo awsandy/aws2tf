@@ -43,7 +43,7 @@ terraform validate
 Success! The configuration is valid.
 ```
 
-Or there may be some kind of python error. (as trying to test everyone's AWS combinations in advance isn't possible)
+Or there may be some kind of error as trying to test everyone's AWS combinations in advance isn't possible.
 
 **If you happen to find one of these errors please open an issue here and paste in the error and it will get fixed.**
 
@@ -66,14 +66,14 @@ To include AWS account Policies and Roles:
 
 To generate the terraform files for an EKS cluster
 ```
-./eks2tf.sh
+./aws2tf.sh -t eks
 ```
 
 
 
-To filter the terraform resource type: (eg: just availability sets)
+To get all the VPC related resources in a particular VPC
 ```
-./aws2tf.sh -r vpc
+./aws2tf.sh -t vpc -i vpc-xxxxxxxxx
 ```
 To filter the terraform resource type: (eg: just availability sets) and fast forward - ie. build up resources one after another.:
 ```

@@ -115,6 +115,15 @@ if [ "$i" == "no" ]; then
 fi
 fi
 
+if [ "$t" == "eks" ]; then
+pre="3*"
+if [ "$i" == "no" ]; then
+    echo "Cluster Name null exiting - specify with -i <cluster-name>"
+    exit
+fi
+fi
+
+
 pwd
 
 echo "terraform init"
