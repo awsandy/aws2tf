@@ -18,3 +18,4 @@ clean*
 *.xlsx
 quotas
 boto3
+flip-eks.sh

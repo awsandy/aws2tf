@@ -18,13 +18,13 @@ if [ "$kcount" -gt "0" ]; then
             
             tcmd=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.vpcId" | tr -d '"'`
             ../../scripts/100* $tcmd  # vpc
-            ../../scripts/102* $tcmd  # subnets
+            ../../scripts/101* $tcmd  # vpc cidrs
+            ../../scripts/105* $tcmd  # subnets
             ## EKS creates it's own SG's - no it doesn't
-            ../../scripts/103*.sh $tcmd  # security groups
+            ../../scripts/110*.sh $tcmd  # security groups
             
             # don't keep eni's - created by nat gw and node group instances
             # still need to call as eip is nested from eni's
-
 
             rm -f aws_network_interface*.tf
             # need to rip out eni state
