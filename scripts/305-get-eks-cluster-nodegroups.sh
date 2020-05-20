@@ -1,14 +1,26 @@
 #!/bin/bash
 echo $AWS
-kcount=`$AWS eks list-clusters | jq ".clusters | length"`
+if [ "$1" != "" ]; then
+    kcount=1
+else
+    kcount=`$AWS eks list-clusters | jq ".clusters | length"`
+fi
+
 if [ "$kcount" -gt "0" ]; then
     kcount=`expr $kcount - 1`
     #echo kcount=$kcount
     for k in `seq 0 $kcount`; do
         #echo "***k=$k"
-        cln=`$AWS eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`
+        
+        if [ "$1" != "" ]; then
+            cln=`echo $1`
+        else
+            cln=`$AWS eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`      
+        fi
+                
         echo cluster name $cln
         cname=`echo $cln`
+
         jcount=`$AWS eks list-nodegroups --cluster-name $cln | jq ".nodegroups | length"`
         
         echo jcount=$jcount
