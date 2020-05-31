@@ -103,9 +103,6 @@ The following terraform resource types are supported by this tool at this time:
 ### Autoscaling
 * aws_autoscaling_group
 
-### Base Resources
-* aws_resource_group
-
 ### Directory Services
 * aws_directory_service_directory
 
@@ -144,6 +141,9 @@ The following terraform resource types are supported by this tool at this time:
 * aws_iam_role_policy
 * aws_iam_role_policy_attachment
 
+### Resource Groups
+* aws_resource_group
+
 ### RDS
 * aws_db_instance
 
@@ -154,6 +154,9 @@ The following terraform resource types are supported by this tool at this time:
 * aws_s3_access_point
 * aws_s3_bucket
 * aws_s3_bucket_policy
+
+### Service Discovery
+* aws_service_discovery_private_dns_namespace
 
 ### VPC
 * aws_customer_gateway
