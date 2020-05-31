@@ -18,7 +18,7 @@ There should hopefully be no subsequent additions or deletions reported by the t
 ## Requirements & Prerequisites
 + The tool is written for the bash shell script & Python3 and has been tested on macOS
 + AWS cli (V1) **version 1.17.4 or higher** needs to be installed and you need a login with at least "Read" priviledges
-+ terraform **version v0.12.20 or higher** needs to be installed
++ terraform **version v0.12.25 or higher** needs to be installed
 + jq **version 1.6 or higher**
 
 
@@ -64,9 +64,9 @@ To include AWS account Policies and Roles:
 ./aws2tf.sh -p yes
 ```
 
-To generate the terraform files for an EKS cluster
+To generate the terraform files for an EKS cluster named "mycluster"
 ```
-./aws2tf.sh -t eks
+./aws2tf.sh -t eks -i mycluster
 ```
 
 
@@ -75,10 +75,9 @@ To get all the VPC related resources in a particular VPC
 ```
 ./aws2tf.sh -t vpc -i vpc-xxxxxxxxx
 ```
-To filter the terraform resource type: (eg: just availability sets) and fast forward - ie. build up resources one after another.:
+To use a specific region and profile
 ```
-./aws2tf.sh -r vpc
-./aws2tf.sh -r subnet -f yes
+./aws2tf.sh -t vpc -i vpc-xxxxxxxxx -r eu-west-1 -p default
 ```
 
 To use the fast forward option correctly you'll need a good understanding of terraform resource dependancies to ensure you avoid any depenacy errors.
