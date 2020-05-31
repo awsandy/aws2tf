@@ -97,6 +97,9 @@ Be patient - lots of output is given as aws2tf:
 
 The following terraform resource types are supported by this tool at this time:
 
+### Athena
+* aws_athena_named_query
+  
 ### Autoscaling
 * aws_autoscaling_group
 
@@ -126,12 +129,26 @@ The following terraform resource types are supported by this tool at this time:
 * aws_eks_fargate_profile
 * aws_eks_node_group
 
+### Elastic Load Balancing v2 (ALB/NLB)
+* aws_lb
+* aws_lb_listener
+* aws_lb_target_group
+
+### Glue
+* aws_glue_job
+
 ### IAM
 * aws_iam_instance_profile
 * aws_iam_policy
 * aws_iam_role
 * aws_iam_role_policy
 * aws_iam_role_policy_attachment
+
+### RDS
+* aws_db_instance
+
+### Route 53
+* aws_route53_zone
 
 ### S3
 * aws_s3_access_point
