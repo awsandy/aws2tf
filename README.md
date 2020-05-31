@@ -97,8 +97,63 @@ Be patient - lots of output is given as aws2tf:
 
 The following terraform resource types are supported by this tool at this time:
 
-Base Resources
+### Autoscaling
+* aws_autoscaling_group
+
+### Base Resources
 * aws_resource_group
+
+### Directory Services
+* aws_directory_service_directory
+
+### EC2
+* aws_ec2_client_vpn_endpoint
+* aws_ec2_client_vpn_network_association
+* aws_ec2_transit_gateway
+* aws_ec2_transit_gateway_route_table
+* aws_ec2_transit_gateway_vpc_attachment
+* aws_eip
+* aws_instance
+* aws_launch_template
+
+### ECS
+* aws_ecs_cluster
+* aws_ecs_service
+* aws_ecs_task_definition
+
+### EKS
+* aws_eks_cluster
+* aws_eks_fargate_profile
+* aws_eks_node_group
+
+### IAM
+* aws_iam_instance_profile
+* aws_iam_policy
+* aws_iam_role
+* aws_iam_role_policy
+* aws_iam_role_policy_attachment
+
+### S3
+* aws_s3_access_point
+* aws_s3_bucket
+* aws_s3_bucket_policy
+
+### VPC
+* aws_customer_gateway
+* aws_internet_gateway
+* aws_nat_gateway
+* aws_network_interface
+* aws_network_interface_attachment
+* aws_route_table
+* aws_route_table_association
+* aws_subnet
+* aws_security_group
+* aws_vpc
+* aws_vpc_ipv4_cidr_block_association
+* aws_vpc_endpoint
+* aws_vpc_dhcp_options
+* aws_vpc_peering_connection
+* aws_vpn_connection
 
 
 ## Planned Additions

@@ -5,9 +5,9 @@ else
     cmd[0]="$AWS ec2 describe-vpc-endpoint-services"
 fi
 
-pref[0]="VpcEndpoints"
-tft[0]="aws_vpc_endpoint"
-idfilt[0]="VpcEndpointId"
+pref[0]="ServiceDetails"
+tft[0]="aws_vpc_endpoint_service"
+idfilt[0]="ServiceId"
 
 #rm -f ${tft[0]}.tf
 
