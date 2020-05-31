@@ -117,6 +117,7 @@ The following terraform resource types are supported by this tool at this time:
 * aws_launch_template
 
 ### ECS
+* aws_ecs_capacity_provider (tbd)
 * aws_ecs_cluster
 * aws_ecs_service
 * aws_ecs_task_definition

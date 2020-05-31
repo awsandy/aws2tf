@@ -1,14 +1,14 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="$AWS elbv2 describe-load-balancers --filter \"Name=vpc-id,Values=$1\""
+    cmd[0]="$AWS elbv2 describe-load-balancers --query \"LoadBalancers[?Type=='application']|[?VpcId=='$1']\""
 else
-    cmd[0]="$AWS elbv2 describe-load-balancers"
+    cmd[0]="$AWS elbv2 describe-load-balancers --query \"LoadBalancers[?Type=='application']\""
 fi
 c=0
 cm=${cmd[$c]}
 echo $cm
 
-pref[0]="LoadBalancers"
+pref[0]=""
 tft[0]="aws_lb"
 idfilt[0]="LoadBalancerArn"
 rm -f ${tft[(${c})]}.*.tf
@@ -20,15 +20,19 @@ for c in `seq 0 0`; do
 	#echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
-    if [ "$count" -gt "0" ]; then
+    
+    if [[ "$count" -gt "0" && "$count"!="" ]]; then
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
             #echo $i
+            
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].${idfilt[(${c})]}" | tr -d '"'`
+            #echo $cname
             lbarn=`echo $cname`
             attribs=`$AWS elbv2 describe-load-balancer-attributes --load-balancer-arn ${lbarn}`
-            echo $attribs | jq ".Attributes"
-            echo "$ttft $cname"
+            
+            #echo $attribs | jq ".Attributes"
+            #echo "$ttft $cname"
             rname=${cname//:/_}
             rname=${rname//\//_}
             echo $rname
