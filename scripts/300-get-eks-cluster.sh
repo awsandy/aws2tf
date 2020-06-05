@@ -56,12 +56,12 @@ if [ "$kcount" -gt "0" ]; then
                     ../../scripts/get-eip.sh $eipall         
                 done
             fi
-
-    
+   
 
             ../../scripts/120*.sh $tcmd  # igw
             ../../scripts/130*.sh $tcmd  # nat gw
             # still need to call as eip is nested from nat gw
+            ../../scripts/135*.sh $tcmd  # TGW
 
             ## need these or will it do it's own ?
             ../../scripts/140*.sh $tcmd  # route table
