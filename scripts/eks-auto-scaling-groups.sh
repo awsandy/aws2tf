@@ -2,8 +2,7 @@
 
 if [ "$1" != "" ]; then
     mkey=`echo "kubernetes.io/cluster/${1}"`
-    mkey="Name"
-    echo $mkey
+    #echo $mkey
     cmd[0]="$AWS autoscaling describe-auto-scaling-groups | jq '.AutoScalingGroups[] | select(.Tags[].Key==\"${mkey}\").AutoScalingGroupName'"
     
 else
@@ -12,40 +11,31 @@ else
 fi
 c=0
 cm=${cmd[$c]}
-echo $cm
+#echo $cm
 
 asgs=`eval $cm`
-echo $asgs
+#echo $asgs
 for t in ${asgs[@]}; do
-  asgn=`echo $t | tr -d '"'`
-  cm="$AWS autoscaling describe-auto-scaling-groups --auto-scaling-group-names $asgn"
+  cname=`echo $t | tr -d '"'`
+  #echo "cname=$cname"
+  cm=`echo "${AWS} autoscaling describe-auto-scaling-groups --auto-scaling-group-names ${cname}"`
 
 
-
-pref[0]="AutoScalingGroups"
+pref[0]="AutoScalingGroups[]"
 tft[0]="aws_autoscaling_group"
 idfilt[0]="AutoScalingGroupName"
 rm -f ${tft[(${c})]}.*.tf
 
-for c in `seq 0 0`; do
- 
-    #cm=${cmd[$c]}
-	ttft=${tft[(${c})]}
-	#echo $cm
+ttft=${tft[(${c})]}
+	
     awsout=`eval $cm`
-    echo $awsout | jq .
-    count=`echo $awsout | jq ".${pref[(${c})]} | length"`
-    echo $count
     
-    if [ "$count" -gt "0" ]; then
-        count=`expr $coun
-        for i in `seq 0 $count`; do
-            #echo $i
-            cname=`echo $awsout | jq ".${pref[(${c})]}.${idfilt[(${c})]}" | tr -d '"'`
+
             echo $cname
          
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
+            
             terraform import $ttft.$cname $cname
             terraform state show $ttft.$cname > t2.txt
             rm $ttft.$cname.tf
@@ -110,11 +100,8 @@ for c in `seq 0 0`; do
                 
             done <"$file"
             
-        done
-    fi
-done
-done
+done # for t
 terraform fmt
 terraform validate
-#rm t*.txt
+rm -f t*.txt
 
