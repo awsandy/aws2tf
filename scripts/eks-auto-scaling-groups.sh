@@ -13,31 +13,35 @@ fi
 c=0
 cm=${cmd[$c]}
 echo $cm
+
 asgs=`eval $cm`
 echo $asgs
-exit
+for t in ${asgs[@]}; do
+  asgn=`echo $t | tr -d '"'`
+  cm="$AWS autoscaling describe-auto-scaling-groups --auto-scaling-group-names $asgn"
 
 
-pref[0]=""
+
+pref[0]="AutoScalingGroups"
 tft[0]="aws_autoscaling_group"
 idfilt[0]="AutoScalingGroupName"
 rm -f ${tft[(${c})]}.*.tf
 
 for c in `seq 0 0`; do
  
-    cm=${cmd[$c]}
+    #cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
 	#echo $cm
     awsout=`eval $cm`
     echo $awsout | jq .
-    count=`echo $awsout | jq ". | length"`
+    count=`echo $awsout | jq ".${pref[(${c})]} | length"`
     echo $count
-    exit
+    
     if [ "$count" -gt "0" ]; then
-        count=`expr $count - 1`
+        count=`expr $coun
         for i in `seq 0 $count`; do
             #echo $i
-            cname=`echo $awsout | jq ".${idfilt[(${c})]}" | tr -d '"'`
+            cname=`echo $awsout | jq ".${pref[(${c})]}.${idfilt[(${c})]}" | tr -d '"'`
             echo $cname
          
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
@@ -108,6 +112,7 @@ for c in `seq 0 0`; do
             
         done
     fi
+done
 done
 terraform fmt
 terraform validate
