@@ -1,13 +1,13 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="$AWS ec2 describe-launch-templates --filter \"Name=vpc-id,Values=$1\""
+    cmd[0]="$AWS ec2 describe-launch-templates --launch-template-ids $1"
 else
-    cmd[0]="$AWS ec2 describe-launch-templates"
+    echo "Cluster name not set exiting"
+    exit
 fi
 c=0
 cm=${cmd[$c]}
 echo $cm
-
 
 
 pref[0]="LaunchTemplates"
