@@ -55,23 +55,57 @@ for c in `seq 0 0`; do
                     #if [[ ${tt1} == "availability_zone" ]];then skip=1;fi
                     if [[ ${tt1} == "availability_zone_id" ]];then skip=1;fi
                     if [[ ${tt1} == "state" ]];then skip=1;fi
-                    if [[ ${tt1} == "dns_entry" ]];then skip=1;fi
+                    #if [[ ${tt1} == "dns_entry" ]];then skip=1;fi
+                    if [[ ${tt1} == "dns_entry" ]];then
+                        #echo "dns block" 
+                        tt2=`echo $tt2 | tr -d '"'` 
+                        skip=1
+                        while [ "$t1" != "]" ] && [ "$tt2" != "[]" ] ;do
+                        #while [[ "$t1" != "]" ]] ;do
+
+                            read line
+                            t1=`echo "$line"`
+                            #echo $t1
+                        done
+                    fi
+
 
                     if [[ ${tt1} == "requester_managed" ]];then skip=1;fi
                     if [[ ${tt1} == "prefix_list_id" ]];then skip=1;fi
                     if [[ ${tt1} == "cidr_blocks" ]];then
-                        echo "matched cidr"  
+                        #echo "cidr block" 
+                        tt2=`echo $tt2 | tr -d '"'` 
                         skip=1
-                        while [[ "$t1" != "]" ]] ;do
+                        while [ "$t1" != "]" ] && [ "$tt2" != "[]" ] ;do
+                        #while [[ "$t1" != "]" ]] ;do
+
                             read line
                             t1=`echo "$line"`
-                            echo $t1
+                            #echo $t1
                         done
                     fi
-                    if [[ ${tt1} == "network_interface_ids" ]];then skip=1;fi
+                    if [[ ${tt1} == "network_interface_ids" ]];then 
+                        #echo "network interface id block" 
+                        tt2=`echo $tt2 | tr -d '"'` 
+                        skip=1
+                        while [ "$t1" != "]" ] && [ "$tt2" != "[]" ] ;do
+                            read line
+                            t1=`echo "$line"`
+                            #echo $t1
+                        done
+                    fi
                     if [[ ${tt1} == "vpc_id" ]]; then
                         tt2=`echo $tt2 | tr -d '"'`
                         t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
+                    fi
+                else
+                    if [[ "$t1" == *"subnet-"* ]]; then
+                        t1=`echo $t1 | tr -d '"|,'`
+                        t1=`printf "aws_subnet.%s.id," $t1`
+                    fi 
+                    if [[ "$t1" == *"sg-"* ]]; then
+                        t1=`echo $t1 | tr -d '"|,'`
+                        t1=`printf "aws_security_group.%s.id," $t1`
                     fi
                
                 fi
@@ -83,9 +117,9 @@ for c in `seq 0 0`; do
             done <"$file"
             
         done
-    fi
+    fi 
 done
 terraform fmt
 terraform validate
-rm t*.txt
+rm -f t*.txt
 

@@ -1,7 +1,21 @@
-#1/bin/bash
-cmd[0]="$AWS ec2 describe-transit-gateway-route-tables"
+#!/bin/bash
 pref[0]="TransitGatewayRouteTables"
 tft[0]="aws_ec2_transit_gateway_route_table"
+c=0
+ttft=${tft[(${c})]}
+if [ "$1" != "" ]; then
+    cmd[0]="$AWS ec2 describe-transit-gateway-route-tables --filters \"Name=transit-gateway-id,Values=$1\"" 
+    cname=$1
+    fn=`printf "%s__%s.tf" $ttft $cname`
+    if [ -f "$fn" ] ; then
+        echo "$fn exists already skipping"
+        exit
+    else
+        echo "could not find $fn continuing ... "
+    fi
+else
+    cmd[0]="$AWS ec2 describe-transit-gateway-route-tables"
+fi
 
 
 for c in `seq 0 0`; do
@@ -60,5 +74,5 @@ for c in `seq 0 0`; do
 done
 terraform fmt
 terraform validate
-rm t*.txt
+rm -f t*.txt
 

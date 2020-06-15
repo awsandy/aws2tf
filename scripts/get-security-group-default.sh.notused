@@ -132,5 +132,5 @@ done
 
 #terraform fmt
 #terraform validate
-#rm t*.txt tf1.tmp
+#rm -f t*.txt tf1.tmp
 

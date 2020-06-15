@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 cmd[0]="$AWS ec2 describe-vpn-connections"
 pref[0]="VpnConnections"
 tft[0]="aws_vpn_connection"
@@ -97,5 +97,5 @@ for c in `seq 0 0`; do
 done
 terraform fmt
 terraform validate
-#rm t*.txt
+#rm -f t*.txt
 

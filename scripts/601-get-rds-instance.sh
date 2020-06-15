@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 cmd[0]="$AWS rds describe-db-instances"
 pref[0]="DBInstances"
 tft[0]="aws_db_instance"

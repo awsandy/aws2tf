@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 cmd[0]="$AWS ec2 describe-client-vpn-endpoints"
 pref[0]="ClientVpnEndpoints"
 tft[0]="aws_ec2_client_vpn_endpoint"
@@ -92,5 +92,5 @@ for c in `seq 0 0`; do
 done
 terraform fmt
 terraform validate
-#rm t*.txt
+#rm -f t*.txt
 

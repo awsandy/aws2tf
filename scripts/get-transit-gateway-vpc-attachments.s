@@ -1,10 +1,10 @@
-#1/bin/bash
-cmd[0]="$AWS ec2 describe-transit-gateways"
-pref[0]="TransitGateways"
-tft[0]="aws_ec2_transit_gateway"
+#!/bin/bash
+cmd[0]="$AWS ec2 describe-transit-gateway-vpc-attachments"
+pref[0]="TransitGatewayVpcAttachments"
+tft[0]="aws_ec2_transit_gateway_vpc_attachment"
 
 for c in `seq 0 0`; do
-    
+ 
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
 	#echo $cm
@@ -14,7 +14,7 @@ for c in `seq 0 0`; do
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
             #echo $i
-            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].TransitGatewayId" | tr -d '"'`
+            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].TransitGatewayAttachmentId" | tr -d '"'`
             echo $cname
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
@@ -39,13 +39,17 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "id" ]];then skip=1; fi          
                     if [[ ${tt1} == "role_arn" ]];then skip=1;fi
                     if [[ ${tt1} == "association_default_route_table_id" ]];then skip=1;fi
-                    if [[ ${tt1} == "propagation_default_route_table_id" ]];then skip=1;fi
+                    if [[ ${tt1} == "vpc_owner_id" ]];then skip=1;fi
                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "default_route_table_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "owner_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi
+                    if [[ ${tt1} == "vpc_id" ]]; then
+                        tt2=`echo $tt2 | tr -d '"'`
+                        t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
+                    fi
                 fi
                 if [ "$skip" == "0" ]; then
                     #echo $skip $t1
@@ -59,5 +63,5 @@ for c in `seq 0 0`; do
 done
 terraform fmt
 terraform validate
-rm t*.txt
+rm -f t*.txt
 

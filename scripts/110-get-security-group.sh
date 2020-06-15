@@ -64,6 +64,10 @@ terraform state list | grep aws_security_group_rule > tf1.tmp
 for i in `cat tf1.tmp` ; do
     terraform state show $i > t2.txt
     echo $i
+    fn=`printf "%s.tf" $i`
+
+
+
     ttft=`echo $i | cut -d'.' -f1`
     cname=`echo $i | cut -d'.' -f2`
     
@@ -78,6 +82,8 @@ for i in `cat tf1.tmp` ; do
     fi
     echo $ssg
     echo "$fn $ttft $cname"
+    
+    echo $aws2tfmess > $fn
                 while IFS= read line
                 do
                     skip=0
@@ -138,5 +144,5 @@ done
 
 #terraform fmt
 #terraform validate
-#rm t*.txt tf1.tmp
+#rm -f t*.txt tf1.tmp
 

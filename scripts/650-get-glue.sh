@@ -55,5 +55,5 @@ for c in `seq 0 1`; do
         done
     fi
 done
-rm t*.txt
+rm -f t*.txt
 

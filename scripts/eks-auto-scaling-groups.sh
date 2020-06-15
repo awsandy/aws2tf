@@ -16,34 +16,32 @@ cm=${cmd[$c]}
 asgs=`eval $cm`
 #echo $asgs
 for t in ${asgs[@]}; do
-  cname=`echo $t | tr -d '"'`
-  #echo "cname=$cname"
-  cm=`echo "${AWS} autoscaling describe-auto-scaling-groups --auto-scaling-group-names ${cname}"`
+    cname=`echo $t | tr -d '"'`
+    #echo "cname=$cname"
+    cm=`echo "${AWS} autoscaling describe-auto-scaling-groups --auto-scaling-group-names ${cname}"`
 
 
-pref[0]="AutoScalingGroups[]"
-tft[0]="aws_autoscaling_group"
-idfilt[0]="AutoScalingGroupName"
-rm -f ${tft[(${c})]}.*.tf
+    pref[0]="AutoScalingGroups"
+    tft[0]="aws_autoscaling_group"
+    idfilt[0]="AutoScalingGroupName"
+    rm -f ${tft[(${c})]}.*.tf
 
-ttft=${tft[(${c})]}
+    ttft=${tft[(${c})]}
 	
     awsout=`eval $cm`
     
 
-            echo $cname
+    echo $cname
          
-            printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
-            printf "}" $cname >> $ttft.$cname.tf
+    printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
+    printf "}" $cname >> $ttft.$cname.tf
             
-            terraform import $ttft.$cname $cname
-            terraform state show $ttft.$cname > t2.txt
-            rm $ttft.$cname.tf
-            cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
-            #	for k in `cat t1.txt`; do
-            #		echo $k
-            #	done
-            file="t1.txt"
+    terraform import $ttft.$cname $cname
+    terraform state show $ttft.$cname > t2.txt
+    rm $ttft.$cname.tf
+    cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
+
+    file="t1.txt"
            
             fn=`printf "%s__%s.tf" $ttft $cname`
             #echo "#" > $fn
@@ -99,9 +97,12 @@ ttft=${tft[(${c})]}
                 fi
                 
             done <"$file"
+
+        # get the launch template
+        ltid=`echo $awsout | jq .AutoScalingGroups[0].LaunchTemplate.LaunchTemplateId | tr -d '"'`
+        echo "ltid=$ltid"
+        ../../scripts/eks-launch_template.sh $ltid
             
 done # for t
-terraform fmt
-terraform validate
-rm -f t*.txt
+
 

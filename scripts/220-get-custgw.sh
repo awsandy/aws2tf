@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 cmd[0]="$AWS ec2 describe-customer-gateways"
 pref[0]="CustomerGateways"
 tft[0]="aws_customer_gateway"

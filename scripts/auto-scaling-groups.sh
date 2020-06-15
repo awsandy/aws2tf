@@ -98,5 +98,5 @@ for c in `seq 0 0`; do
 done
 terraform fmt
 terraform validate
-#rm t*.txt
+#rm -f t*.txt
 

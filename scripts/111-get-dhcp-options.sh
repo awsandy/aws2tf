@@ -15,6 +15,7 @@ for c in `seq 0 0`; do
 	#echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
+    echo "count=$count"
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
@@ -65,6 +66,6 @@ for c in `seq 0 0`; do
 done
 terraform fmt
 terraform validate
-rm t*.txt
+rm -f t*.txt
 
 #

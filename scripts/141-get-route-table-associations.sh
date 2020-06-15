@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 if [ "$1" != "" ]; then
     cmd[0]="$AWS ec2 describe-route-tables --filters \"Name=vpc-id,Values=$1\""
 else
@@ -99,5 +99,5 @@ for c in `seq 0 0`; do
 done
 terraform fmt
 terraform validate
-rm t*.txt
+rm -f t*.txt
 

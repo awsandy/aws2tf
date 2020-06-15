@@ -95,6 +95,10 @@ if [ "$kcount" -gt "0" ]; then
                     echo "Get Fargate Pod execution role arn = $podarn" 
                     ../../scripts/050-get-iam-roles.sh $podarn
 
+                    # Get the fargate profile
+                    #../../scripts/fargate_profile.sh $cname
+
+
                 done
             fi
         
@@ -212,19 +216,23 @@ if [ "$kcount" -gt "0" ]; then
 
                     # Get the fargate profile
                     ../../scripts/fargate_profile.sh $cname
-                    echo "run command ....."
-                    echo "$AWS eks update-kubeconfig --name $cname"
+
+
                 done # done for i
             fi
-        done 
-        # address supporting eks cluster resources
-        echo "fmt"
-        terraform fmt
-        echo "validate"
-        terraform validate
-        
+        done # done for c
+    # address supporting eks cluster resources
+    ../../scripts/get-eks-cluster-nodegroups.sh $cln
     done  # k  
 fi
+
+echo "fmt"
+terraform fmt
+echo "validate"
+terraform validate
+rm -f t*.txt
+echo "run command ....."
+echo "$AWS eks update-kubeconfig --name $cname"
 
 
 

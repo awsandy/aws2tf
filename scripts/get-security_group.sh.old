@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 if [ "$1" != "" ]; then 
     cmd[0]="$AWS ec2 describe-security-groups --group-ids $1"
 else
@@ -78,5 +78,5 @@ done
 
 terraform fmt
 terraform validate
-rm t*.txt tf1.tmp
+rm -f t*.txt tf1.tmp
 

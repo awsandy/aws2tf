@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 cmd[0]="$AWS autoscaling describe-auto-scaling-groups"
 pref[0]="AutoScalingGroups"
 tft[0]="aws_autoscaling_group"
@@ -63,5 +63,5 @@ for c in `seq 0 0`; do
 done
 terraform fmt
 terraform validate
-rm t*.txt
+rm -f t*.txt
 
