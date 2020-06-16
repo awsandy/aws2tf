@@ -83,7 +83,12 @@ for t in ${asgs[@]}; do
                         t1=`printf "%s = aws_subnet.%s.id" $tt1 $tt2`
                     fi
 
-
+                #
+                else
+                    if [[ "$t1" == *"subnet-"* ]]; then
+                        t1=`echo $t1 | tr -d '"|,'`
+                        t1=`printf "aws_subnet.%s.id," $t1`
+                    fi
                 #else
                 #    if [[ "$t1" == *"sg-"* ]]; then
                 #        t1=`echo $t1 | tr -d '"|,'`

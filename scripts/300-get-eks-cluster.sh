@@ -131,11 +131,7 @@ if [ "$kcount" -gt "0" ]; then
                     tfa=`printf "%s.%s" $ttft $cname`
                     terraform show  -json | jq --arg myt "$tfa" '.values.root_module.resources[] | select(.address==$myt)' > $tfa.json
                     #cat $tfa.json | jq .
-                    aj=`cat aws_eks_cluster.ateks1.json`
-                    trole=`echo $aj | jq .values.role_arn | cut -f2 -d'/' | tr -d '"'`
-
-
-
+       
                     rm $ttft.$cname.tf
                     cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
                     #	for k in `cat t1.txt`; do
