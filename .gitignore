@@ -19,3 +19,4 @@ clean*
 quotas
 boto3
 flip-eks.sh
+t*.sh
