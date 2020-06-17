@@ -6,7 +6,7 @@ else
 fi
 
 
-cmd[0]="$AWS ec2 describe-instances"
+
 pref[0]="Reservations"
 tft[0]="aws_instance"
 
@@ -60,7 +60,7 @@ for c in `seq 0 0`; do
                     fi
                     if [[ ${tt1} == "public_ip" ]];then skip=1;fi
                     if [[ ${tt1} == "public_dns" ]];then skip=1;fi
-                    #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
+                    if [[ ${tt1} == "device_name" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi    
                     if [[ ${tt1} == "subnet_id" ]]; then

@@ -56,6 +56,8 @@ r=`aws configure get region`
 echo $r
 fi
 
+mysub=`echo ${mysub}-vpc`
+
 if [ "$mysub" == "null" ]; then
     echo "Account is null exiting"
     exit

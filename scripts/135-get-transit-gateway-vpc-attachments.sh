@@ -7,7 +7,7 @@ fi
 
 pref[0]="TransitGatewayVpcAttachments"
 tft[0]="aws_ec2_transit_gateway_vpc_attachment"
-
+tgwlist=()
 for c in `seq 0 0`; do
  
     cm=${cmd[$c]}
@@ -73,12 +73,18 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
+            tgwlist+=( "${tgwid}" )
             # get the TGW itself
-            ../../scripts/201-get-transit-gateway.sh $tgwid
-            ../../scripts/202-get-transit-gateway-route-tables.sh $tgwid
+
         done
 
+        ## defer to TGW
 
+        for tgwi in ${tgwlist[@]}; do
+        echo "tgw = $tgwi"
+        ../../scripts/201-get-transit-gateway.sh $tgwi
+        #../../scripts/202-get-transit-gateway-route-tables.sh $tgwi
+        done
 
     fi
 done

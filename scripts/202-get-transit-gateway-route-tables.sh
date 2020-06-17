@@ -28,10 +28,8 @@ for c in `seq 0 0`; do
             if [ -f "$fn" ] ; then
                 echo "$fn exists already skipping"
                 rexists="yes"
-            else
-                echo "could not find $fn continuing ... "
             fi
-            echo "rexists = $rexists"
+            #echo "rexists = $rexists"
             if [[ "$rexists" == "no" ]]; then
 
                 printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
@@ -59,10 +57,13 @@ for c in `seq 0 0`; do
                         if [[ ${tt1} == "association_default_route_table_id" ]];then skip=1;fi
                         if [[ ${tt1} == "vpc_owner_id" ]];then skip=1;fi
                         if [[ ${tt1} == "owner_id" ]];then skip=1;fi
-                        if [[ ${tt1} == "default_propagation_route_table" ]];then skip=1;fi
+                      
+                        if [[ ${tt1} == "transit_gateway_id" ]];then 
+                            tt2=`echo $tt2 | tr -d '"'`
+                            t1=`printf "%s = aws_ec2_transit_gateway.%s.id" ${tt1} ${tt2}`
+                        fi
                         if [[ ${tt1} == "default_association_route_table" ]];then skip=1;fi
-                        #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
-                        #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
+                        if [[ ${tt1} == "default_propagation_route_table" ]];then skip=1;fi
                         #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi
                     fi
                     if [ "$skip" == "0" ]; then
@@ -71,12 +72,14 @@ for c in `seq 0 0`; do
                     fi
                     
                 done <"$file"
+                # get routes with tgw rtb id
+                ../../scripts/get-transit-gateway-routes.sh $cname
             fi
         done # for i
     fi
 done  # for c
 terraform fmt
-terraform validate
+#terraform validate
 rm -f t*.txt
 
 

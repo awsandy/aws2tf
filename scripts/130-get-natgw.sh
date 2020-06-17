@@ -25,6 +25,8 @@ for c in `seq 0 0`; do
             #echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].NatGatewayId" | tr -d '"'`
             echo $cname
+            eipall=`echo $awsout | jq ".${pref[(${c})]}[(${i})].NatGatewayAddresses[0].AllocationId" | tr -d '"'`
+            echo "eipall = $eipall"
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
@@ -69,6 +71,7 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "allocation_id" ]]; then
                         tt2=`echo $tt2 | tr -d '"'`
                         t1=`printf "%s = aws_eip.%s.id" $tt1 $tt2`
+                        
                     fi
 
                 fi
@@ -78,6 +81,7 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
+            ../../scripts/get-eip.sh $eipall
             
         done
     fi
