@@ -83,7 +83,7 @@ for c in `seq 0 0`; do
         for tgwi in ${tgwlist[@]}; do
         echo "tgw = $tgwi"
         ../../scripts/201-get-transit-gateway.sh $tgwi
-        #../../scripts/202-get-transit-gateway-route-tables.sh $tgwi
+        ../../scripts/202-get-transit-gateway-route-tables.sh $tgwi
         done
 
     fi
