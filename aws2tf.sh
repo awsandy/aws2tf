@@ -126,6 +126,15 @@ if [ "$i" == "no" ]; then
 fi
 fi
 
+if [ "$t" == "tgw" ]; then
+pre="*"
+t="transitgw"
+if [ "$i" == "no" ]; then
+    i=""
+fi
+fi
+
+
 if [ "$t" == "eks" ]; then
 pre="3*"
 if [ "$i" == "no" ]; then
