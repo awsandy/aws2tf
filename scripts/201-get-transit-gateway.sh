@@ -10,8 +10,6 @@ if [ "$1" != "" ]; then
     if [ -f "$fn" ] ; then
         echo "$fn exists already skipping"
         exit
-    else
-        echo "could not find $fn continuing ... "
     fi
 else
     cmd[0]="$AWS ec2 describe-transit-gateways"

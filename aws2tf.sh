@@ -86,7 +86,7 @@ rm -f import.log
 #if [ "$f" = "no" ]; then
 #    ../../scripts/resources.sh 2>&1 | tee -a import.log
 #fi
-export AWS="aws --profile $p --region $r"
+export AWS="aws --profile $p --region $r --output json "
 echo " "
 echo "Account ID = ${s}"
 echo "AWS Resource Group Filter = ${g}"
