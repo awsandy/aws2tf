@@ -46,6 +46,7 @@ for c in `seq 0 0`; do
                         flc=0
                         fd=0
                         acl=0
+                        echo $aws2tfmess > $fn
                         while IFS= read line
                         do
                             skip=0

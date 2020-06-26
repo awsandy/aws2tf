@@ -84,6 +84,7 @@ for i in `cat tf1.tmp` ; do
     echo "$fn $ttft $cname"
     
     echo $aws2tfmess > $fn
+    
                 while IFS= read line
                 do
                     skip=0

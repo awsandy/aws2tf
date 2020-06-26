@@ -36,6 +36,7 @@ for c in `seq 0 0`; do
     
             file="t1.txt"
             fn=`printf "%s__%s__%s.tf" $ttft $cln $cname`
+            echo $aws2tfmess > $fn
             while IFS= read line
             do
 				skip=0

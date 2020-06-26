@@ -51,6 +51,7 @@ if [ "$count" -gt "0" ]; then
         cat t1.txt
         file="t1.txt"
         fn=`printf "%s__%s.tf" $ttft $cname`
+        echo $aws2tfmess > $fn
         while IFS= read line
         do
 			skip=0

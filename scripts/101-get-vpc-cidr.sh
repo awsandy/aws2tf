@@ -42,7 +42,7 @@ for c in `seq 0 0`; do
                 #		echo $k
                 #	done
                 file="t1.txt"
-                
+                echo $aws2tfmess > $fn
                 while IFS= read line
                 do
                     skip=0

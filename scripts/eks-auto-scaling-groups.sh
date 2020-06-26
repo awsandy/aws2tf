@@ -45,6 +45,7 @@ for t in ${asgs[@]}; do
            
             fn=`printf "%s__%s.tf" $ttft $cname`
             #echo "#" > $fn
+            echo $aws2tfmess > $fn
             while IFS= read line
             do
 				skip=0

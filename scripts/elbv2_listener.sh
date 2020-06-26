@@ -53,6 +53,7 @@ for c in `seq 0 0`; do
             
          
             #echo "#" > $fn
+            echo $aws2tfmess > $fn
             while IFS= read line
             do
 				skip=0
