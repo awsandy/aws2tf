@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="$AWS ec2 describe-customer-gateways --filters \"Name=transit-gateway-id,Values=$1\"" 
+    cmd[0]="$AWS ec2 describe-customer-gateways --filters \"Name=customer-gateway-id,Values=$1\"" 
 else
     cmd[0]="$AWS ec2 describe-customer-gateways"
 fi
