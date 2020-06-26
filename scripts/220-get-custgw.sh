@@ -1,5 +1,10 @@
 #!/bin/bash
-cmd[0]="$AWS ec2 describe-customer-gateways"
+if [ "$1" != "" ]; then
+    cmd[0]="$AWS ec2 describe-customer-gateways --filters \"Name=transit-gateway-id,Values=$1\"" 
+else
+    cmd[0]="$AWS ec2 describe-customer-gateways"
+fi
+
 pref[0]="CustomerGateways"
 tft[0]="aws_customer_gateway"
 

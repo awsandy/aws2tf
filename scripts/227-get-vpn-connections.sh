@@ -1,5 +1,11 @@
 #!/bin/bash
-cmd[0]="$AWS ec2 describe-vpn-connections"
+if [ "$1" != "" ]; then
+    cmd[0]="$AWS ec2 describe-vpn-connections --filters \"Name=transit-gateway-id,Values=$1\"" 
+else
+    cmd[0]="$AWS ec2 describe-vpn-connections"
+fi
+
+
 pref[0]="VpnConnections"
 tft[0]="aws_vpn_connection"
 
@@ -16,6 +22,7 @@ for c in `seq 0 0`; do
             #echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].VpnConnectionId" | tr -d '"'`
             echo $cname
+            cgwid=`echo $awsout | jq ".${pref[(${c})]}[(${i})].CustomerGatewayId" | tr -d '"'`
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
@@ -92,6 +99,9 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
+
+## get customer gateway
+            ../../scripts/220-get-custgw.sh $cgwid
             
         done
     fi
