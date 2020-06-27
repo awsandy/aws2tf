@@ -148,13 +148,10 @@ pwd
 if [ "$c" == "no" ]; then
     echo "terraform init"
     terraform init 2>&1 | tee -a import.log
-else
-ls *.tf | wc -l
 fi
 
 
 #############################################################################
-ls *.tf | wc -l
 
 date
 lc=0

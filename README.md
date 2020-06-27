@@ -38,10 +38,16 @@ To generate the terraform files for an account and stop after a "terraform valid
 ./aws2tf.sh -v yes
 ```
 
+or if your interested in a type or group for example: Transit Gateway resources:
+```
+./aws2tf.sh -v yes -t tgw
+```
+
 ```
 terraform validate
 Success! The configuration is valid.
 ```
+
 
 Or there may be some kind of error as trying to test everyone's AWS combinations in advance isn't possible.
 
@@ -69,6 +75,8 @@ To generate the terraform files for an EKS cluster named "mycluster"
 ./aws2tf.sh -t eks -i mycluster
 ```
 
+The currently supported Resources groups/types are:
+
 
 
 To get all the VPC related resources in a particular VPC
@@ -80,7 +88,23 @@ To use a specific region and profile
 ./aws2tf.sh -t vpc -i vpc-xxxxxxxxx -r eu-west-1 -p default
 ```
 
-To use the fast forward option correctly you'll need a good understanding of terraform resource dependancies to ensure you avoid any depenacy errors.
+* tgw - Transit Gateway resources -i <transit gateway id>
+* vpc - A VPC and it's related resources -i <VPC id>
+* eks - An EKS cluster and it's related resources -i <Cluster Name>
+* ecs - An ECS cluster and it's related resources
+
+
+Using the cumulative mode
+
+If for example you want to get several VPC's you can use the cumulative mode:
+
+To get all the VPC related resources in a particular VPC
+```
+./aws2tf.sh -t vpc -i vpc-aaaaaaaaa 
+./aws2tf.sh -t vpc -i vpc-bbbbbbbbb -c yes
+./aws2tf.sh -t vpc -i vpc-ccccccccc -c yes
+```
+
 
 <br>
 
