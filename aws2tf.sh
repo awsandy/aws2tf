@@ -6,8 +6,6 @@ p="default"
 f="no"
 v="no"
 r="no"
-t="no"
-i="no"
 c="no"
 
 while getopts ":p:r:x:f:v:t:i:c:" o; do
