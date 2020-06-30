@@ -116,12 +116,17 @@ printf " profile = \"%s\" \n" $p >> aws.tf
 printf "}\n" >> aws.tf
 
 cat aws.tf
+
+if [ "$t" == "no" ]; then 
+t="*"
+fi
+
 pre="*"
 if [ "$t" == "vpc" ]; then
 pre="1*"
 t="*"
 if [ "$i" == "no" ]; then
-    echo "VPC ID null exiting"
+    echo "VPC Id null exiting - specify with -i <vpc-id>"
     exit
 fi
 fi
@@ -130,7 +135,17 @@ if [ "$t" == "tgw" ]; then
 pre="*"
 t="transitgw"
 if [ "$i" == "no" ]; then
-    i=""
+    echo "TGW Id null exiting - specify with -i <tgw-id>"
+    exiting
+fi
+fi
+
+
+if [ "$t" == "ecs" ]; then
+pre="3*"
+if [ "$i" == "no" ]; then
+    echo "Cluster Name null exiting - specify with -i <cluster-name>"
+    exit
 fi
 fi
 
@@ -182,7 +197,7 @@ for com in `ls ../../scripts/$pre-get-*$t*.sh | cut -d'/' -f4 | sort -g`; do
                     echo "Ignoring $line"
                 else
                     echo "Found Error: $line exiting .... (pass for now)"
-                    break
+                    
                 fi
             fi
 
