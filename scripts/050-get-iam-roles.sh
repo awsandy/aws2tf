@@ -25,7 +25,7 @@ for c in `seq 0 0`; do
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
-            echo $i
+            #echo $i
             if [ "$1" != "" ]; then
                 cname=`echo $awsout | jq ".RoleName" | tr -d '"'` 
             else
