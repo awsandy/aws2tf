@@ -18,6 +18,7 @@ for c in `seq 0 0`; do
 	#echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
+    echo $awsout | jq .
     echo "count=$count"
     if [ "$count" == "" ]; then count=0 ; fi
     if [ "$count" -gt "0" ]; then
