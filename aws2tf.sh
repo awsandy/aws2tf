@@ -2,11 +2,11 @@ usage()
 { echo "Usage: $0 [-p <profile>(Default="default") ] [-c <yes|no(default)>] [-t <type>] [-r <region>] [-x <yes|no(default)>]" 1>&2; exit 1;
 }
 x="no"
-p="iam"
+p="default" # profile
 f="no"
 v="no"
-r="no"
-c="no"
+r="no" # region
+c="no" # combine mode
 
 while getopts ":p:r:x:f:v:t:i:c:" o; do
     case "${o}" in
