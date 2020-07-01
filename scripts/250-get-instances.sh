@@ -36,12 +36,12 @@ for c in `seq 0 0`; do
             if [ "$nl" != "0" ]; then
                 nl=`expr $nl - 1`
                 for ni in `seq 0 $nl`; do
-                    nif=`echo $nets | jq ".${pref[(${c})]}[(${i})].Instances[].NetworkInterfaces[(${ni}).NetworkInterfaceId"`
+                    nif=`echo $nets | jq ".${pref[(${c})]}[(${i})].Instances[].NetworkInterfaces[(${ni})].NetworkInterfaceId"`
                     echo $nif
                 done
             fi
-
-
+            fn=`printf "%s__%s.tf" $ttft $cname`
+            echo $aws2tfmess > $fn
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
@@ -64,6 +64,10 @@ for c in `seq 0 0`; do
                     tt2=`echo "$line" | cut -f2- -d'='`
                     if [[ ${tt1} == "arn" ]];then skip=1; fi                
                     if [[ ${tt1} == "id" ]];then 
+                        skip=0
+                        #t1=`printf "user_data_base64 = %s" $ud`
+                    fi    
+                    if [[ ${tt1} == "user_data" ]];then 
                         skip=0
                         t1=`printf "user_data_base64 = %s" $ud`
                     fi          
