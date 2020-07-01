@@ -16,6 +16,7 @@ for c in `seq 0 0`; do
             #echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].InstanceProfileName" | tr -d '"'`
             echo $cname
+            instroles=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Roles"`
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
@@ -62,6 +63,19 @@ for c in `seq 0 0`; do
                 
                 
             done <"$file"
+
+            nl=`echo $instroles | jq ". | length"`
+            echo "num inst roles= $nl"
+            if [ "$nl" != "0" ]; then
+                nl=`expr $nl - 1`
+                for ni in `seq 0 $nl`; do
+                    nif=`echo $instroles | jq ".[(${ni})].RoleName" | tr -d '"'`
+                    echo $ni $nif
+                    ../../scripts/050-get-iam-roles.sh $nif
+                done
+            fi
+
+
             
         done
     fi

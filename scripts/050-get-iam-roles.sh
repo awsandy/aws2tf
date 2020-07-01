@@ -1,6 +1,10 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="$AWS iam list-roles | jq '.Roles[] | select(.Arn==\"${1}\")'"
+    if [ "$1 == "arn:aws:iam"* ]; then
+        cmd[0]="$AWS iam list-roles | jq '.Roles[] | select(.Arn==\"${1}\")'"
+    else
+        cmd[0]="$AWS iam list-roles | jq '.Roles[] | select(.RoleName==\"${1}\")'"
+    fi
 else
     cmd[0]="$AWS iam list-roles"
 fi
@@ -14,7 +18,7 @@ for c in `seq 0 0`; do
     cm=${cmd[$c]}
     #echo "role command = $cm"
     ttft=${tft[(${c})]}
-    #echo $cm
+    echo $cm
     awsout=`eval $cm`
     if [ "$1" != "" ]; then
         count=1
@@ -34,7 +38,13 @@ for c in `seq 0 0`; do
             ocname=`echo $cname`
             cname=${cname//./_}
             echo $cname
-            
+            fn=`printf "%s__%s.tf" $ttft $cname`
+            if [ -f "$fn" ] ; then
+                echo "$fn exists already skipping"
+                exit
+            fi
+
+
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" >> $ttft.$cname.tf
             terraform import $ttft.$cname $ocname
@@ -45,7 +55,7 @@ for c in `seq 0 0`; do
             #		echo $k
             #	done
             file="t1.txt"
-            fn=`printf "%s__%s.tf" $ttft $cname`
+
             echo $aws2tfmess > $fn
             while IFS= read line
             do

@@ -31,16 +31,7 @@ for c in `seq 0 0`; do
             $AWS ec2 describe-instance-attribute --instance-id $cname --attribute userData | jq .UserData.Value | tr -d '"' | base64 --decode > $cname.sh
 
             nets=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Instances[].NetworkInterfaces"`
-            nl=`echo $nets | jq ". | length"`
-            echo "netifs= $nl"
-            if [ "$nl" != "0" ]; then
-                nl=`expr $nl - 1`
-                for ni in `seq 0 $nl`; do
-                    nif=`echo $nets | jq ".[(${ni})].NetworkInterfaceId" | tr -d '"'`
-                    echo $nif
-                    ../../scripts/get-eni.sh $netif
-                done
-            fi
+            
             fn=`printf "%s__%s.tf" $ttft $cname`
             echo $aws2tfmess > $fn
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
@@ -104,6 +95,18 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
+
+
+            nl=`echo $nets | jq ". | length"`
+            echo "netifs= $nl"
+            if [ "$nl" != "0" ]; then
+                nl=`expr $nl - 1`
+                for ni in `seq 0 $nl`; do
+                    nif=`echo $nets | jq ".[(${ni})].NetworkInterfaceId" | tr -d '"'`
+                    echo $ni $nif
+                    ../../scripts/get-eni.sh $nif
+                done
+            fi
             
         done
     fi
