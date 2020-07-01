@@ -173,7 +173,7 @@ echo "loop through providers"
 pwd
 for com in `ls ../../scripts/$pre-get-*$t*.sh | cut -d'/' -f4 | sort -g`; do    
     echo "$com"
-    if [[ "$com" == *"${exclude}"*]]; then
+    if [[ "$com" == *"${exclude}"*]] then
         echo "skipping $com"
     else
         docomm=". ../../scripts/$com $i"
