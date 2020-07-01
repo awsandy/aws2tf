@@ -55,9 +55,9 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "private_dns" ]];then skip=1;fi
 
                     if [[ ${tt1} == "volume_id" ]];then skip=1;fi
-                    if [[ ${tt1} == "user_data" ]];then 
-                        t1=`printf "%s = file(\"%s.sh\")" $tt1 $cname`
-                    fi
+                    #if [[ ${tt1} == "user_data" ]];then 
+                    #    t1=`printf "%s = file(\"%s.sh\")" $tt1 $cname`
+                    #fi
                     if [[ ${tt1} == "public_ip" ]];then skip=1;fi
                     if [[ ${tt1} == "public_dns" ]];then skip=1;fi
                     if [[ ${tt1} == "device_name" ]];then skip=1;fi
