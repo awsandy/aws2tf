@@ -1,5 +1,5 @@
 #!/bin/bash
-cmd[0]="$AWS iam list-instance-profiles"
+cmd[0]="$AWS iam get-instance-profile --instance-profile-name $1"
 pref[0]="InstanceProfiles"
 tft[0]="aws_iam_instance_profile"
 
@@ -81,6 +81,6 @@ for c in `seq 0 0`; do
     fi
 done
 terraform fmt
-terraform validate
+
 rm -f t*.txt
 

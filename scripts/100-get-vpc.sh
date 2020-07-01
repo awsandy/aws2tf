@@ -21,6 +21,11 @@ for c in `seq 0 0`; do
             #echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].VpcId" | tr -d '"'`
             echo $cname
+            fn=`printf "%s__%s.tf" $ttft $cname`
+            if [ -f "$fn" ] ; then
+                echo "$fn exists already skipping"
+                continue
+            fi
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
@@ -31,7 +36,7 @@ for c in `seq 0 0`; do
             #		echo $k
             #	done
             file="t1.txt"
-            fn=`printf "%s__%s.tf" $ttft $cname`
+            
             echo $aws2tfmess > $fn
             while IFS= read line
             do

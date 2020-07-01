@@ -27,7 +27,7 @@ for c in `seq 0 0`; do
             fn=`printf "%s__%s.tf" $ttft $cname`
             if [ -f "$fn" ] ; then
                 echo "$fn exists already skipping"
-                exit
+                continue
             fi
             echo $aws2tfmess > $fn
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf

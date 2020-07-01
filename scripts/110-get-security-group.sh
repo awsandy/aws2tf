@@ -1,6 +1,10 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="$AWS ec2 describe-security-groups --filters \"Name=vpc-id,Values=$1\"" 
+    if [[ "$1" == "vpc-"* ]]; then
+        cmd[0]="$AWS ec2 describe-security-groups --filters \"Name=vpc-id,Values=$1\"" 
+    else
+        cmd[0]="$AWS ec2 describe-security-groups --group-ids $1" 
+    fi
 else
     cmd[0]="$AWS ec2 describe-security-groups"
 fi
@@ -33,6 +37,12 @@ for c in `seq 0 0`; do
                 
                 echo $cname
                 fn=`printf "%s__%s.tf" $ttft $cname`
+                if [ -f "$fn" ] ; then
+                    echo "$fn exists already skipping"
+                    continue
+                fi
+
+
                 printf "resource \"%s\" \"%s\" {\n" $ttft $cname > $fn
 
                 printf "description = \"%s\"\n" "$desc" >> $fn

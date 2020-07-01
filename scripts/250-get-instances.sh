@@ -5,10 +5,11 @@ else
     cmd[0]="$AWS ec2 describe-instances"
 fi
 
+cloud9s=`aws ec2 describe-instances --filters "Name=tag-key,Values=aws:cloud9*" | jq .Reservations[].Instances[].InstanceId`
+asis=`aws ec2 describe-instances --filters "Name=tag-key,Values=aws:autoscaling*" | jq .Reservations[].Instances[].InstanceId`
 
 pref[0]="Reservations"
 tft[0]="aws_instance"
-
 
 for c in `seq 0 0`; do
     
@@ -22,8 +23,30 @@ for c in `seq 0 0`; do
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
             #echo "i=$i"
+            skipit=0
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Instances[].InstanceId" | tr -d '"'`
             echo $cname
+            ivpc=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Instances[].VpcId" | tr -d '"'`
+            for ci in `echo $cloud9s`;do
+                c9=`echo $ci | tr -d '"'`
+                if [ "$c9" == "$cname" ]; then
+                    echo "Instance is cloud9 skipping ....."
+                    skipit=1
+                fi
+            done
+            for ci in `echo $asis`;do
+                c9=`echo $ci | tr -d '"'`
+                if [ "$c9" == "$cname" ]; then
+                    echo "Instance is Autoscaling skipping ....."
+                    skipit=1
+                fi
+            done
+            if [[ $skipit -eq 1 ]];then
+                echo "breaking ..."
+                continue 
+            fi
+
+
             # get instance user_data
 
             ud=`$AWS ec2 describe-instance-attribute --instance-id $cname --attribute userData | jq .UserData.Value`
@@ -98,6 +121,21 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
+            pfnm=`echo $awsout | jq ".Reservations[0].Instances[].IamInstanceProfile.Arn" | cut -f2 -d'/' | tr -d '"'`
+            ../../scripts/get-inprof.sh $pfnm
+
+            ## need the vpc
+            #../../aws2tf.sh -t vpc -i $ivpc -c yes
+
+            ../../scripts/100-get-vpc.sh $ivpc
+            ../../scripts/105-get-subnet.sh $ivpc
+            ../../scripts/110-get-security-group.sh $ivpc
+
+            #for com in `ls ../../scripts/1*.sh`; do
+            #    comd=`printf "%s %s" $com $ivpc`
+            #    echo $comd
+            #    eval $comd
+            #done
 
 
             nl=`echo $nets | jq ". | length"`
