@@ -27,6 +27,13 @@ for c in `seq 0 0`; do
             echo $cname
             eipall=`echo $awsout | jq ".${pref[(${c})]}[(${i})].NatGatewayAddresses[0].AllocationId" | tr -d '"'`
             echo "eipall = $eipall"
+            fn=`printf "%s__%s.tf" $ttft $cname`
+            if [ -f "$fn" ] ; then
+                echo "$fn exists already skipping"
+                exit
+            fi
+  
+
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
@@ -41,7 +48,7 @@ for c in `seq 0 0`; do
             #		echo $k
             #	done
             file="t1.txt"
-            fn=`printf "%s__%s.tf" $ttft $cname`
+           
             echo $aws2tfmess > $fn
             while IFS= read line
             do
