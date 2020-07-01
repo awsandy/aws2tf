@@ -13,7 +13,6 @@ setup-local-git.sh
 test*
 *.new
 *.sav
-get*.sh
 clean*
 *.xlsx
 quotas
