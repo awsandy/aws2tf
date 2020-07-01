@@ -59,6 +59,9 @@ for c in `seq 0 0`; do
                          
                     if [[ ${tt1} == "user_data" ]];then 
                         skip=0
+                        printf "lifecycle {\n" >> $fn
+                        printf "   ignore_changes = [\"user_data\"]\n" >> $fn
+                        printf "}\n" >> $fn
                         t1=`printf "user_data_base64 = %s" $ud`
                     fi          
                     if [[ ${tt1} == "role_arn" ]];then skip=1;fi
