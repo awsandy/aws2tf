@@ -2,7 +2,7 @@ usage()
 { echo "Usage: $0 [-p <profile>(Default="default") ] [-c <yes|no(default)>] [-t <type>] [-r <region>] [-x <yes|no(default)>]" 1>&2; exit 1;
 }
 x="no"
-p="default"
+p="iam"
 f="no"
 v="no"
 r="no"
@@ -163,7 +163,7 @@ if [ "$c" == "no" ]; then
     terraform init 2>&1 | tee -a import.log
 fi
 
-
+exclude="iam"
 #############################################################################
 
 date
@@ -172,7 +172,10 @@ echo "t=$t"
 echo "loop through providers"
 pwd
 for com in `ls ../../scripts/$pre-get-*$t*.sh | cut -d'/' -f4 | sort -g`; do    
-        echo "$com"
+    echo "$com"
+    if [[ "$com" == *"${exclude}"*]]; then
+        echo "skipping $com"
+    else
         docomm=". ../../scripts/$com $i"
         if [ "$f" = "no" ]; then
             eval $docomm 2>&1 | tee -a import.log
@@ -203,7 +206,7 @@ for com in `ls ../../scripts/$pre-get-*$t*.sh | cut -d'/' -f4 | sort -g`; do
 
         echo "$docomm" >> processed.txt
         
-    
+    fi
     
 done
 
