@@ -36,7 +36,7 @@ for c in `seq 0 0`; do
             if [ "$nl" != "0" ]; then
                 nl=`expr $nl - 1`
                 for ni in `seq 0 $nl`; do
-                    nif=`echo $nets | jq ".${pref[(${c})]}[(${i})].Instances[].NetworkInterfaces[(${ni})].NetworkInterfaceId"`
+                    nif=`echo $nets | jq ".[(${ni})].NetworkInterfaceId" | tr -d '"'`
                     echo $nif
                 done
             fi
