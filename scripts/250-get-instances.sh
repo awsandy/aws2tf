@@ -27,7 +27,7 @@ for c in `seq 0 0`; do
             # get instance user_data
 
             ud=`$AWS ec2 describe-instance-attribute --instance-id $cname --attribute userData | jq .UserData.Value`
-            echo "user_date=$ud"
+            #echo "user_date=$ud"
             $AWS ec2 describe-instance-attribute --instance-id $cname --attribute userData | jq .UserData.Value | tr -d '"' | base64 --decode > $cname.sh
 
             nets=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Instances[].NetworkInterfaces"`
