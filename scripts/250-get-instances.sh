@@ -25,7 +25,22 @@ for c in `seq 0 0`; do
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Instances[].InstanceId" | tr -d '"'`
             echo $cname
             # get instance user_data
+
+            ud=`$AWS ec2 describe-instance-attribute --instance-id $cname --attribute userData | jq .UserData.Value`
+            echo "user_date=$ud"
             $AWS ec2 describe-instance-attribute --instance-id $cname --attribute userData | jq .UserData.Value | tr -d '"' | base64 --decode > $cname.sh
+
+            nets=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Instances[].NetworkInterfaces"`
+            nl=`echo $nets | jq ". | length"`
+            echo "netifs= $nl"
+            if [ "$nl" != "0" ]; then
+                nl=`expr $nl - 1`
+                for ni in `seq 0 $nl`; do
+                    nif=`echo $nets | jq ".${pref[(${c})]}[(${i})].Instances[].NetworkInterfaces[(${ni}).NetworkInterfaceId"`
+                    echo $nif
+                done
+            fi
+
 
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
@@ -48,7 +63,10 @@ for c in `seq 0 0`; do
                     tt1=`echo "$line" | cut -f1 -d'=' | tr -d ' '` 
                     tt2=`echo "$line" | cut -f2- -d'='`
                     if [[ ${tt1} == "arn" ]];then skip=1; fi                
-                    if [[ ${tt1} == "id" ]];then skip=1; fi          
+                    if [[ ${tt1} == "id" ]];then 
+                        skip=0
+                        t1=`printf "user_data_base64 = %s" $ud`
+                    fi          
                     if [[ ${tt1} == "role_arn" ]];then skip=1;fi
                     if [[ ${tt1} == "primary_network_interface_id" ]];then skip=1;fi
                     if [[ ${tt1} == "instance_state" ]];then skip=1;fi
