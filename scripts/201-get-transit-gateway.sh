@@ -71,6 +71,11 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
+
+            ddf=`printf "data_%s__%s.tf" $ttft $cname`
+            printf "data \"%s\" \"%s\" {\n" $ttft $cname > $dfn
+            printf "id = \"%s\"\n" $cname >> $dfn
+            printf "}\n" $ttft $cname >> $dfn
             
         done
     fi
