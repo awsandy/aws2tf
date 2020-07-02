@@ -21,6 +21,12 @@ for c in `seq 0 0`; do
             #echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}.InstanceProfileName" | tr -d '"'`
             echo $cname
+            fn=`printf "%s__%s.tf" $ttft $cname`
+            if [ -f "$fn" ] ; then
+                echo "$fn exists already skipping"
+                continue
+            fi
+        
             instroles=`echo $awsout | jq ".${pref[(${c})]}.Roles"`
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
