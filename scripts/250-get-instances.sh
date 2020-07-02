@@ -121,7 +121,8 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
-            pfnm=`echo $awsout | jq ".Reservations[0].Instances[].IamInstanceProfile.Arn" | cut -f2 -d'/' | tr -d '"'`
+            pfnm=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Instances[].IamInstanceProfile.Arn" | cut -f2 -d'/' | tr -d '"'`
+            echo "------ $pfnm -------"
             ../../scripts/get-inprof.sh $pfnm
 
             ## need the vpc
