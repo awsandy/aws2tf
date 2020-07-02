@@ -5,14 +5,14 @@ if [ "$1" == "null" ]; then
     exit 
 fi
 cmd[0]="$AWS iam get-instance-profile --instance-profile-name $1"
-pref[0]="InstanceProfiles"
+pref[0]="InstanceProfile"
 tft[0]="aws_iam_instance_profile"
 
 for c in `seq 0 0`; do
    
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
-	#echo $cm
+	echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
     if [ "$count" -gt "0" ]; then

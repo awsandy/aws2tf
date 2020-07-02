@@ -27,6 +27,8 @@ for c in `seq 0 0`; do
                 echo "$fn exists already skipping"
                 continue
             fi
+
+
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
