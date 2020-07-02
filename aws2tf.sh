@@ -130,8 +130,8 @@ fi
 fi
 
 if [ "$t" == "tgw" ]; then
-pre="*"
-t="type-get-transitgw"
+pre="type"
+t="transitgw"
 if [ "$i" == "no" ]; then
     echo "TGW Id null exiting - specify with -i <tgw-id>"
     exiting
