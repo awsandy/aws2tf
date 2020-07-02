@@ -146,6 +146,7 @@ for c in `seq 0 0`; do
                     nif=`echo $nets | jq ".[(${ni})].NetworkInterfaceId" | tr -d '"'`
                     echo $ni $nif
                     ../../scripts/get-eni.sh $nif
+                    ../../scripts/get-instance-network-interface-attachment.sh $nif
                 done
             fi
             
