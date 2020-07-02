@@ -19,9 +19,9 @@ for c in `seq 0 0`; do
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
             #echo $i
-            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].InstanceProfileName" | tr -d '"'`
+            cname=`echo $awsout | jq ".${pref[(${c})]}.InstanceProfileName" | tr -d '"'`
             echo $cname
-            instroles=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Roles"`
+            instroles=`echo $awsout | jq ".${pref[(${c})]}.Roles"`
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
             terraform import $ttft.$cname $cname
