@@ -14,7 +14,7 @@ for c in `seq 0 0`; do
 	ttft=${tft[(${c})]}
 	echo $cm
     awsout=`eval $cm`
-    count=`echo $awsout | jq ".${pref[(${c})]} | length"`
+    count=1 # as only one profile name
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
