@@ -45,6 +45,8 @@ for c in `seq 0 0`; do
                 continue 
             fi
 
+            
+
             fn=`printf "%s__%s.tf" $ttft $cname`
             devind=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Attachment.DeviceIndex" | tr -d '"'`
             insid=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Attachment.InstanceId" | tr -d '"'`
