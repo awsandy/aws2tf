@@ -9,6 +9,10 @@ fi
 pref[0]="NetworkInterfaces"
 tft[0]="aws_network_interface_attachment"
 
+cloud9s=`aws ec2 describe-instances --filters "Name=tag-key,Values=aws:cloud9*" | jq .Reservations[].Instances[].InstanceId`
+asis=`aws ec2 describe-instances --filters "Name=tag-key,Values=aws:autoscaling*" | jq .Reservations[].Instances[].InstanceId`
+
+
 for c in `seq 0 0`; do
     
     cm=${cmd[$c]}
@@ -22,6 +26,25 @@ for c in `seq 0 0`; do
             #echo $i
             cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].NetworkInterfaceId" | tr -d '"'`
             echo $cname
+            for ci in `echo $cloud9s`;do
+                c9=`echo $ci | tr -d '"'`
+                if [ "$c9" == "$cname" ]; then
+                    echo "Instance is cloud9 skipping ....."
+                    skipit=1
+                fi
+            done
+            for ci in `echo $asis`;do
+                c9=`echo $ci | tr -d '"'`
+                if [ "$c9" == "$cname" ]; then
+                    echo "Instance is Autoscaling skipping ....."
+                    skipit=1
+                fi
+            done
+            if [[ $skipit -eq 1 ]];then
+                echo "breaking ..."
+                continue 
+            fi
+
             fn=`printf "%s__%s.tf" $ttft $cname`
             devind=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Attachment.DeviceIndex" | tr -d '"'`
             insid=`echo $awsout | jq ".${pref[(${c})]}[(${i})].Attachment.InstanceId" | tr -d '"'`
