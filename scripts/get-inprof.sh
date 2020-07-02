@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$1" == "null" ]; then 
-    echo "****inst prof $1"
+    echo "****inst prof $1 *****"
     exit 
 fi
 cmd[0]="$AWS iam get-instance-profile --instance-profile-name $1"
