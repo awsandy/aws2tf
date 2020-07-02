@@ -57,9 +57,23 @@ for c in `seq 0 0`; do
                     #if [[ ${tt1} == "default_network_acl_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_association_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "ipv6_cidr_block" ]];then skip=1;fi
+                    if [[ ${tt1} == "network_interface_id" ]]; then
+                        tt2=`echo $tt2 | tr -d '"'`
+                        if [ "$tt2" != "" ]; then
+                            t1=`printf "%s = aws_network_interface.%s.id" $tt1 $tt2`
+                        fi
+                    fi              
+                    if [[ ${tt1} == "instance_id" ]]; then
+                        tt2=`echo $tt2 | tr -d '"'`
+                        if [ "$tt2" != "" ]; then
+                            t1=`printf "%s = aws_instance.%s.id" $tt1 $tt2`
+                        fi
+                    fi
                     if [[ ${tt1} == "vpc_id" ]]; then
                         tt2=`echo $tt2 | tr -d '"'`
-                        t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
+                        if [ "$tt2" != "" ]; then
+                            t1=`printf "%s = aws_vpc.%s.id" $tt1 $tt2`
+                        fi
                     fi
                     if [[ ${tt1} == "nat_gateway_id" ]]; then
                         tt2=`echo $tt2 | tr -d '"'`
