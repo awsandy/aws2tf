@@ -80,6 +80,12 @@ for i in `cat tf1.tmp` ; do
 
     ttft=`echo $i | cut -d'.' -f1`
     cname=`echo $i | cut -d'.' -f2`
+
+
+    if [ -f "$fn" ] ; then
+        echo "$fn exists already skipping"
+        continue
+    fi
     
     cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
 
