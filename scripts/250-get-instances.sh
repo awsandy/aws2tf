@@ -96,6 +96,10 @@ for c in `seq 0 0`; do
                     #if [[ ${tt1} == "user_data" ]];then 
                     #    t1=`printf "%s = file(\"%s.sh\")" $tt1 $cname`
                     #fi
+                    # These are rarely used
+                    if [[ ${tt1} == "cpu_core_count" ]];then skip=1;fi
+                    if [[ ${tt1} == "cpu_threads_per_core" ]];then skip=1;fi
+
                     if [[ ${tt1} == "public_ip" ]];then skip=1;fi
                     if [[ ${tt1} == "public_dns" ]];then skip=1;fi
                     if [[ ${tt1} == "device_name" ]];then skip=1;fi
