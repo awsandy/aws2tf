@@ -100,6 +100,7 @@ for c in `seq 0 0`; do
                     if [[ ${tt1} == "cpu_core_count" ]];then skip=1;fi
                     if [[ ${tt1} == "cpu_threads_per_core" ]];then skip=1;fi
 
+                    if [[ ${tt1} == "private_ip" ]];then skip=1;fi
                     if [[ ${tt1} == "public_ip" ]];then skip=1;fi
                     if [[ ${tt1} == "public_dns" ]];then skip=1;fi
                     if [[ ${tt1} == "device_name" ]];then skip=1;fi
