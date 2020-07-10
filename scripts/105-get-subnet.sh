@@ -31,6 +31,7 @@ for c in `seq 0 0`; do
             fi
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" $cname >> $ttft.$cname.tf
+            printf "terraform import %s.%s %s" $ttft $cname $cname > import_$ttft_$cname.sh
             terraform import $ttft.$cname $cname
             terraform state show $ttft.$cname > t2.txt
             tfa=`printf "%s.%s" $ttft $cname`
@@ -70,6 +71,11 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
+
+            dfn=`printf "data_%s__%s.tf" $ttft $cname`
+            printf "data \"%s\" \"%s\" {\n" $ttft $cname > $dfn
+            printf "id = \"%s\"\n" $cname >> $dfn
+            printf "}\n" $ttft $cname >> $dfn
             
         done
     fi
