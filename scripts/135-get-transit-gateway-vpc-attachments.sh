@@ -1,8 +1,8 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="$AWS ec2 describe-transit-gateway-vpc-attachments --filters \"Name=vpc-id,Values=$1\"" 
+    cmd[0]="$AWS ec2 describe-transit-gateway-vpc-attachments --filters \"Name=vpc-id,Values=$1\" \"Name=state,Values=available\"" 
 else
-    cmd[0]="$AWS ec2 describe-transit-gateway-vpc-attachments"
+    cmd[0]="$AWS ec2 describe-transit-gateway-vpc-attachments --filters \"Name=state,Values=available\""
 fi
 
 pref[0]="TransitGatewayVpcAttachments"
