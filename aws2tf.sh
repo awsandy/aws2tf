@@ -236,5 +236,5 @@ echo "Terraform Plan ..."
 terraform plan .
 
 echo "---------------------------------------------------------------------------"
-echo "aws2tf output files are in generated/tf.$mysub"
+echo "aws2tf output files are in aws2tf/generated/tf.$mysub"
 echo "---------------------------------------------------------------------------"
