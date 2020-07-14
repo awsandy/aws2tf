@@ -4,7 +4,7 @@ tft[0]="aws_ec2_transit_gateway"
 c=0
 ttft=${tft[(${c})]}
 if [ "$1" != "" ]; then
-    cmd[0]="$AWS ec2 describe-transit-gateways --transit-gateway-ids $1 \"Name=state,Values=available\"" 
+    cmd[0]="$AWS ec2 describe-transit-gateways --transit-gateway-ids $1 --filters \"Name=state,Values=available\"" 
     cname=$1
     fn=`printf "%s__%s.tf" $ttft $cname`
     if [ -f "$fn" ] ; then
