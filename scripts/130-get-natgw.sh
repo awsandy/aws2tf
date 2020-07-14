@@ -92,9 +92,10 @@ for c in `seq 0 0`; do
             ../../scripts/get-eip.sh $eipall
             
         done
+        terraform fmt
+        terraform validate
     fi
 done
-terraform fmt
-terraform validate
+
 rm -f t*.txt
 
