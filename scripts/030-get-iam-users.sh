@@ -1,17 +1,8 @@
 #!/bin/bash
-if [ "$1" != "" ]; then
-    if [ "$1" == "arn:aws:iam"* ]; then
-        cmd[0]="$AWS iam list-roles | jq '.Roles[] | select(.Arn==\"${1}\")'"
-    else
-        cmd[0]="$AWS iam list-roles | jq '.Roles[] | select(.RoleName==\"${1}\")'"
-    fi
-else
-    cmd[0]="$AWS iam list-roles"
-fi
+cmd[0]="$AWS iam list-users"
 
-
-pref[0]="Roles"
-tft[0]="aws_iam_role"
+pref[0]="Users"
+tft[0]="aws_iam_user"
 
 for c in `seq 0 0`; do
     
@@ -31,9 +22,9 @@ for c in `seq 0 0`; do
         for i in `seq 0 $count`; do
             #echo $i
             if [ "$1" != "" ]; then
-                cname=`echo $awsout | jq ".RoleName" | tr -d '"'` 
+                cname=`echo $awsout | jq ".UserName" | tr -d '"'` 
             else
-                cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].RoleName" | tr -d '"'`
+                cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].UserName" | tr -d '"'`
             fi
             ocname=`echo $cname`
             cname=${cname//./_}
@@ -88,20 +79,12 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"   # done while
+            ##../../scripts/get-iam-groups-for-user.sh $cname
             
         done # done for i
-        # Get attached role policies
-        pwd
-        echo "role policies $ocname"
-        ../../scripts/051-get-iam-role-policies.sh $ocname
-         echo "attached role policies $ocname"
-        ../../scripts/052-get-iam-attached-role-policies.sh $ocname
-        
-        echo "fmt"
+        # Get attached role policies       
         terraform fmt
-        echo "validate"
         terraform validate
-    
     fi
 done
 

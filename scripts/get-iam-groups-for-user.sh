@@ -1,17 +1,13 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    if [ "$1" == "arn:aws:iam"* ]; then
-        cmd[0]="$AWS iam list-roles | jq '.Roles[] | select(.Arn==\"${1}\")'"
-    else
-        cmd[0]="$AWS iam list-roles | jq '.Roles[] | select(.RoleName==\"${1}\")'"
-    fi
+    cmd[0]="$AWS iam list-groups-for-user --user-name $1"
 else
-    cmd[0]="$AWS iam list-roles"
+    echo "Must specify a user exiting..."
+    exit
 fi
 
-
-pref[0]="Roles"
-tft[0]="aws_iam_role"
+pref[0]="Groups"
+tft[0]="aws_iam_user_group_membership"
 
 for c in `seq 0 0`; do
     
@@ -20,25 +16,20 @@ for c in `seq 0 0`; do
     ttft=${tft[(${c})]}
     echo $cm
     awsout=`eval $cm`
-    if [ "$1" != "" ]; then
-        count=1
-    else
-        count=`echo $awsout | jq ".${pref[(${c})]} | length"`
-    fi
-    #echo "count=$count"
+
+    count=`echo $awsout | jq ".${pref[(${c})]} | length"`
+    
+    echo "count=$count"
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
             #echo $i
-            if [ "$1" != "" ]; then
-                cname=`echo $awsout | jq ".RoleName" | tr -d '"'` 
-            else
-                cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].RoleName" | tr -d '"'`
-            fi
+
+            cname=`echo $awsout | jq ".${pref[(${c})]}[(${i})].GroupName" | tr -d '"'`
             ocname=`echo $cname`
             cname=${cname//./_}
             echo $cname
-            fn=`printf "%s__%s.tf" $ttft $cname`
+            fn=`printf "%s__%s.tf" $ttft $1__$cname`
             if [ -f "$fn" ] ; then
                 echo "$fn exists already skipping"
                 exit
@@ -47,14 +38,16 @@ for c in `seq 0 0`; do
 
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" >> $ttft.$cname.tf
-            terraform import $ttft.$cname $ocname
+            terraform import $ttft.$cname "$1/$cname"
             terraform state show $ttft.$cname > t2.txt
             rm $ttft.$cname.tf
             cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
             #	for k in `cat t1.txt`; do
             #		echo $k
             #	done
-            file="t1.txt"
+            file="t1.txt $1/$cname"
+            echo "lines in t1" 
+            wc -l tx.txt
 
             echo $aws2tfmess > $fn
             while IFS= read line
@@ -90,18 +83,9 @@ for c in `seq 0 0`; do
             done <"$file"   # done while
             
         done # done for i
-        # Get attached role policies
-        pwd
-        echo "role policies $ocname"
-        ../../scripts/051-get-iam-role-policies.sh $ocname
-         echo "attached role policies $ocname"
-        ../../scripts/052-get-iam-attached-role-policies.sh $ocname
-        
-        echo "fmt"
+        # Get attached role policies       
         terraform fmt
-        echo "validate"
         terraform validate
-    
     fi
 done
 

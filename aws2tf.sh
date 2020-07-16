@@ -67,14 +67,12 @@ cd generated/tf.$mysub
 if [ "$f" = "no" ]; then
     if [ "$c" = "no" ]; then
         echo "Cleaning generated/tf.$mysub"
-        rm -f resources*.txt
+        rm -f resources*.txt *.sh
         rm -f processed.txt
         rm -f *.tf *.json
         rm -f terraform.*
-        rm -rf .terraform
-    
+        rm -rf .terraform   
     fi
-
 else
     sort -u processed.txt > pt.txt
     cp pt.txt processed.txt
@@ -164,6 +162,12 @@ if [ "$c" == "no" ]; then
 fi
 
 exclude="iam"
+
+if [ "$t" == "iam" ]; then
+pre="03*"
+exclude="xxxxxxx"
+fi
+
 #############################################################################
 
 date
