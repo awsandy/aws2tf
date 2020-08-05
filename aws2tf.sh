@@ -59,7 +59,7 @@ if [ "$mysub" == "null" ]; then
     exit
 fi
 
-mkdir -p generated/tf.$mysub
+mkdir -p generated/tf.$mysub/data
 
 s=`echo $mysub`
 cd generated/tf.$mysub
