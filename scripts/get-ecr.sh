@@ -1,13 +1,13 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="$AWS ec2 describe-subnets --filters \"Name=vpc-id,Values=$1\"" 
+    cmd[0]="$AWS ecr describe-repositories --repository-names \"$1\"" 
 else
-    cmd[0]="$AWS ec2 describe-subnets"
+    cmd[0]="$AWS ecr describe-repositories"
 fi
 
-pref[0]="Subnets"
-tft[0]="aws_subnet"
-idfilt[0]="SubnetId"
+pref[0]="repositories"
+tft[0]="aws_ecr_repository"
+idfilt[0]="repositoryName"
 
 #rm -f ${tft[0]}.tf
 
