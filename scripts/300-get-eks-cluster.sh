@@ -67,7 +67,7 @@ if [ "$kcount" -gt "0" ]; then
         ../../scripts/141*.sh $tcmd  # route table assoc
 
         rarn=`echo $awsout | jq ".${pref[(${c})]}.roleArn" | tr -d '"'`
-        echo $rarn
+        echo "rarn=$rarn"
         ../../scripts/050-get-iam-roles.sh $rarn
         csg=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.clusterSecurityGroupId" | tr -d '"'`
             #../../scripts/103-get-security_group.sh $csg
@@ -78,8 +78,9 @@ if [ "$kcount" -gt "0" ]; then
                 #../../scripts/103-get-security_group.sh $s1
         done
 
-
-            fgp=`$AWS eks list-fargate-profiles --cluster-name $cln`
+        fgp=`$AWS eks list-fargate-profiles --cluster-name $cln`
+        echo "fgp=${fgp}"
+        if [ "$fgp" == "" ]; then
             np=`echo $fgp | jq ".fargateProfileNames | length"`
             if [ "$np" -gt "0" ]; then
                 np=`expr $np - 1`
@@ -100,8 +101,7 @@ if [ "$kcount" -gt "0" ]; then
 
                 done # end for p
             fi
-        
-        
+        fi      
 
         echo "pre-reqs complete - getting EKS"
               

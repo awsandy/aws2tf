@@ -155,7 +155,7 @@ if [ "$kcount" -gt "0" ]; then
                 #echo "finish refresh"
                 rm -f t*.txt
 
-                echo $rarn
+                #echo $rarn
                 ../../scripts/050-get-iam-roles.sh $rarn
             fi
 

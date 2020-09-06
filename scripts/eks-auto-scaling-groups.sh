@@ -84,6 +84,15 @@ for t in ${asgs[@]}; do
                         t1=`printf "%s = aws_subnet.%s.id" $tt1 $tt2`
                     fi
 
+                    if [[ ${tt1} == "availability_zones" ]];then 
+                        skip=1
+                        while [[ "$t1" != "]" ]] ;do
+                            read line
+                            t1=`echo "$line"`
+                            echo $t1
+                        done
+                    fi
+
                 #
                 else
                     if [[ "$t1" == *"subnet-"* ]]; then

@@ -1,6 +1,7 @@
 #!/bin/bash
-if [ "$1" != "" ]; then
-    if [ "$1" == "arn:aws:iam"* ]; then
+if [[ "$1" != "" ]]; then
+   
+    if [[ ${1} == "arn:aws:iam"* ]]; then
         cmd[0]="$AWS iam list-roles | jq '.Roles[] | select(.Arn==\"${1}\")'"
     else
         cmd[0]="$AWS iam list-roles | jq '.Roles[] | select(.RoleName==\"${1}\")'"
@@ -47,6 +48,7 @@ for c in `seq 0 0`; do
 
             printf "resource \"%s\" \"%s\" {" $ttft $cname > $ttft.$cname.tf
             printf "}" >> $ttft.$cname.tf
+            echo $ttft.$cname $ocname
             terraform import $ttft.$cname $ocname
             terraform state show $ttft.$cname > t2.txt
             rm $ttft.$cname.tf
