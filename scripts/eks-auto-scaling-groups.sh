@@ -89,7 +89,7 @@ for t in ${asgs[@]}; do
                         while [[ "$t1" != "]" ]] ;do
                             read line
                             t1=`echo "$line"`
-                            echo $t1
+                            #echo $t1
                         done
                     fi
 
