@@ -16,35 +16,32 @@ if [ "$kcount" -gt "0" ]; then
         if [ "$1" != "" ]; then
             cln=`echo $1`
         else
-            cln=`$AWS eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`
-           
+            cln=`$AWS eks list-clusters  | jq ".clusters[(${k})]" | tr -d '"'`         
         fi
         echo cluster name $cln  
          
         cmd[0]=`echo "$AWS eks describe-cluster --name $cln"` 
         cm=${cmd[$c]}
         awsout=`eval $cm`
-        
-     
             
-            tcmd=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.vpcId" | tr -d '"'`
-            ../../scripts/100* $tcmd  # vpc
-            ../../scripts/101* $tcmd  # vpc cidrs
-            ../../scripts/105* $tcmd  # subnets
+        tcmd=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.vpcId" | tr -d '"'`
+        ../../scripts/100* $tcmd  # vpc
+        ../../scripts/101* $tcmd  # vpc cidrs
+        ../../scripts/105* $tcmd  # subnets
             ## EKS creates it's own SG's - no it doesn't
-            ../../scripts/110*.sh $tcmd  # security groups
+        ../../scripts/110*.sh $tcmd  # security groups
             
             # don't keep eni's - created by nat gw and node group instances
             # still need to call as eip is nested from eni's
 
-            rm -f aws_network_interface*.tf
+        rm -f aws_network_interface*.tf
             # need to rip out eni state
-            terraform state list | grep aws_network_interface > tf2.tmp
-            for ts in `cat tf2.tmp` ; do
-                terraform state rm $ts > t2.txt
-            done
+        terraform state list | grep aws_network_interface > tf2.tmp
+        for ts in `cat tf2.tmp` ; do
+            terraform state rm $ts > t2.txt
+        done
 
-            `
+        
             
             ## this needs to loop !!
             ## this is now done in NatGW code 
@@ -60,26 +57,26 @@ if [ "$kcount" -gt "0" ]; then
             #fi
    
 
-            ../../scripts/120*.sh $tcmd  # igw
-            ../../scripts/130*.sh $tcmd  # nat gw
+        ../../scripts/120*.sh $tcmd  # igw
+        ../../scripts/130*.sh $tcmd  # nat gw
             # still need to call as eip is nested from nat gw
-            ../../scripts/135*.sh $tcmd  # TGW
+        ../../scripts/135*.sh $tcmd  # TGW
 
             ## need these or will it do it's own ?
-            ../../scripts/140*.sh $tcmd  # route table
-            ../../scripts/141*.sh $tcmd  # route table assoc
+        ../../scripts/140*.sh $tcmd  # route table
+        ../../scripts/141*.sh $tcmd  # route table assoc
 
-            rarn=`echo $awsout | jq ".${pref[(${c})]}.roleArn" | tr -d '"'`
-            echo $rarn
-            ../../scripts/050-get-iam-roles.sh $rarn
-            csg=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.clusterSecurityGroupId" | tr -d '"'`
+        rarn=`echo $awsout | jq ".${pref[(${c})]}.roleArn" | tr -d '"'`
+        echo $rarn
+        ../../scripts/050-get-iam-roles.sh $rarn
+        csg=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.clusterSecurityGroupId" | tr -d '"'`
             #../../scripts/103-get-security_group.sh $csg
 
-            sgs=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.securityGroupIds[]" | tr -d '"'`
-            for s1 in `echo $sgs` ; do
-                echo $s1
+        sgs=`echo $awsout | jq ".${pref[(${c})]}.resourcesVpcConfig.securityGroupIds[]" | tr -d '"'`
+        for s1 in `echo $sgs` ; do
+            echo $s1
                 #../../scripts/103-get-security_group.sh $s1
-            done
+        done
 
 
             fgp=`$AWS eks list-fargate-profiles --cluster-name $cln`
@@ -101,7 +98,7 @@ if [ "$kcount" -gt "0" ]; then
                     #../../scripts/fargate_profile.sh $cname
 
 
-                done
+                done # end for p
             fi
         
         
@@ -221,7 +218,9 @@ if [ "$kcount" -gt "0" ]; then
             fi
         done # done for c
     # address supporting eks cluster resources
+
     ../../scripts/get-eks-cluster-nodegroups.sh $cln
+    
     done  # k  
 fi
 

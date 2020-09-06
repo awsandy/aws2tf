@@ -2,7 +2,7 @@
 if [ "$1" != "" ]; then
     cmd[0]="$AWS ec2 describe-launch-templates --launch-template-ids $1"
 else
-    echo "Cluster name not set exiting"
+    echo "launch template id not set exiting"
     exit
 fi
 c=0
@@ -37,6 +37,7 @@ for c in `seq 0 0`; do
             #		echo $k
             #	done
             file="t1.txt"
+            $AWS ec2 describe-launch-template-versions --launch-template-id $cname | jq .LaunchTemplateVersions[0].LaunchTemplateData.UserData | tr -d '"' | base64 --decode > $cname.sh
             fn=`printf "%s__%s.tf" $ttft $cname`
             echo $aws2tfmess > $fn
             while IFS= read line
