@@ -147,7 +147,7 @@ fi
 
 
 if [ "$t" == "eks" ]; then
-pre="3*"
+pre="30*"
 if [ "$i" == "no" ]; then
     echo "Cluster Name null exiting - specify with -i <cluster-name>"
     exit

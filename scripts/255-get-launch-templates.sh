@@ -36,6 +36,9 @@ for c in `seq 0 0`; do
             #	for k in `cat t1.txt`; do
             #		echo $k
             #	done
+
+            ud=`$AWS ec2 describe-launch-template-versions --launch-template-id $cname  | jq .LaunchTemplateVersions[0].LaunchTemplateData.UserData | tr -d '"' | base64 --decode`          
+            $AWS ec2 describe-launch-template-versions --launch-template-id $cname | jq .LaunchTemplateVersions[0].LaunchTemplateData.UserData | tr -d '"' | base64 --decode > $cname.sh
             file="t1.txt"
             fn=`printf "%s__%s.tf" $ttft $cname`
             echo $aws2tfmess > $fn

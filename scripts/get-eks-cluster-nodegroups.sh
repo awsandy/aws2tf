@@ -139,7 +139,12 @@ if [ "$kcount" -gt "0" ]; then
                                 fi
                                 
                             done <"$file"   # done while
-                            
+
+                            # pick up the launch template here
+                            ltid=`echo $awsout | jq .nodegroup.launchTemplate.id | tr -d '"'`
+                            echo "ltid=$ltid"
+                            ../../scripts/eks-launch_template.sh $ltid
+                     
                         done # done for i
                     fi
                 done
@@ -162,7 +167,7 @@ if [ "$kcount" -gt "0" ]; then
     done
 fi
 
-## Look for unmanaged Nodes vis autoscaloing group
+## Look for unmanaged Nodes vis autoscaling group
 
 ../../scripts/eks-auto-scaling-groups.sh $cln
 
