@@ -1,13 +1,13 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="$AWS configservice describe-config-rules  --config-rule-names $1" 
+    cmd[0]="$AWS configservice describe-configuration-recorder-status  --configuration-recorder-names $1" 
 else
-    cmd[0]="$AWS configservice describe-config-rules"
+    cmd[0]="$AWS configservice describe-configuration-recorder-status"
 fi
 
-pref[0]="ConfigRules"
-tft[0]="aws_config_config_rule"
-idfilt[0]="ConfigRuleName"
+pref[0]="ConfigurationRecordersStatus"
+tft[0]="aws_config_configuration_recorder_status"
+idfilt[0]="name"
 
 #rm -f ${tft[0]}.tf
 
@@ -71,7 +71,6 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
-
             
         done
         terraform fmt

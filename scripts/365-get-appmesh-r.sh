@@ -9,14 +9,15 @@ fi
 pref[0]="routes"
 tft[0]="aws_appmesh_route"
 idfilt[0]="routeName"
-
+echo "*************************"
+echo $1 $2
 #rm -f ${tft[0]}.tf
 
 for c in `seq 0 0`; do
     
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
-	#echo $cm
+	echo $cm
     awsout=`eval $cm`
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
     if [ "$count" -gt "0" ]; then
@@ -28,17 +29,17 @@ for c in `seq 0 0`; do
             rname=${cname//:/_}
             rname=${rname//./_}
             rname=${rname//\//_}
-            echo $rname
+            echo "365 rname=$rname"
 
-            fn=`printf "%s__%s__%s.tf" $ttft $1 $rname`
+            fn=`printf "%s__%s__%s__%s.tf" $ttft $1 $2 $rname`
             if [ -f "$fn" ] ; then
                 echo "$fn exists already skipping"
                 continue
             fi
-            printf "resource \"%s\" \"%s__%s__%s\" {" $ttft $1 $2 $rname > $ttft.$1__$rname.tf
-            printf "}" >> $ttft.$1__$rname.tf
-            printf "terraform import %s.%s__%s__%s %s/%s/%s" $ttft $1 $2 $rname $1 $2 $cname > import_$ttft_$1_$2_$cname.sh
-            terraform import $ttft.$1__$rname $1/$2/$cname
+            printf "resource \"%s\" \"%s__%s__%s\" {" $ttft $1 $2 $rname > $ttft.$1__$2__$rname.tf
+            printf "}" >> $ttft.$1__$2__$rname.tf
+            printf "terraform import %s.%s__%s__%s %s/%s/%s" $ttft $1 $2 $rname $1 $2 $cname > import_$ttft_$1_$2_$rname.sh
+            terraform import $ttft.$1__$2__$rname $1/$2/$cname
             terraform state show $ttft.$1__$2__$rname > t2.txt
             tfa=`printf "%s.%s__%s__%s" $ttft $1 $2 $rname`
             terraform show  -json | jq --arg myt "$tfa" '.values.root_module.resources[] | select(.address==$myt)' > $tfa.json
@@ -81,8 +82,7 @@ for c in `seq 0 0`; do
 
             
         done
-        terraform fmt
-        terraform validate
+
     fi
 done
 

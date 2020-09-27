@@ -1,13 +1,13 @@
 #!/bin/bash
 if [ "$1" != "" ]; then
-    cmd[0]="$AWS configservice describe-config-rules  --config-rule-names $1" 
+    cmd[0]="$AWS configservice describe-config-rules  --configuration-recorder-names $1" 
 else
-    cmd[0]="$AWS configservice describe-config-rules"
+    cmd[0]="$AWS configservice describe-configuration-recorders"
 fi
 
-pref[0]="ConfigRules"
-tft[0]="aws_config_config_rule"
-idfilt[0]="ConfigRuleName"
+pref[0]="ConfigurationRecorders"
+tft[0]="aws_config_configuration_recorder"
+idfilt[0]="name"
 
 #rm -f ${tft[0]}.tf
 
@@ -54,7 +54,7 @@ for c in `seq 0 0`; do
                     tt2=`echo "$line" | cut -f2- -d'='`
                     if [[ ${tt1} == "arn" ]];then skip=1; fi                
                     if [[ ${tt1} == "id" ]];then skip=1; fi          
-                    if [[ ${tt1} == "role_arn" ]];then skip=1;fi
+                    #if [[ ${tt1} == "role_arn" ]];then skip=1;fi
                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
                     if [[ ${tt1} == "rule_id" ]];then skip=1;fi
                     #if [[ ${tt1} == "availability_zone" ]];then skip=1;fi
@@ -71,7 +71,6 @@ for c in `seq 0 0`; do
                 fi
                 
             done <"$file"
-
             
         done
         terraform fmt
