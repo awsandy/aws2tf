@@ -9,6 +9,10 @@ else
     echo "Cluster name not set exiting"
     exit
 fi
+
+# check if related to a node group
+
+
 c=0
 cm=${cmd[$c]}
 #echo $cm
@@ -16,6 +20,7 @@ cm=${cmd[$c]}
 asgs=`eval $cm`
 #echo $asgs
 for t in ${asgs[@]}; do
+    killer=0
     cname=`echo $t | tr -d '"'`
     #echo "cname=$cname"
     cm=`echo "${AWS} autoscaling describe-auto-scaling-groups --auto-scaling-group-names ${cname}"`
@@ -51,9 +56,11 @@ for t in ${asgs[@]}; do
 				skip=0
                 # display $line or do something with $line
                 t1=`echo "$line"` 
+                
                 if [[ ${t1} == *"="* ]];then
                     tt1=`echo "$line" | cut -f1 -d'=' | tr -d ' '` 
                     tt2=`echo "$line" | cut -f2- -d'='`
+                    #echo $tt2
                     if [[ ${tt1} == "arn" ]];then
                         if [[ ${tt2} == *"autoscaling"* ]];then
                             skip=1
@@ -93,6 +100,11 @@ for t in ${asgs[@]}; do
                         done
                     fi
 
+                    if [[ ${tt2} == *"eks:nodegroup-name"* ]];then 
+                        echo $tt2
+                        killer=1
+                    fi
+
                 #
                 else
                     if [[ "$t1" == *"subnet-"* ]]; then
@@ -114,9 +126,15 @@ for t in ${asgs[@]}; do
             done <"$file"
 
         # get the launch template
-        ltid=`echo $awsout | jq .AutoScalingGroups[0].LaunchTemplate.LaunchTemplateId | tr -d '"'`
-        echo "ltid=$ltid"
-        ../../scripts/eks-launch_template.sh $ltid
+
+        if [ "$killer" == "0" ]; then
+            ltid=`echo $awsout | jq .AutoScalingGroups[0].LaunchTemplate.LaunchTemplateId | tr -d '"'`
+            echo "ltid=$ltid"
+            ../../scripts/eks-launch_template.sh $ltid
+        else
+            rm -f $fn
+            terraform state rm $ttft.$cname
+        fi
             
 done # for t
 

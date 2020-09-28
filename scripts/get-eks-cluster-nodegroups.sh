@@ -74,6 +74,7 @@ if [ "$kcount" -gt "0" ]; then
                             file="t1.txt"
                             fn=`printf "%s__%s.tf" $ttft $cname`
                             echo $aws2tfmess > $fn
+                            iscust=0
                             while IFS= read line
                             do
                                 skip=0
@@ -90,13 +91,31 @@ if [ "$kcount" -gt "0" ]; then
                                     fi
                                     if [[ ${tt1} == "id" ]];then skip=1; fi
                                     #if [[ ${tt1} == "role_arn" ]];then skip=1;fi
+                                    if [[ ${tt1} == "ami_type" ]];then 
+                                        ## temp hack for AMI type
+                                        amit=`echo $tt2 | tr -d '"'`
+                                        if [[ ${amit} == "CUSTOM" ]];then
+                                            skip=1
+                                            iscust=1
+                                        fi
+                                    fi
                                     if [[ ${tt1} == "node_role_arn" ]];then 
-                                    rarn=`echo $tt2 | tr -d '"'`
+                                        rarn=`echo $tt2 | tr -d '"'`
                                     fi
                                     if [[ ${tt1} == "owner_id" ]];then skip=1;fi
                                     if [[ ${tt1} == "association_id" ]];then skip=1;fi
                                     if [[ ${tt1} == "unique_id" ]];then skip=1;fi
                                     if [[ ${tt1} == "create_date" ]];then skip=1;fi
+                                    if [[ ${tt1} == "version" ]];then 
+                                        if [ "$iscust" == "1" ]; then
+                                            skip=1;
+                                        fi
+                                    fi
+                                    if [[ ${tt1} == "release_version" ]];then 
+                                        if [ "$iscust" == "1" ]; then
+                                            skip=1;
+                                        fi
+                                    fi
                                     #if [[ ${tt1} == "certificate_authority" ]];then 
                                     # skip the block
                                     #    echo $SL
