@@ -70,7 +70,7 @@ if [ "$kcount" -gt "0" ]; then
                             rm $ttft.$cname.tf
                             #ls *.tf
                             cat t2.txt | perl -pe 's/\x1b.*?[mGKH]//g' > t1.txt
-
+                            mv="version"
                             file="t1.txt"
                             fn=`printf "%s__%s.tf" $ttft $cname`
                             echo $aws2tfmess > $fn
@@ -109,6 +109,7 @@ if [ "$kcount" -gt "0" ]; then
                                     if [[ ${tt1} == "version" ]];then 
                                         if [ "$iscust" == "1" ]; then
                                             skip=1;
+                                            iscust=0  # skip first occurance but not the second
                                         fi
                                     fi
                                     if [[ ${tt1} == "release_version" ]];then 

@@ -40,7 +40,7 @@ if [ "$kcount" -gt "0" ]; then
         for ts in `cat tf2.tmp` ; do
             terraform state rm $ts > t2.txt
         done
-
+        
         
             
             ## this needs to loop !!
@@ -65,6 +65,7 @@ if [ "$kcount" -gt "0" ]; then
             ## need these or will it do it's own ?
         ../../scripts/140*.sh $tcmd  # route table
         ../../scripts/141*.sh $tcmd  # route table assoc
+        ../../scripts/161*.sh $tcmd  # vpce
 
         rarn=`echo $awsout | jq ".${pref[(${c})]}.roleArn" | tr -d '"'`
         #echo "rarn=$rarn"
@@ -150,6 +151,12 @@ if [ "$kcount" -gt "0" ]; then
                             if [[ ${tt1} == *":"* ]];then
                                 t1=`printf "\"%s\"=%s" $tt1 $tt2`
                             fi
+                            #if [[ ${tt1} == "endpoint_public_access" ]];then
+                            #    # must start public and flick over
+                            #    t1=`printf "\"%s\"= false" $tt1`
+                            #fi
+
+
                             if [[ ${tt1} == "arn" ]];then skip=1; fi
                             if [[ ${tt1} == "id" ]];then skip=1; fi
                             if [[ ${tt1} == "role_arn" ]];then 
@@ -223,6 +230,11 @@ if [ "$kcount" -gt "0" ]; then
     
     done  # k  
 fi
+
+#### potfix private net
+####  endpoint_public_access  = true
+
+
 
 echo "fmt"
 terraform fmt

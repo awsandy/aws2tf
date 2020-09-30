@@ -107,6 +107,10 @@ for c in `seq 0 0`; do
                         t1=`echo $t1 | tr -d '"|,'`
                         t1=`printf "aws_security_group.%s.id," $t1`
                     fi
+                    if [[ "$t1" == *"rtb-"* ]]; then
+                        t1=`echo $t1 | tr -d '"|,'`
+                        t1=`printf "aws_route_table.%s.id," $t1`
+                    fi
                
                 fi
                 if [ "$skip" == "0" ]; then

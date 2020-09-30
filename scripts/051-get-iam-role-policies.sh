@@ -23,7 +23,7 @@ for c in `seq 0 0`; do
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
-        echo $count
+        #echo $count
         for i in `seq 0 $count`; do
             pname=`echo $awsout | jq ".${pref[(${c})]}[(${i})]" | tr -d '"'`     
             awsout2=`$AWS iam get-role-policy --role-name ${1} --policy-name ${pname}`
