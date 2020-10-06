@@ -1,17 +1,37 @@
-export AWS="$AWS --region eu-west-2 --profile Net1"
-cmd[0]="$AWS s3api list-buckets"
+#!/bin/bash
+if [ "$1" != "" ]; then 
+    BUCKET_NAME=$1
+    JSON_STRING=$( jq -n \
+                  --arg bn "$BUCKET_NAME" \
+                  '{Buckets: [{Name: $bn}]}' )
+
+
+    cmd[0]=`echo $JSON_STRING | jq .`
+else
+    cmd[0]="$AWS s3api list-buckets"
+fi
+
+
 pref[0]="Buckets"
 tft[0]="aws_s3_bucket"
 idfilt[0]="Name"
-theregion=`echo $AWS | cut -f3 -d ' '`
+
+theregion=`echo $AWS | cut -f5 -d ' '`
  
 for c in `seq 0 0`; do
    
     cm=${cmd[$c]}
 	ttft=${tft[(${c})]}
-	#echo $cm
-    awsout=`eval $cm`
+	echo $cm | jq .
+    echo "here"
+    if [ "$1" != "" ]; then 
+        awsout=`echo $cm | jq .`
+    else
+        awsout=`eval $cm`
+    fi 
+    echo awsout=$awsout
     count=`echo $awsout | jq ".${pref[(${c})]} | length"`
+    echo count=$count
     if [ "$count" -gt "0" ]; then
         count=`expr $count - 1`
         for i in `seq 0 $count`; do
@@ -20,7 +40,6 @@ for c in `seq 0 0`; do
             echo $cname
             if [ "$cname" != "null" ] ; then
                 
-            
                 # check region
                 br=`$AWS s3api get-bucket-location --bucket ${cname}`
                 if [ $? -ne 0 ]; then
@@ -28,7 +47,8 @@ for c in `seq 0 0`; do
                 else
                     br=`echo $br | jq .LocationConstraint | tr -d '"'`
                 fi
-                echo $cname $br
+                echo $cname $br $theregion
+                
                 if [ "$br" == "$theregion" ]; then
                              
                 
@@ -66,6 +86,9 @@ for c in `seq 0 0`; do
                                     #printf "acl = \"private\"\n" >> $fn
                                     #printf "force_destroy = false \n" >> $fn
 
+                                    skip=1
+                                fi
+                                if [[ ${tt1} == "region" ]];then
                                     skip=1
                                 fi
                                     
