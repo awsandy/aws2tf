@@ -1,4 +1,10 @@
-# aws2tf supports Terraform v0.12
+# aws2tf
+
+----
+
+## This project has moved to: https://github.com/aws-samples/aws2tf
+
+----
 
 **Work in progress - please report any issues you find.**
 
