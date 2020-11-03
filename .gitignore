@@ -9,6 +9,8 @@ vpc/generated
 *.orig
 old
 setup-local-git.sh
+.sh
+to-aws-samples.sh
 *.xlsx
 test*
 *.new
